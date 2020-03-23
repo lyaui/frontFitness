@@ -1,0 +1,27 @@
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+}
+
+.page {
+    &-item {
+
+        font-size: 20px;
+        color:$color-primary;
+        padding:0 1rem;
+        margin: .5rem;
+        border-radius: 5px;
+        
+    }
+
+    &-link {
+        text-decoration: none;
+        color: $color-primary;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

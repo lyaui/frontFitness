@@ -1,0 +1,154 @@
+.btn {
+
+    &,
+    &:link,
+    &:visited {
+        font-family: $font-ch;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: center;
+        display: inline-block;
+        border: none;
+        transition: all .5s;
+        cursor: pointer;
+        outline: none;
+    }
+
+    &:active {
+        transform: translateY(2px);
+    }
+}
+
+.explore-btn {
+    color: $color-secondary;
+    font-size: 18px;
+    background-color: rgba($color-secondary, .2);
+    border: 2px solid $color-secondary !important;
+    animation: moveInBottom 2s;
+    padding: 1rem 4rem;
+    border-radius: .5rem;
+    transition: all .5s;
+    letter-spacing: .8rem;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+
+
+    &:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: $color-secondary;
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        transition: transform .3s ease-out;
+    }
+
+    &:hover:before {
+        transform: scaleX(1.1);
+    }
+
+    &:hover {
+        color: #fff;
+    }
+
+
+}
+
+.btn-primary {
+    padding-left: 5px;
+    border-radius: 5px;
+    width: 100%;
+    background-image: -webkit-gradient(linear, left top, right bottom, from($color-secondary-light), to($color-secondary-dark));
+    height: 32px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 5px;
+
+    &:hover {
+        transform: translateY(-2px)
+    }
+
+    &:active {
+        transform: translateY(2px)
+    }
+
+}
+
+.btn-primary--cancel {
+    padding-left: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 100%;
+    background-image: -webkit-gradient(linear, left top, right bottom, from(rgb(180, 180, 180)), to(rgb(150, 150, 150)));
+    height: 32px;
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 5px;
+
+    &:hover {
+        transform: translateY(-2px)
+    }
+
+    &:active {
+        transform: translateY(2px)
+    }
+
+
+}
+
+.admin-btn {
+    padding: 5px;
+    font-size: 18px;
+    transition: all.3s;
+    background-color: transparent;
+    color: $color-primary;
+
+    &:hover {
+        background-color: transparent;
+        color: $color-secondary
+    }
+}
+
+//////////add to cart//////////
+
+.addcart-btn {
+    background-color: #fff;
+    color: $color-primary;
+    height: 35px;
+    width: 100%;
+    border: 1px solid $color-primary; //$color-grey-dark-3
+    border-radius: 5px;
+
+    &:hover {
+        border-color: $color-secondary;
+    }
+}
+
+.addcart-link {
+    color: currentColor;
+    display: block;
+    padding: 5px 0;
+    text-decoration: none;
+    font-size: 16px;
+    transition: all .5s;
+
+    &:hover {
+        color: $color-secondary !important;
+    }
+}
+
+.in-cart {
+    color: $color-grey-dark-3;
+    border: 1px solid $color-grey-dark-3;
+    background-color: $color-grey-light-3;
+}
+
+.btn-footer {
+    display: flex;
+    justify-content: flex-end;
+}

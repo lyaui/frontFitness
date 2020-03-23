@@ -1,0 +1,422 @@
+.navigation {
+    font-size: 16px;
+    z-index: 500;
+    padding: 0 2rem;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: transparent;
+    margin-top: 1rem;
+    height: 60px;
+    align-content: center;
+
+    .head-nav {
+        display: flex;
+        list-style: none;
+        align-items: center;
+
+
+        &__item {
+            &:not(:first-child) {
+                margin-left: 1rem;
+
+                @include respond(tab-port) {
+                    margin-left: 0rem;
+                }
+            }
+        }
+
+        &__link {
+            letter-spacing: .2rem;
+            color: #fff;
+            padding: .6rem 1.2rem;
+            font-family: $font-ch;
+            font-weight: 300;
+            transition: all .2s;
+
+            @include respond(tab-port) {
+                padding: .6rem 1rem;
+            }
+
+            &:hover {
+                color: $color-secondary;
+            }
+        }
+
+        &__user {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+
+            @include respond(phone) {
+                color: currentColor
+            }
+
+            &-img {
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                margin-right: 1rem;
+                background-color: $color-grey-light-1;
+                object-fit: cover
+            }
+
+            &-name {
+                font-size: 2rem;
+                font-weight: 800;
+            }
+        }
+    }
+}
+
+.cart-btn {
+    position: relative;
+
+    &:hover .cart-qty {
+        color: #fff
+    }
+}
+
+.cart-qty {
+    position: absolute;
+    top: -20%;
+    right: 10%;
+    width: 18px;
+    height: 18px;
+    font-size: 16px;
+    background: $color-secondary;
+    border-radius: 50%;
+    line-height: 18px;
+    text-align: center;
+    transition: all .5s;
+
+    @include respond(phone) {
+        margin-left: .5rem;
+        position: static
+    }
+}
+
+.res-nav {
+    margin-top: -10px;
+
+    &__checkbox {
+        display: none;
+    }
+
+    &__background {
+        width: 6rem;
+        height: 6rem;
+        border-radius: 50%;
+        position: fixed;
+        top: 2rem;
+        right: 1rem;
+        transform: scale(0);
+        background-image: linear-gradient(to top left, rgba(#000, .7), rgba(#000, 1));
+        z-index: 1000;
+        transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
+
+        &--active {
+            transform: scale(40)
+        }
+    }
+
+    &__nav {
+        visibility: hidden;
+        height: 100vh;
+        width: 0; //利用width=0來隱藏物體
+        position: fixed; //確保不會隨著滑時移到別的位置
+        top: 0;
+        left: 0rem; //會從左邊出來並縮回左邊
+        z-index: 1500; //介於button和backgroun之間
+        opacity: 0; //只是畫面上看不見，但依然會有隱形的連結可以點
+        transition: all .5s cubic-bezier(0.68, -0.55, 0.26, 1.55);
+        display: flex;
+        flex-direction: column;
+        margin-top: 40px;
+
+        &--active {
+            width: 100%;
+            opacity: 1;
+            visibility: visible
+        }
+    }
+
+    &__list {
+        padding: 1rem;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+
+    &__user-img {
+        width: 80px;
+        height: 80px;
+        background-color: $color-grey-light-1;
+        border-radius: 50%;
+        margin-left: 2rem;
+        margin-bottom: 20px;
+        box-shadow: 0rem 0rem 10px rgba($color-secondary-light, .8);
+        transition: all .5s;
+
+        &:hover {
+            transform: scale(1.05);
+
+        }
+    }
+
+    &__user-name {
+        font-size: 20px;
+        color: #fff;
+        margin-top: auto;
+        margin-left: 12px;
+        margin-bottom: 20px;
+    }
+
+    &__item {
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        align-items: baseline;
+        padding: .8rem 2rem;
+        font-size: 16px;
+        font-weight: 300;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+        background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
+        background-size: 226%; //利用background-size調整linear-gradiaent的面積比
+        transition: all .4s;
+
+        i {
+            width: 20px;
+            height: 20px;
+            margin-right: 1rem;
+            text-align: center;
+        }
+
+        &:hover,
+        &:active {
+            font-weight: 400;
+            color: $color-primary;
+            background-position: 100%;
+            transform: translateX(1rem)
+        }
+    }
+
+    &__link {
+
+        &-logreg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+            margin: 20px auto;
+            transition: all .5s;
+
+            &:hover {
+                color: $color-secondary;
+                border: 1px solid $color-secondary;
+                transform: scale(1.05)
+            }
+
+            p {
+                font-size: 18px;
+                letter-spacing: 5px;
+                margin-left: 5px;
+                display: none;
+            }
+
+            &:hover p {
+                display: block;
+            }
+
+            i {
+                display: block;
+            }
+
+            &:hover i {
+                display: none;
+            }
+        }
+
+        &-logout {
+            color: #fff;
+            font-size: 20px;
+            line-height: 30px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+            transition: all .5s;
+
+            i {
+                display: block;
+                @include vertical-horizontal-center
+            }
+
+            &:hover {
+                color: $color-secondary !important;
+                transform: scale(1.1);
+                border: 1px solid $color-secondary;
+            }
+        }
+    }
+
+    &__button{
+        position: relative;
+        margin-top: 15px;
+        z-index: 2000 !important;
+        font-size: 32px;
+        color: #fff;
+        padding: 5px;
+    }
+}
+
+
+.navigation-dark {
+    background-color: rgba($color-primary, 1);
+    box-shadow: 0 .2rem 1rem .1rem rgba(#000, .2);
+    margin-top: 0;
+    transition: .5s;
+}
+
+
+//////////Sub-bar//////////
+
+.sub-nav {
+    width: 100%;
+    z-index: 10;
+    background-color: rgba($color-grey-light-1, .95);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid $color-grey-light-2;
+    position: fixed;
+    transition: all .3s;
+
+
+    &--scroll {
+        transform: translateY(-100%);
+    }
+
+    &__list {
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
+        max-width: 144rem;
+        width: 100%;
+        padding-right: 10rem;
+        padding-left: 10rem;
+        margin-right: auto;
+        margin-left: auto;
+
+        @include respond(tab-land) {
+            justify-content: center;
+            padding: 0;
+        }
+    }
+
+    &__item {
+        max-width: 144rem;
+        padding: 5px 2rem;
+        flex: 0 0 16.666%;
+
+
+        &--active {
+            font-weight: 500;
+        }
+
+        &--active>* {
+            font-size: 15px !important;
+            color: $color-primary !important
+        }
+
+        @include respond(tab-port) {
+            flex: 0 0 16.666%;
+            padding: 5px 1.4rem;
+        }
+
+        @include respond(phone) {
+            padding: 3px .5rem;
+            flex: 0 0 33.33%;
+        }
+
+
+
+    }
+
+    &__link {
+
+        i {
+            margin-right: .5rem;
+
+            @include respond(tab-port) {
+
+                display: none;
+            }
+
+            @include respond(phone) {
+                display: flex;
+            }
+        }
+
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        color:$color-font-default;
+        font-family: $font-ch;
+        letter-spacing: .1rem;
+        font-size: 14px;
+        transition: all .3s;
+
+        &:hover {
+            color: $color-secondary;
+        }
+
+    }
+
+    &--hidden {
+        transform: translate3d(0, -100%, 0);
+    }
+
+
+}
+
+//////////Announce-bar//////////
+
+.announce-bar {
+    width: 100%;
+    z-index: 100;
+    position: fixed;
+    bottom: 0px;
+    color: #fff;
+    background: rgba($color-secondary, .95);
+    letter-spacing: .2rem;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+    transition: all .5s;
+
+    &__code {
+        cursor: copy;
+        padding: 1px 5px;
+        transition: all .3s;
+
+        &:hover {
+            background-color: $color-primary;
+        }
+    }
+
+    &--hidden {
+        transform: translate3d(0, +100%, 0);
+    }
+}

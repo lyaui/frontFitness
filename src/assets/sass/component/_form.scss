@@ -1,0 +1,196 @@
+.form {
+
+    &__group {
+        width: 100%;
+        margin-bottom: 14px;
+        position: relative;
+
+        &:not(:first-child) {
+            margin-left: 2rem;
+
+            @include respond(tab-port) {
+                margin-left: 1.5rem;
+            }
+
+            @include respond(phone) {
+                margin-left: 0;
+            }
+        }
+
+        button {
+            display: block;
+        }
+    }
+
+    &__row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        @include respond(phone) {
+            flex-direction: column;
+        }
+
+        img {
+            border: 1px solid $color-grey-light-2;
+            padding: 10px;
+            margin: 0 30px 0 10px;
+            border-radius: 5px;
+            object-fit: cover;
+            width: 250px;
+            height: 150px;
+        }
+
+    }
+
+    &__input {
+        width: 100%;
+        height: 32px;
+        padding: 5px;
+        display: block;
+        color: $color-grey-dark-3;
+        font-size: 14px;
+        border-radius: 6px;
+        border: 1px solid #cacbcc;
+        background-color: transparent;
+        letter-spacing: 1px;
+        transition: .5s all;
+
+        &--warning {
+            border: 1px solid $color-secondary;
+        }
+
+
+        &:focus {
+            outline: none;
+            box-shadow: 0 1rem 2rem rgba(#000, .03);
+            border: 1px solid $color-primary-light;
+
+        }
+
+        &::-webkit-input-placeholder {
+            color: $color-grey-light-2;
+        }
+    }
+
+    &__counter {
+        position: absolute;
+        right: 7px;
+        top: 34px;
+        display: flex;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 2px;
+        background-color: lighten($color-grey-light-2, 5%);
+
+        span {
+            margin: auto;
+            display: block;
+            font-size: 16px;
+            line-height: 16px;
+        }
+    }
+
+    &__label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: .3rem;
+        margin-right: 1rem;
+        color: $color-grey-dark-3
+    }
+
+    &__checkbox {
+        margin-right: 5px;
+
+        input[type="checkbox"] {
+            width: 30px;
+            /*Desired width*/
+            height: 30px;
+            /*Desired height*/
+        }
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-left: 20px;
+
+    }
+
+    &__radio-button {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 3px solid $color-secondary;
+        border-radius: 50%;
+        position: absolute;
+        left: -10px;
+        // @include vertical-horizontal-center;
+        // transform:translateY(-50%,-50%);
+
+        &::after {
+            content: "";
+            width: 6px;
+            height: 6px;
+            display: block;
+            border-radius: 50%;
+            background-color: $color-secondary;
+            @include vertical-horizontal-center;
+            opacity: 0;
+            transition: all .2s;
+        }
+    }
+
+    &__radio-input:checked~&__radio-label &__radio-button::after {
+        //選擇__radio-label中的__radio-button
+        opacity: 1;
+    }
+
+    &__tag-case {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+    }
+
+    &__tag {
+        height: 25px;
+        font-size: 14px;
+        color: $color-grey-dark-1;
+        background-color: rgba($color-secondary, .3);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        border: 1px solid $color-secondary;
+        padding: .1rem .8rem;
+        margin: .3rem;
+
+        i {
+            padding: 0 0 0 .3rem;
+        }
+
+        &:hover {
+            background-color: rgba($color-secondary, .7);
+        }
+
+        &:active {
+            background-color: rgba($color-secondary, .8);
+        }
+    }
+}
+
+select:invalid {
+    color: $color-grey-light-2;
+}
+
+textarea {
+    resize: vertical;
+}

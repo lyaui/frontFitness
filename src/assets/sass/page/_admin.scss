@@ -1,0 +1,243 @@
+////////// Admin layout //////////
+.admin-content {
+    display: flex;
+}
+
+.admin-main {
+    margin-left: 200px;
+    padding: 0 5rem;
+    width: 100%;
+
+    @include respond(tab-land) {
+        padding: 90px 4rem 0 4rem;
+        margin-left: 0rem;
+    }
+
+    @include respond(tab-port) {
+        padding: 90px 3rem 0 3rem;
+    }
+
+    @include respond(phone) {
+        padding: 90px 2rem 0 2rem;
+    }
+}
+
+.admin-panel {
+    padding: 3rem;
+    background-color: #fff;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: $color-grey-dark-3;
+    line-height: 2em;
+
+    @include respond(phone) {
+        padding: 3rem 2rem;
+    }
+}
+
+.admin-table {
+    color: $color-grey-dark-3;
+    line-height: 1.5em;
+    font-family: $font-ch;
+    margin-top: .8rem;
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    border-collapse: collapse;
+    background-color: $color-grey-light-1;
+    box-shadow: 0rem 0rem 2rem rgba(#000, .1);
+
+    @include respond(tab-land) {
+        font-size: 14px;
+    }
+
+    & thead {
+        border-bottom: 2px solid $color-grey-light-2;
+        padding: 1rem 2rem;
+    }
+
+    & th {
+        letter-spacing: 2px;
+        padding: 1rem 1rem;
+        background-color: #fff;
+    }
+
+    & tbody tr {
+        transition: all .5s;
+
+        &:hover {
+            background-color: $color-focus;
+        }
+    }
+
+    & td {
+        padding: .8rem .5rem;
+
+        a {
+            color: currentColor;
+            text-decoration: none;
+            padding: 2rem 0;
+            transition: all .3s;
+
+            &:hover {
+                color: $color-secondary
+            }
+        }
+    }
+}
+
+////////// New Edit Course //////////
+.edit-form {
+    width: 100%;
+    display: flex;
+
+    @include respond(phone) {
+        flex-direction: column
+    }
+
+}
+
+.cover-upload {
+    width: 25%;
+    margin-right: 4rem;
+
+    @include respond(tab-port) {
+        width: 30%;
+        margin-right: 3rem;
+    }
+
+    @include respond(phone) {
+        width: 100%;
+        margin-right: 0rem;
+    }
+}
+
+.form__img {
+    width: 100%;
+}
+
+.content-edit {
+    width: 75%;
+
+    @include respond(tab-port) {
+        width: 70%;
+    }
+
+    @include respond(phone) {
+        width: 100%;
+    }
+}
+
+////////// Courses admin //////////
+
+.course-admin__img {
+    width: 10rem;
+    height: 7rem;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+.lighten-row {
+    background-color: #fff;
+}
+
+////////// Profile page & Orders//////////
+.profile-admin {
+
+    &__form {
+        display: flex;
+
+        @include respond(phone) {
+            flex-direction: column
+        }
+    }
+
+    &__img {
+        margin-right: 2rem;
+
+        img {
+            width: 200px;
+            height: 200px;
+            border: 1px solid $color-grey-light-2;
+            padding: 1rem;
+            object-fit: cover;
+            background-color: $color-grey-light-1;
+
+            @include respond(tab-port) {
+                width: 100px;
+                height: 100px;
+            }
+
+            @include respond(phone) {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    }
+
+    &__info {
+        width: 100%;
+    }
+
+}
+
+.admin-order {
+    background-color: $color-grey-light-1;
+    border: 1px solid $color-grey-light-2;
+    padding: 2rem;
+    @include respond(phone) {
+        padding: 1rem 1rem;
+    }
+    &--notpay {
+        background-color: $color-focus;
+    }
+    &-info {
+        display: flex;
+
+        @include respond(phone) {
+            flex-direction: column;
+        }
+    }
+}
+
+.detail-show-btn {
+    color: $color-secondary-light;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: block;
+    margin: auto;
+}
+
+.go-checkout{
+    flex-wrap: wrap;
+    justify-content: space-between
+
+
+}
+
+.go-checkout .heading-tertiary--grey{
+    font-size: 16px
+}
+
+////////// order-modal table //////////
+.admin-panel .d-block-phone {
+    table {
+        border-bottom: 1px solid $color-grey-light-2;
+    }
+
+    tr {
+        padding: 0;
+    }
+
+    td {
+        margin: 0;
+        padding: 0 2rem;
+        border: none;
+
+        &:first-child {
+            width: 100px;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+.feedback {
+    z-index: -2;
+    background-color: #fff;
+    font-family: $font-ch;
+    margin: 1rem 0;
+    padding: 3.5rem 3rem;
+    position: relative;
+    box-shadow: 0 2rem 5rem rgba(0, 0, 0, .01);
+    min-height: 30rem;
+    color: $color-font-default;
+    display: grid;
+    // grid-template-rows: 4rem 12rem;
+    transition: all .5s;
+
+    @include respond(tab-land) {
+        padding: 3.5rem 2.5rem;
+    }
+
+    @include respond(tab-port) {
+        padding: 3.5rem 2rem;
+    }
+
+    @include respond(phone) {
+        margin: 1rem .5rem;
+    }
+
+
+    &:hover {
+        transform: translateY(-1.5rem);
+        box-shadow: 0 2rem 5rem rgba(0, 0, 0, .03);
+    }
+
+    &::before {
+        content: "\201C";
+        position: absolute;
+        z-index: -1;
+        top: 5px;
+        left: -10px;
+        line-height: 1;
+        font-size: 20rem;
+        color: $color-grey-light-1;
+        font-family: sans-serif;
+    }
+
+
+
+
+    &-comment {
+        &__text {
+            font-size: 14px;
+            line-height: 2em;
+        }
+    }
+
+    &__img {
+        display: block;
+        margin-top: 1rem;
+        margin-right: 1rem;
+        height: 8rem !important;
+        width: 8rem !important;
+        border-radius: 50%;
+        transition: all .5s;
+    }
+
+    &:hover &__img {
+        transform: scale(1.05)
+    }
+
+    &__user {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between
+    }
+
+    i {
+        padding: 0.2rem;
+        color: $color-secondary-light
+    }
+}
