@@ -52,12 +52,10 @@ export default new Vuex.Store({
       const uploadTask = storageRef.put(file);
       uploadTask.on(
         'state_changed',
-        (snapshot) => {
-          console.log(snapshot);
-        },
-        (error) => {
-          console.log(error);
-        },
+        // eslint-disable-next-line no-unused-vars
+        (snapshot) => {},
+        // eslint-disable-next-line no-unused-vars
+        (error) => {},
         () => {
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             commit('setDownloadUrl', downloadURL);

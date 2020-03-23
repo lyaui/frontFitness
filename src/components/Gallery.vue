@@ -46,11 +46,13 @@ export default {
   },
   methods: {
     showImg(index) {
-      this.index = index;
-      this.visible = true;
+      const vm = this;
+      vm.index = index;
+      vm.visible = true;
     },
     handleHide() {
-      this.visible = false;
+      const vm = this;
+      vm.visible = false;
     },
   },
 };

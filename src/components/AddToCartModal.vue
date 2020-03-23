@@ -69,27 +69,32 @@ export default {
   name: 'AddToCartModal',
   computed: {
     cartCourses() {
-      return this.$store.state.cart.cart;
+      const vm = this;
+      return vm.$store.state.cart.cart;
     },
   },
   watch: {
     cartCourses() {
-      if (this.cartCourses.length === 0) {
-        this.hide();
+      const vm = this;
+      if (vm.cartCourses.length === 0) {
+        vm.hide();
       }
     },
   },
 
   methods: {
     deleteCourse(course) {
-      this.$store.commit('cart/removeItem', course);
+      const vm = this;
+      vm.$store.commit('cart/removeItem', course);
     },
     checkout() {
-      this.hide();
-      this.$router.push('/cart');
+      const vm = this;
+      vm.hide();
+      vm.$router.push('/cart');
     },
     hide() {
-      this.$modal.hide('addtocart');
+      const vm = this;
+      vm.$modal.hide('addtocart');
     },
   },
 };

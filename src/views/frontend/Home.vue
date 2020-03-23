@@ -316,29 +316,34 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     // 新課搶先看
     coursesNew() {
-      return this.$store.state.courses.courses.filter(
+      const vm = this;
+      return vm.$store.state.courses.courses.filter(
         (course) => course.title.includes('NEW') && course.remainQuantity > 0,
       );
     },
     // 精選課程
     courses() {
-      return this.$store.state.courses.courses.filter(
+      const vm = this;
+      return vm.$store.state.courses.courses.filter(
         (course) => course.remainQuantity > 0 && course.discount,
       );
     },
   },
   methods: {
     selectCat(cat) {
-      this.$store
+      const vm = this;
+      vm.$store
         .dispatch('courses/getCourses', cat)
-        .then(() => this.$router.push('/courses'));
+        .then(() => vm.$router.push('/courses'));
     },
     toggleOpen(i) {
-      this.FAQs = this.FAQs.map((faq, j) => {
+      const vm = this;
+      vm.FAQs = vm.FAQs.map((faq, j) => {
         if (j === i) {
           faq.open = !faq.open;
         } else {
@@ -350,7 +355,8 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('courses/getCourses', '所有課程');
+    const vm = this;
+    vm.$store.dispatch('courses/getCourses', '所有課程');
   },
 
   mounted() {

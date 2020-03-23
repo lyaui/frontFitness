@@ -177,29 +177,33 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.auth.user;
+      const vm = this;
+      return vm.$store.state.auth.user;
     },
     cartCourses() {
-      return this.$store.state.cart.cart;
+      const vm = this;
+      return vm.$store.state.cart.cart;
     },
 
     // 計算價格相關
     total() {
-      return this.$store.state.cart.total;
+      const vm = this;
+      return vm.$store.state.cart.total;
     },
 
     // 折扣訊息
     feedback() {
+      const vm = this;
       // 沒輸入折扣代碼
-      if (!this.couponCode) {
+      if (!vm.couponCode) {
         return null;
       }
       // 錯的折扣代碼
-      if (this.couponCode !== 'LOVEFITTING') {
+      if (vm.couponCode !== 'LOVEFITTING') {
         return '代碼不存在 請再次確認';
       }
       // 有折扣代碼課程
-      if (this.total.totalDiscount !== 0) {
+      if (vm.total.totalDiscount !== 0) {
         return '已成功套用優惠券';
       }
       // 無折扣代碼課程
@@ -208,52 +212,58 @@ export default {
 
     // 是否成功使用優惠券狀態
     discounted() {
-      return this.$store.state.cart.coupon;
+      const vm = this;
+      return vm.$store.state.cart.coupon;
     },
   },
   watch: {
     // 輸入成功時就會送出折扣碼
     couponCode() {
-      if (this.couponCode === 'LOVEFITTING') {
-        this.coupon = true;
-        this.$store.commit('cart/addCouponCode', this.coupon);
+      const vm = this;
+      if (vm.couponCode === 'LOVEFITTING') {
+        vm.coupon = true;
+        vm.$store.commit('cart/addCouponCode', vm.coupon);
       }
       // 計算總價
-      this.$store.commit('cart/total');
+      vm.$store.commit('cart/total');
     },
   },
   methods: {
-    // 移除課程
+
     deleteCourse(course) {
-      this.$store.commit('cart/removeItem', course);
+      const vm = this;
+      vm.$store.commit('cart/removeItem', course);
       // 計算總價
-      this.$store.commit('cart/total');
+      vm.$store.commit('cart/total');
     },
     selectCat(cat) {
-      this.$store
+      const vm = this;
+      vm.$store
         .dispatch('courses/getCourses', cat)
-        .then(() => this.$router.push('/courses'));
+        .then(() => vm.$router.push('/courses'));
     },
 
     // 下一步
     checkOut() {
-      if (this.user && this.cartCourses.length > 0) {
+      const vm = this;
+      if (vm.user && vm.cartCourses.length > 0) {
         // 創建暫時訂單
-        this.$store.commit('checkout/setPayment', {
-          courses: this.cartCourses,
-          total: this.total,
+        vm.$store.commit('checkout/setPayment', {
+          courses: vm.cartCourses,
+          total: vm.total,
         });
-        this.$router.push('/checkout');
+        vm.$router.push('/checkout');
       } else {
-        this.$toasted.error('請先登入或註冊會員', { duration: 3000 });
+        vm.$toasted.error('請先登入或註冊會員', { duration: 3000 });
       }
     },
   },
 
   created() {
+    const vm = this;
     // 初始設定coupon是false，離開頁面就折扣就會消失
-    this.$store.commit('cart/addCouponCode', this.coupon);
-    this.$store.commit('cart/total');
+    vm.$store.commit('cart/addCouponCode', vm.coupon);
+    vm.$store.commit('cart/total');
   },
 };
 </script>

@@ -195,10 +195,12 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     payments() {
-      return this.$store.state.checkout.payments;
+      const vm = this;
+      return vm.$store.state.checkout.payments;
     },
   },
   methods: {
@@ -206,16 +208,19 @@ export default {
       return moment(num).format('YYYY/MM/DD HH:mm');
     },
     show(payment) {
-      this.payment = payment;
-      this.$modal.show('payment-detail');
+      const vm = this;
+      vm.payment = payment;
+      vm.$modal.show('payment-detail');
     },
     hide() {
-      this.showDetail = false;
-      this.$modal.hide('payment-detail');
+      const vm = this;
+      vm.showDetail = false;
+      vm.$modal.hide('payment-detail');
     },
   },
   created() {
-    this.$store.dispatch('checkout/getPayments');
+    const vm = this;
+    vm.$store.dispatch('checkout/getPayments');
   },
 };
 </script>

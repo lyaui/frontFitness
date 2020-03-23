@@ -340,102 +340,116 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.auth.user;
+      const vm = this;
+      return vm.$store.state.auth.user;
     },
     isRegisterValid() {
+      const vm = this;
       return (
-        !this.$v.form.name.$invalid
-        && !this.$v.form.email.$invalid
-        && !this.$v.form.password.$invalid
-        && !this.$v.form.passwordConfirm.$invalid
+        !vm.$v.form.name.$invalid
+        && !vm.$v.form.email.$invalid
+        && !vm.$v.form.password.$invalid
+        && !vm.$v.form.passwordConfirm.$invalid
       );
     },
     isLoginValid() {
-      return !this.$v.form.email.$invalid && !this.$v.form.password.$invalid;
+      const vm = this;
+      return !vm.$v.form.email.$invalid && !vm.$v.form.password.$invalid;
     },
     cartItem() {
-      return this.$store.state.cart.cart.length;
+      const vm = this;
+      return vm.$store.state.cart.cart.length;
     },
     cat() {
-      return this.$store.state.courses.cat;
+      const vm = this;
+      return vm.$store.state.courses.cat;
     },
   },
   watch: {
     // 當類別或路徑變更時關閉RWD選單
     cat() {
-      this.showRwdNav = false;
+      const vm = this;
+      vm.showRwdNav = false;
     },
     $route() {
-      this.showRwdNav = false;
+      const vm = this;
+      vm.showRwdNav = false;
     },
   },
   methods: {
     reset() {
-      this.form.name = '';
-      this.form.email = '';
-      this.form.password = '';
-      this.form.passwordConfirm = '';
+      const vm = this;
+      vm.form.name = '';
+      vm.form.email = '';
+      vm.form.password = '';
+      vm.form.passwordConfirm = '';
     },
     selectCat(cat) {
-      this.$store
+      const vm = this;
+      vm.$store
         .dispatch('courses/getCourses', cat)
-        .then(() => this.$router.push('/courses'));
+        .then(() => vm.$router.push('/courses'));
     },
     handleRegister() {
-      this.$v.$touch();
-      if (this.isRegisterValid) {
-        this.$store
-          .dispatch('auth/signUp', this.form)
+      const vm = this;
+      vm.$v.$touch();
+      if (vm.isRegisterValid) {
+        vm.$store
+          .dispatch('auth/signUp', vm.form)
           .then(async (user) => {
-            await this.$store.dispatch('auth/createUserProfile', {
+            await vm.$store.dispatch('auth/createUserProfile', {
               uid: user.uid,
               userProfile: {
                 userId: user.uid,
-                name: this.form.name,
-                email: this.form.email,
-                userImg: this.form.img,
+                name: vm.form.name,
+                email: vm.form.email,
+                userImg: vm.form.img,
               },
             });
-            this.$toasted.success('註冊成功', {
+            vm.$toasted.success('註冊成功', {
               duration: 2000,
             });
-            this.hide();
+            vm.hide();
           })
-          .catch((error) => this.$toasted.error(error, { duration: 3000 }));
+          .catch((error) => vm.$toasted.error(error, { duration: 3000 }));
       } else {
-        this.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
+        vm.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
       }
     },
     handleLogin() {
-      this.$v.$touch();
-      if (this.isLoginValid) {
-        this.$store
-          .dispatch('auth/signIn', this.form)
+      const vm = this;
+      vm.$v.$touch();
+      if (vm.isLoginValid) {
+        vm.$store
+          .dispatch('auth/signIn', vm.form)
           .then(() => {
-            this.$toasted.success('登入成功', {
+            vm.$toasted.success('登入成功', {
               duration: 2000,
             });
-            this.hide();
+            vm.hide();
           })
-          .catch((error) => this.$toasted.error(error, { duration: 2000 }));
+          .catch((error) => vm.$toasted.error(error, { duration: 2000 }));
       } else {
-        this.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
+        vm.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
       }
     },
     logOut() {
-      this.$store.dispatch('auth/signOut').then(() => {
-        this.$toasted.success('成功登出', {
+      const vm = this;
+      vm.$store.dispatch('auth/signOut').then(() => {
+        vm.$toasted.success('成功登出', {
           duration: 2000,
         });
-        this.$router.push({ name: 'home' });
+        vm.$router.push({ name: 'home' });
       });
     },
     show() {
-      this.$modal.show('logRegModal');
+      const vm = this;
+      vm.$modal.show('logRegModal');
     },
     hide() {
-      this.reset();
-      this.$modal.hide('logRegModal');
+      const vm = this;
+      vm.reset();
+      vm.$modal.hide('logRegModal');
     },
   },
 };

@@ -29,15 +29,18 @@ export default {
   name: 'Pagination',
   computed: {
     currentPage() {
-      return this.$store.getters['courses/currentPage'];
+      const vm = this;
+      return vm.$store.getters['courses/currentPage'];
     },
     totalPage() {
-      return this.$store.state.courses.pagination.totalLength;
+      const vm = this;
+      return vm.$store.state.courses.pagination.totalLength;
     },
   },
   methods: {
     getMoreCourses(page) {
-      this.$store.dispatch('courses/getMoreCourses', page);
+      const vm = this;
+      vm.$store.dispatch('courses/getMoreCourses', page);
     },
   },
 };

@@ -86,29 +86,33 @@ export default {
   components: { Pagination },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     textCounter() {
-      return this.course.title;
+      const vm = this;
+      return vm.course.title;
     },
     courses() {
-      return this.$store.state.courses.courses;
+      const vm = this;
+      return vm.$store.state.courses.courses;
     },
   },
   methods: {
     deleteCourse(title, id) {
-      this.$modal.show('dialog', {
+      const vm = this;
+      vm.$modal.show('dialog', {
         title: `⚠️ 確定刪除 ${title} 嗎？`,
         text: '課程一旦刪除將無法復原 😱😱😱',
         buttons: [
           {
             title: '確定',
             handler: () => {
-              this.$store.dispatch('courses/removeCourse', id).then(() => {
-                this.$toasted.success(`成功刪除 ${title}`, {
+              vm.$store.dispatch('courses/removeCourse', id).then(() => {
+                vm.$toasted.success(`成功刪除 ${title}`, {
                   duration: 2000,
                 });
-                this.$modal.hide('dialog');
+                vm.$modal.hide('dialog');
               });
             },
           },
@@ -120,39 +124,43 @@ export default {
     },
 
     addCourse() {
-      this.$store
-        .dispatch('courses/createCourse', { ...this.course })
+      const vm = this;
+      vm.$store
+        .dispatch('courses/createCourse', { ...vm.course })
         .then(() => {
-          this.$toasted.success('成功新增課程', {
+          vm.$toasted.success('成功新增課程', {
             duration: 2000,
           });
         });
     },
 
     updateCourse(id) {
-      this.$store
-        .dispatch('courses/updateCourse', { id, course: this.course })
+      const vm = this;
+      vm.$store
+        .dispatch('courses/updateCourse', { id, course: vm.course })
         .then(() => {
-          this.$toasted.success('更新成功!!', {
+          vm.$toasted.success('更新成功!!', {
             duration: 2000,
           });
         });
     },
     // 編輯/新增課程
     turnNewEditPage(status, course) {
-      this.$store.commit('courses/setStatus', status);
+      const vm = this;
+      vm.$store.commit('courses/setStatus', status);
       if (status === '編輯課程') {
-        this.$store.commit('courses/setCourse', course);
+        vm.$store.commit('courses/setCourse', course);
       } else {
-        this.$store.commit('courses/setCourse', {});
+        vm.$store.commit('courses/setCourse', {});
       }
-      this.$router.push({ name: 'courseNewEdit' });
+      vm.$router.push({ name: 'courseNewEdit' });
     },
   },
 
   created() {
-    this.$store.dispatch('courses/getCoursesLimit');
-    this.$store.dispatch('courses/getPageLength');
+    const vm = this;
+    vm.$store.dispatch('courses/getCoursesLimit');
+    vm.$store.dispatch('courses/getPageLength');
   },
 };
 </script>

@@ -90,7 +90,8 @@ export default {
   },
   computed: {
     selectCat() {
-      return this.$store.state.courses.selectCat;
+      const vm = this;
+      return vm.$store.state.courses.selectCat;
     },
   },
 
@@ -102,6 +103,7 @@ export default {
       return title;
     },
     measureSize() {
+      const vm = this;
       const width = window.innerWidth;
       let cardNum;
 
@@ -122,12 +124,13 @@ export default {
           cardNum = 4;
           break;
       }
-      this.showBtn = !(this.courseCard.length <= cardNum);
+      vm.showBtn = !(vm.courseCard.length <= cardNum);
     },
   },
   created() {
-    window.addEventListener('resize', this.measureSize);
-    this.measureSize();
+    const vm = this;
+    window.addEventListener('resize', vm.measureSize);
+    vm.measureSize();
   },
 };
 </script>

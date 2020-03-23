@@ -478,93 +478,103 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     status() {
-      return this.$store.state.courses.status;
+      const vm = this;
+      return vm.$store.state.courses.status;
     },
     getCourse() {
-      return this.$store.state.courses.course;
+      const vm = this;
+      return vm.$store.state.courses.course;
     },
     getDownloadURL() {
-      return this.$store.state.downloadURL;
+      const vm = this;
+      return vm.$store.state.downloadURL;
     },
   },
   watch: {
     // 從編輯狀態切到新增狀態的話
     status() {
-      if (this.status === '新增課程') {
-        this.course = { ...this.courseNew };
+      const vm = this;
+      if (vm.status === '新增課程') {
+        vm.course = { ...vm.courseNew };
       }
     },
     getDownloadURL() {
-      if (this.getDownloadURL) {
-        this.course.imageUrl = this.getDownloadURL;
-        this.updateCover = false;
+      const vm = this;
+      if (vm.getDownloadURL) {
+        vm.course.imageUrl = vm.getDownloadURL;
+        vm.updateCover = false;
       }
     },
   },
   methods: {
     addCourse() {
-      this.$v.$touch();
-
-      if (this.$v.$invalid) {
-        this.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
+      const vm = this;
+      vm.$v.$touch();
+      if (vm.$v.$invalid) {
+        vm.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
       } else {
-        this.$store
-          .dispatch('courses/createCourse', { ...this.course })
+        vm.$store
+          .dispatch('courses/createCourse', { ...vm.course })
           .then(() => {
-            this.$toasted.success('成功新增課程', {
+            vm.$toasted.success('成功新增課程', {
               duration: 2000,
             });
-            this.$router.push({ name: 'coursesAdmin' });
+            vm.$router.push({ name: 'coursesAdmin' });
           })
           .catch((e) => console(e.message));
       }
     },
     updateCourse(id) {
-      this.$v.$touch();
-      if (!this.updateCover) {
-        if (this.$v.$invalid) {
-          this.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
+      const vm = this;
+      vm.$v.$touch();
+      if (!vm.updateCover) {
+        if (vm.$v.$invalid) {
+          vm.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
         } else {
-          this.$store
-            .dispatch('courses/updateCourse', { id, course: this.course })
+          vm.$store
+            .dispatch('courses/updateCourse', { id, course: vm.course })
             .then(() => {
-              this.$toasted.success('更新成功!!', {
+              vm.$toasted.success('更新成功!!', {
                 duration: 2000,
               });
-              this.$router.push({ name: 'coursesAdmin' });
+              vm.$router.push({ name: 'coursesAdmin' });
             });
         }
       }
     },
     addTags() {
-      if (this.tag) {
-        this.course.tags.push(this.tag);
+      const vm = this;
+      if (vm.tag) {
+        vm.course.tags.push(vm.tag);
       }
-      this.tag = '';
+      vm.tag = '';
     },
     deleteTag(key) {
-      this.course.tags.splice(key, 1);
+      const vm = this;
+      vm.course.tags.splice(key, 1);
     },
     uploadImage(e) {
+      const vm = this;
       const file = e.target.files[0];
       if (!file.type.includes('image')) {
-        this.$toasted.error('請上傳圖片檔案', { duration: 3000 });
+        vm.$toasted.error('請上傳圖片檔案', { duration: 3000 });
       } else {
-        this.updateCover = true;
-        this.$store.dispatch('updateFile', { file, place: 'courses/' });
+        vm.updateCover = true;
+        vm.$store.dispatch('updateFile', { file, place: 'courses/' });
       }
     },
   },
   created() {
-    this.$store.commit('setDownloadUrl', null);
-
-    if (this.status === '編輯課程') {
-      this.course = { ...this.getCourse };
+    const vm = this;
+    vm.$store.commit('setDownloadUrl', null);
+    if (vm.status === '編輯課程') {
+      vm.course = { ...vm.getCourse };
     } else {
-      this.course = { ...this.courseNew };
+      vm.course = { ...vm.courseNew };
     }
   },
 };

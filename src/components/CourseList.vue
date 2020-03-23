@@ -72,7 +72,8 @@ export default {
   components: { StarRating, AddToCart },
   computed: {
     remainCourse() {
-      return this.coursesList.filter((course) => course.remainQuantity > 0);
+      const vm = this;
+      return vm.coursesList.filter((course) => course.remainQuantity > 0);
     },
   },
   methods: {

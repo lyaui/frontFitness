@@ -180,102 +180,110 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
-    // 全部課程
     courses() {
-      return this.$store.state.courses.courses.filter(
+      const vm = this;
+      return vm.$store.state.courses.courses.filter(
         (course) => course.remainQuantity > 0 && course.discount,
       );
     },
-    // 排序課程
     coursesOrdered() {
-      const course = [...this.$store.state.courses.courses].sort(
-        (a, b) => b[this.property] - a[this.property],
+      const vm = this;
+      const course = [...vm.$store.state.courses.courses].sort(
+        (a, b) => b[vm.property] - a[vm.property],
       );
-      return this.order ? course : course.reverse();
+      return vm.order ? course : course.reverse();
     },
-    // 選取分類
     cat() {
-      return this.$store.state.courses.cat;
+      const vm = this;
+      return vm.$store.state.courses.cat;
     },
   },
 
   methods: {
     reset() {
-      this.searchShow = false;
-      this.searchWord = null;
-      this.count = 0;
-      this.infiniteData = [];
+      const vm = this;
+      vm.searchShow = false;
+      vm.searchWord = null;
+      vm.count = 0;
+      vm.infiniteData = [];
     },
     selectCat(cat) {
-      // 避免double click
-      if (this.cat !== cat) {
-        this.reset();
-        this.$store.dispatch('courses/getCourses', cat);
+      const vm = this;
+      if (vm.cat !== cat) {
+        vm.reset();
+        vm.$store.dispatch('courses/getCourses', cat);
       }
     },
     scrollSubNav() {
+      const vm = this;
       const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
       if (currentScrollPosition < 0) {
         return;
       }
-      if (Math.abs(currentScrollPosition - this.lastScrollPosition) < 60) {
+      if (Math.abs(currentScrollPosition - vm.lastScrollPosition) < 60) {
         return;
       }
-      this.showNavbar = currentScrollPosition < this.lastScrollPosition;
-      this.lastScrollPosition = currentScrollPosition;
+      vm.showNavbar = currentScrollPosition < vm.lastScrollPosition;
+      vm.lastScrollPosition = currentScrollPosition;
     },
     loadMore() {
-      const arrayShow = [...this.coursesOrdered];
-      if (this.infiniteData.length <= arrayShow.length) {
-        this.busy = true;
+      const vm = this;
+      const arrayShow = [...vm.coursesOrdered];
+      if (vm.infiniteData.length <= arrayShow.length) {
+        vm.busy = true;
         setTimeout(() => {
           for (let i = 0, j = 5; i < j; i++) {
-            if (this.count === arrayShow.length) {
+            if (vm.count === arrayShow.length) {
               break;
             }
-            this.infiniteData.push(arrayShow[this.count++]);
+            vm.infiniteData.push(arrayShow[vm.count++]);
           }
-          this.busy = false;
+          vm.busy = false;
         }, 500);
       }
     },
     searchCourse() {
+      const vm = this;
       // 如果輸入框中有字
-      if (this.searchWord) {
-        this.keyWord = this.searchWord;
-        this.reset();
-        this.searchShow = true;
+      if (vm.searchWord) {
+        vm.keyWord = vm.searchWord;
+        vm.reset();
+        vm.searchShow = true;
         // 符合課程
-        this.$store
+        vm.$store
           .dispatch('courses/getCourses', '所有課程')
           .then((courses) => {
-            const filteredCourses = courses.filter((course) => course.title.match(this.keyWord))
+            const filteredCourses = courses.filter((course) => course.title.match(vm.keyWord))
               || [];
-            this.$store.commit('courses/setCourses', filteredCourses);
-            this.loadMore();
+            vm.$store.commit('courses/setCourses', filteredCourses);
+            vm.loadMore();
           });
       } else {
-        this.$toasted.error('請輸入搜尋字詞', { duration: 3000 });
+        vm.$toasted.error('請輸入搜尋字詞', { duration: 3000 });
       }
     },
     orderCourse(property, order) {
-      this.property = property;
-      this.order = order;
-      this.count = 0;
-      this.infiniteData = [];
-      this.loadMore();
+      const vm = this;
+      vm.property = property;
+      vm.order = order;
+      vm.count = 0;
+      vm.infiniteData = [];
+      vm.loadMore();
     },
   },
 
   mounted() {
-    $(window).scroll(this.scrollSubNav);
+    const vm = this;
+    $(window).scroll(vm.scrollSubNav);
   },
   created() {
-    this.reset();
-    if (this.$store.state.courses.courses.length === 0) {
-      this.$store.dispatch('courses/getCourses', '所有課程');
+    const vm = this;
+    vm.reset();
+    if (vm.$store.state.courses.courses.length === 0) {
+      vm.$store.dispatch('courses/getCourses', '所有課程');
     }
   },
 };

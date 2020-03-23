@@ -56,23 +56,26 @@ export default {
   },
   computed: {
     user() {
-      return { ...this.$store.state.auth.user };
+      const vm = this;
+      return { ...vm.$store.state.auth.user };
     },
   },
   methods: {
     logOut() {
-      this.$store.dispatch('auth/signOut').then(() => {
-        this.$toasted.success('成功登出!!', {
+      const vm = this;
+      vm.$store.dispatch('auth/signOut').then(() => {
+        vm.$toasted.success('成功登出!!', {
           duration: 2000,
         });
-        this.$router.push({ name: 'home' });
+        vm.$router.push({ name: 'home' });
       });
     },
     turnNewEditPage(cat) {
+      const vm = this;
       if (cat === '新增課程') {
-        this.$store.commit('courses/setStatus', cat);
-        this.$store.commit('courses/setCourse', {});
-        this.$router.push({ name: 'courseNewEdit' });
+        vm.$store.commit('courses/setStatus', cat);
+        vm.$store.commit('courses/setCourse', {});
+        vm.$router.push({ name: 'courseNewEdit' });
       }
     },
   },

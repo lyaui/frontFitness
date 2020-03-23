@@ -260,71 +260,76 @@ export default {
     },
   },
   computed: {
-    // user
     user() {
-      return this.$store.state.auth.user;
+      const vm = this;
+      return vm.$store.state.auth.user;
     },
     // 價格相關
     total() {
-      return this.$store.state.checkout.payment.total;
+      const vm = this;
+      return vm.$store.state.checkout.payment.total;
     },
-    // 課程相關
     courses() {
-      return this.$store.state.checkout.payment.courses;
+      const vm = this;
+      return vm.$store.state.checkout.payment.courses;
     },
     // 訂單路徑
     path() {
-      return this.$store.state.checkout.payment.id;
+      const vm = this;
+      return vm.$store.state.checkout.payment.id;
     },
   },
   watch: {
     path() {
-      this.$router.push(`/checkout/${this.path}`);
+      const vm = this;
+      vm.$router.push(`/checkout/${vm.path}`);
     },
   },
   methods: {
     // 結帳
     checkOut() {
-      this.$v.$touch();
-      if (this.$v.$invalid) {
-        this.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
+      const vm = this;
+      vm.$v.$touch();
+      if (vm.$v.$invalid) {
+        vm.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
       } else {
         // 購買課程資訊
-        const buyCourses = this.courses.map((course) => ({
+        const buyCourses = vm.courses.map((course) => ({
           id: course.id,
           title: course.title,
           plan:
             // 如果這是優惠課程並且有輸入優惠碼
-            course.discount && this.total.totalDiscount > 0
+            course.discount && vm.total.totalDiscount > 0
               ? '精選優惠'
               : '課程售價',
           price: course.price,
           sellingPrice:
             // 如果這是優惠課程並且有輸入優惠碼
-            course.discount && this.total.totalDiscount > 0
-              ? course.price - this.$store.state.cart.discount
+            course.discount && vm.total.totalDiscount > 0
+              ? course.price - vm.$store.state.cart.discount
               : course.price,
         }));
 
         const payment = {
           courses: buyCourses,
-          user: { userId: this.user.uid, ...this.userInfo },
-          total: this.total,
+          user: { userId: vm.user.uid, ...vm.userInfo },
+          total: vm.total,
         };
 
         // 建立訂單
-        this.$store.dispatch('checkout/createPayment', payment).then(() => {
-          this.$toasted.success('訂單建立成功 請儘快付款', { duration: 3000 });
+        vm.$store.dispatch('checkout/createPayment', payment).then(() => {
+          vm.$toasted.success('訂單建立成功 請儘快付款', { duration: 3000 });
           // 清空購物車與暫時訂單
-          this.$store.commit('cart/clearCart');
+          vm.$store.commit('cart/clearCart');
         });
       }
     },
   },
   created() {
+    const vm = this;
     // 設定初始資料
-    this.userInfo.name = this.user.profile.name;
-    this.userInfo.email = this.user.profile.email;
+    vm.userInfo.name = vm.user.profile.name;
+    vm.userInfo.email = vm.user.profile.email;
   },
 };
 </script>

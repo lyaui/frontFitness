@@ -146,47 +146,53 @@ export default {
   },
   computed: {
     time() {
-      return moment(this.payment.finishedAt).format('YYYY/MM/DD HH:mm');
+      const vm = this;
+      return moment(vm.payment.finishedAt).format('YYYY/MM/DD HH:mm');
     },
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     payment() {
-      return this.$store.state.checkout.payment;
+      const vm = this;
+      return vm.$store.state.checkout.payment;
     },
-    // user
     user() {
-      return this.$store.state.checkout.payment.user;
+      const vm = this;
+      return vm.$store.state.checkout.payment.user;
     },
     // 價格相關
     total() {
-      return this.$store.state.checkout.payment.total;
+      const vm = this;
+      return vm.$store.state.checkout.payment.total;
     },
     // 課程相關
     courses() {
-      return this.$store.state.checkout.payment.courses;
+      const vm = this;
+      return vm.$store.state.checkout.payment.courses;
     },
     // 進度狀態顯示
     status() {
-      return this.payment.status === '付款完成' ? 'success' : 'checkout';
+      const vm = this;
+      return vm.payment.status === '付款完成' ? 'success' : 'checkout';
     },
   },
 
   methods: {
     checkOut(id) {
+      const vm = this;
       // 更改訂單付款狀態
-      this.$store.dispatch('checkout/finishPayment', id).then(() => {
-        // 結帳成功提示
-        this.$toasted.success('付款成功，感謝購買！', {
+      vm.$store.dispatch('checkout/finishPayment', id).then(() => {
+        vm.$toasted.success('付款成功，感謝購買！', {
           duration: 2000,
         });
       });
     },
   },
   created() {
-    this.paymentId = this.$route.params.paymentId;
-
-    this.$store.dispatch('checkout/getPaymentById', this.paymentId);
+    const vm = this;
+    vm.paymentId = vm.$route.params.paymentId;
+    vm.$store.dispatch('checkout/getPaymentById', vm.paymentId);
   },
 };
 </script>

@@ -70,9 +70,10 @@ export default {
   },
   computed: {
     courses() {
-      return this.$store.state.courses.courses.filter(
-        (course) => course.categorySelected === this.category
-          && course.id !== this.courseId
+      const vm = this;
+      return vm.$store.state.courses.courses.filter(
+        (course) => course.categorySelected === vm.category
+          && course.id !== vm.courseId
           && course.remainQuantity > 0,
       );
     },
@@ -87,8 +88,9 @@ export default {
     },
   },
   created() {
-    if (this.$store.state.courses.courses === []) {
-      this.$store.dispatch('courses/getCourses');
+    const vm = this;
+    if (vm.$store.state.courses.courses === []) {
+      vm.$store.dispatch('courses/getCourses');
     }
   },
 };

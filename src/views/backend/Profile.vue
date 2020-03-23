@@ -263,25 +263,30 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     user() {
-      return this.$store.state.auth.user.profile;
+      const vm = this;
+      return vm.$store.state.auth.user.profile;
     },
     payments() {
-      return this.$store.state.checkout.payments.filter(
-        (payment) => payment.user.userId === this.user.userId,
+      const vm = this;
+      return vm.$store.state.checkout.payments.filter(
+        (payment) => payment.user.userId === vm.user.userId,
       );
     },
     getDownloadURL() {
-      return this.$store.state.downloadURL;
+      const vm = this;
+      return vm.$store.state.downloadURL;
     },
   },
   watch: {
     getDownloadURL() {
-      if (this.getDownloadURL) {
-        this.account.userImg = this.getDownloadURL;
-        this.updatePhoto = false;
+      const vm = this;
+      if (vm.getDownloadURL) {
+        vm.account.userImg = vm.getDownloadURL;
+        vm.updatePhoto = false;
       }
     },
   },
@@ -292,29 +297,31 @@ export default {
 
     // 上傳圖片
     uploadImage(e) {
+      const vm = this;
       const file = e.target.files[0];
       if (!file.type.includes('image')) {
-        this.$toasted.error('請上傳圖片檔案', { duration: 3000 });
+        vm.$toasted.error('請上傳圖片檔案', { duration: 3000 });
       } else {
-        this.updatePhoto = true;
-        this.$store.dispatch('updateFile', { file, place: 'profile/' });
+        vm.updatePhoto = true;
+        vm.$store.dispatch('updateFile', { file, place: 'profile/' });
       }
     },
 
     // 更新個人檔案
     updateUser() {
-      this.$v.$touch();
-      if (!this.updatePhoto) {
-        if (this.$v.$invalid) {
-          this.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
+      const vm = this;
+      vm.$v.$touch();
+      if (!vm.updatePhoto) {
+        if (vm.$v.$invalid) {
+          vm.$toasted.error('請正確填寫必要資訊', { duration: 3000 });
         } else {
-          this.$store
+          vm.$store
             .dispatch('auth/updateUser', {
-              id: this.user.userId,
-              user: this.account,
+              id: vm.user.userId,
+              user: vm.account,
             })
             .then(() => {
-              this.$toasted.success('更新成功!!', {
+              vm.$toasted.success('更新成功!!', {
                 duration: 2000,
               });
             });
@@ -324,18 +331,21 @@ export default {
 
     // show accordion
     show(i) {
-      this.showDetail = this.showDetail === i ? false : i;
+      const vm = this;
+      vm.showDetail = vm.showDetail === i ? false : i;
     },
 
     // 前往結帳
     goCheckout(id) {
-      this.$router.push(`/checkout/${id}`);
+      const vm = this;
+      vm.$router.push(`/checkout/${id}`);
     },
   },
   created() {
-    this.$store.commit('setDownloadUrl', null);
-    this.$store.dispatch('checkout/getPayments');
-    this.account = { ...this.user };
+    const vm = this;
+    vm.$store.commit('setDownloadUrl', null);
+    vm.$store.dispatch('checkout/getPayments');
+    vm.account = { ...vm.user };
   },
 };
 </script>

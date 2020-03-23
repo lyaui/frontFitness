@@ -22,8 +22,9 @@ export default {
   },
   methods: {
     copyCode() {
+      const vm = this;
       const textarea = document.createElement('textarea');
-      textarea.value = this.code;
+      textarea.value = vm.code;
       document.body.appendChild(textarea);
       textarea.select();
       document.execCommand('copy');

@@ -230,37 +230,45 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.isLoading;
+      const vm = this;
+      return vm.$store.state.isLoading;
     },
     course() {
-      return this.$store.state.courses.course;
+      const vm = this;
+      return vm.$store.state.courses.course;
     },
     comments() {
-      return this.$store.state.comments.comments;
+      const vm = this;
+      return vm.$store.state.comments.comments;
     },
     coach() {
-      return this.$store.state.courses.coach;
+      const vm = this;
+      return vm.$store.state.courses.coach;
     },
     user() {
-      return this.$store.state.auth.user;
+      const vm = this;
+      return vm.$store.state.auth.user;
     },
   },
   watch: {
     $route() {
-      this.$router.go(0);
+      const vm = this;
+      vm.$router.go(0);
     },
   },
   methods: {
     selectCat(cat) {
-      this.$store
+      const vm = this;
+      vm.$store
         .dispatch('courses/getCourses', cat)
-        .then(() => this.$router.push('/courses'));
+        .then(() => vm.$router.push('/courses'));
     },
   },
   created() {
-    const id = this.$route.params.course_id;
-    this.$store.dispatch('courses/getCourseById', id);
-    this.$store.dispatch('comments/getComments', id);
+    const vm = this;
+    const id = vm.$route.params.course_id;
+    vm.$store.dispatch('courses/getCourseById', id);
+    vm.$store.dispatch('comments/getComments', id);
   },
 };
 </script>

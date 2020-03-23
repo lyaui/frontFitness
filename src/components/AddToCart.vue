@@ -20,18 +20,21 @@ export default {
   computed: {
     // 課程是否已存在於購物車
     inCart() {
-      return this.$store.state.cart.cart.find(
-        (course) => course.title === this.course.title,
+      const vm = this;
+      return vm.$store.state.cart.cart.find(
+        (course) => course.title === vm.course.title,
       );
     },
   },
   methods: {
     addToCart() {
-      this.$store.commit('cart/addToCart', this.course);
-      this.show();
+      const vm = this;
+      vm.$store.commit('cart/addToCart', vm.course);
+      vm.show();
     },
     show() {
-      this.$modal.show('addtocart');
+      const vm = this;
+      vm.$modal.show('addtocart');
     },
   },
 };

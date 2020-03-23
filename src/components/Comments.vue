@@ -200,21 +200,23 @@ export default {
   computed: {
     // 計算平均分數
     avgRating() {
-      if (this.comments.length === 0) {
+      const vm = this;
+      if (vm.comments.length === 0) {
         return 0;
       }
-      const avg = this.comments
+      const avg = vm.comments
         .map((comment) => comment.rating)
-        .reduce((acc, cur) => acc + cur) / this.comments.length;
+        .reduce((acc, cur) => acc + cur) / vm.comments.length;
       return parseFloat(avg.toFixed(1));
     },
     // 計算每個bar
     ratingPercents() {
+      const vm = this;
       let percents = [0, 0, 0, 0, 0];
-      if (this.comments.length === 0) {
+      if (vm.comments.length === 0) {
         return percents;
       }
-      const ratings = this.comments.map((item) => item.rating); // [5,3,3]
+      const ratings = vm.comments.map((item) => item.rating); // [5,3,3]
       // 計算每個rating出現比率
       percents = percents.map(
         // eslint-disable-next-line no-return-assign
@@ -228,10 +230,11 @@ export default {
   watch: {
     // 若平均評價改變則更新資料庫資料
     avgRating() {
-      const course = { ...this.$store.state.courses.course };
-      course.avgRating = this.avgRating;
-      this.$store.dispatch('courses/updateCourse', {
-        id: this.courseId,
+      const vm = this;
+      const course = { ...vm.$store.state.courses.course };
+      course.avgRating = vm.avgRating;
+      vm.$store.dispatch('courses/updateCourse', {
+        id: vm.courseId,
         course,
       });
     },
@@ -241,8 +244,9 @@ export default {
       return moment(num).format('YYYY/MM/DD HH:mm');
     },
     alertLogReg() {
-      if (!this.currentUser) {
-        this.$toasted.info('請先 註冊/登入 以進行評價', {
+      const vm = this;
+      if (!vm.currentUser) {
+        vm.$toasted.info('請先 註冊/登入 以進行評價', {
           duration: 2000,
         });
       }
@@ -250,62 +254,66 @@ export default {
 
     // 新增評價
     addComment() {
-      if (this.comment.rating && this.comment.comment) {
-        this.comment.user = this.currentUser.profile.userId;
-        this.comment.toId = this.courseId;
-        this.$store
+      const vm = this;
+      if (vm.comment.rating && vm.comment.comment) {
+        vm.comment.user = vm.currentUser.profile.userId;
+        vm.comment.toId = vm.courseId;
+        vm.$store
           .dispatch('comments/createComment', {
-            comment: this.comment,
-            user: this.currentUser,
+            comment: vm.comment,
+            user: vm.currentUser,
           })
           .then(() => {
-            this.$toasted.success('已收到您的評價', {
+            vm.$toasted.success('已收到您的評價', {
               duration: 2000,
             });
-            this.inputStatus = '新留言';
-            this.inputShow = !this.inputShow;
+            vm.inputStatus = '新留言';
+            vm.inputShow = !vm.inputShow;
           });
       } else {
-        this.$toasted.error('請 選取分數 與 留下評論 再送出', {
+        vm.$toasted.error('請 選取分數 與 留下評論 再送出', {
           duration: 2000,
         });
       }
     },
 
     updateComment() {
-      if (this.comment.rating && this.comment.comment) {
-        this.$store
-          .dispatch('comments/updateComment', this.comment)
+      const vm = this;
+      if (vm.comment.rating && vm.comment.comment) {
+        vm.$store
+          .dispatch('comments/updateComment', vm.comment)
           .then(() => {
-            this.$toasted.success('成功修改評價', {
+            vm.$toasted.success('成功修改評價', {
               duration: 2000,
             });
-            this.inputStatus = '新留言';
-            this.inputShow = !this.inputShow;
+            vm.inputStatus = '新留言';
+            vm.inputShow = !vm.inputShow;
           });
       } else {
-        this.$toasted.error('請 選取分數 與 留下評論 再送出', {
+        vm.$toasted.error('請 選取分數 與 留下評論 再送出', {
           duration: 2000,
         });
       }
     },
     init() {
-      if (this.currentUser) {
+      const vm = this;
+      if (vm.currentUser) {
         // 確認使用者是否留過言
-        const checkArr = this.comments.find(
-          (comment) => comment.user.userId === this.currentUser.profile.userId,
+        const checkArr = vm.comments.find(
+          (comment) => comment.user.userId === vm.currentUser.profile.userId,
         );
         // 若留過言
         if (checkArr) {
           // 不主動顯示輸入框，並讀入可編輯內容
-          this.inputShow = false;
-          this.comment = { ...checkArr };
+          vm.inputShow = false;
+          vm.comment = { ...checkArr };
         }
       }
     },
   },
   created() {
-    window.setTimeout(this.init, 3000);
+    const vm = this;
+    window.setTimeout(vm.init, 3000);
   },
 };
 </script>
