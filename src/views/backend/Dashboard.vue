@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import SideBar from "@/components/SideBar";
-import CoursesAdmin from "@/views/backend/CoursesAdmin";
+import SideBar from '@/components/SideBar';
+import CoursesAdmin from '@/views/backend/CoursesAdmin';
 
 export default {
-  name: "Dashboard",
+  name: 'Dashboard',
   components: {
     SideBar,
-    CoursesAdmin
-  }
+    CoursesAdmin,
+  },
 };
 </script>

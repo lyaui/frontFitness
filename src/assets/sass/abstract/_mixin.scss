@@ -1,14 +1,14 @@
 @mixin background-adjust {
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 @mixin vertical-horizontal-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 // Media query manerger
@@ -21,47 +21,32 @@ $breakpoint argument choices:
 - 1800px+: big-desktop
 */
 
-//oder: base+typography > general layout + grid > page layout >components
-
-// 這裡使用em因為rem會隨預設字體大小而變動
-// 1em=16px;
-
 @mixin respond($breakpoint) {
-
-    //600px
-    @if$breakpoint ==phone {
-        @media only screen and (max-width: 37.5em) {
-            @content
-        }
+  //600px
+  @if$breakpoint ==phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
     }
+  }
 
-    ;
-
-    @if$breakpoint ==tab-port {
-
-        //900px
-        @media only screen and (max-width: 56.25em) {
-            @content
-        }
+  @if$breakpoint ==tab-port {
+    //900px
+    @media only screen and (max-width: 56.25em) {
+      @content;
     }
+  }
 
-    ;
-
-    @if$breakpoint ==tab-land {
-
-        //1200px
-        @media only screen and (max-width: 75em) {
-            @content
-        }
+  @if$breakpoint ==tab-land {
+    //1200px
+    @media only screen and (max-width: 75em) {
+      @content;
     }
+  }
 
-    ;
-
-    @if$breakpoint ==big-desktop {
-
-        //1800px
-        @media only screen and (min-width: 112.5em) {
-            @content
-        }
+  @if$breakpoint ==big-desktop {
+    //1800px
+    @media only screen and (min-width: 112.5em) {
+      @content;
     }
+  }
 }

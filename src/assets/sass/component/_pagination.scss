@@ -1,27 +1,25 @@
 .pagination {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4rem;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
 }
 
 .page {
-    &-item {
+  &-item {
+    font-size: 20px;
+    color: $color-primary;
+    padding: 0 1rem;
+    margin: 0.5rem;
+    border-radius: 5px;
+  }
 
-        font-size: 20px;
-        color:$color-primary;
-        padding:0 1rem;
-        margin: .5rem;
-        border-radius: 5px;
-        
-    }
-
-    &-link {
-        text-decoration: none;
-        color: $color-primary;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  &-link {
+    text-decoration: none;
+    color: $color-primary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

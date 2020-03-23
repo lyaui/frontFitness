@@ -1,78 +1,75 @@
 .spacing-adjust {
-    margin-left: .8rem !important;
+  margin-left: 0.8rem !important;
 }
 
 .text-center {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .mb-sm {
-    margin-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
 }
 
 .mb-md {
-    margin-bottom: 6rem !important;
+  margin-bottom: 6rem !important;
 }
 
 .mt-sm {
-    margin-top: 1.5rem !important;
+  margin-top: 1.5rem !important;
 }
 
 .ml-sm {
-    margin-left: 1.5rem !important;
+  margin-left: 1.5rem !important;
 }
 
-
 .mt-md {
-    margin-top: 6rem !important;
+  margin-top: 6rem !important;
 }
 
 .p-0 {
-    padding: 0rem !important;
+  padding: 0rem !important;
 }
 
 .pl-0 {
-    padding-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .p-sm {
-    padding: 3rem !important;
+  padding: 3rem !important;
 }
 
 .p-md {
-    padding: 6rem !important;
+  padding: 6rem !important;
 }
 
-.d-none{
-    display: none !important;
+.d-none {
+  display: none !important;
 }
 
 .d-flex {
-    display: flex;
+  display: flex;
 }
 
-
 .d-flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .d-none-tab-p {
-    @include respond(tab-port) {
-        display: none !important;
-    }
+  @include respond(tab-port) {
+    display: none !important;
+  }
 }
 
 .d-none-phone {
-    @include respond(phone) {
-        display: none !important;
-    }
+  @include respond(phone) {
+    display: none !important;
+  }
 }
 
 .d-block-phone {
-    display: none !important;
-
-    @include respond(phone) {
-        display: block !important;
-    }
+  display: none !important;
+  @include respond(phone) {
+    display: block !important;
+  }
 }

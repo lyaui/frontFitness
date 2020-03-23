@@ -1,205 +1,201 @@
 .course-list {
-    &__course {
-        height: 160px;
-        display: flex;
-        margin: 30px 10px;
-        color: $color-grey-dark-3;
-        line-height: 20px;
-        font-size: 14px;
-        background-color: #fff;
-        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
-        text-decoration: none;
-        cursor: pointer;
-        border-radius: 5px;
-        overflow: hidden;
-        position: relative;
-        transition: all .5s;
+  &__course {
+    height: 160px;
+    display: flex;
+    margin: 30px 10px;
+    color: $color-grey-dark-3;
+    line-height: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s;
 
-        @include respond(phone) {
-            height: 160px;
-            flex-direction: column;
-            margin: 30px 0px;
-        }
+    @include respond(phone) {
+      height: 160px;
+      flex-direction: column;
+      margin: 30px 0px;
+    }
+  }
+
+  &__header {
+    background-image: linear-gradient(to bottom, #f7a343, #f0163a);
+    width: 300px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    @include respond(tab-port) {
+      width: 250px;
     }
 
-    &__header {
-        background-image: linear-gradient(to bottom, #f7a343, #f0163a);
-        width: 300px;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
 
-        @include respond(tab-port) {
-            width: 250px;
-        }
+  &__title {
+    margin-bottom: 8px;
+  }
 
-        @include respond(phone) {
-            width: 100%;
-        }
+  &__intro {
+    margin-top: 5px;
+    font-size: 13px;
+  }
+
+  &__hot-tag {
+    position: absolute;
+
+    padding: 10px;
+    left: -20px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 55px 55px 0 0;
+    border-color: rgba($color-secondary, 0.8) transparent transparent
+      transparent;
+    z-index: 2;
+
+    &-text {
+      font-family: $font-ch;
+      font-size: 14px;
+      letter-spacing: 3px;
+      width: 200px;
+      color: #fff;
+      transform: rotate(-46deg);
+      position: absolute;
+      left: -2px;
+      top: -108px;
+      z-index: 5;
+      text-shadow: 0em 0em 0.2em lighten(yellow, 20%);
+    }
+  }
+
+  &__course:hover &__img {
+    opacity: 0.7;
+    transform: scale(1.05);
+    overflow: hidden;
+    transition: all.5s;
+  }
+
+  &__course:hover {
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &__img {
+    transform: scale(1.1);
+    display: block;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__title {
+    @include respond(phone) {
+      color: $color-grey-light-2;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+
+    justify-content: space-between;
+
+    > * {
+      display: flex;
+      flex-direction: column;
     }
 
-    &__title {
-        margin-bottom: 8px;
+    @include respond(tab-port) {
+      padding: 15px;
+      flex-direction: column;
     }
 
-    &__intro {
-        margin-top: 5px;
-        font-size: 13px
+    @include respond(phone) {
+      color: $color-grey-light-2;
+      justify-content: flex-end;
+      position: absolute;
+      height: 100%;
+      top: 0%;
+      padding: 5px 10px;
+      background-image: linear-gradient(
+        to bottom,
+        rgba($color-secondary-light, 0.05),
+        rgba(#000, 0.8)
+      );
+    }
+  }
+
+  &__info {
+    max-width: 400px;
+    margin-right: 20px;
+
+    @include respond(tab-port) {
+      margin-right: 0;
+    }
+  }
+
+  &__rating {
+    display: flex;
+    align-items: baseline;
+
+    & > span {
+      margin-left: 10px;
+    }
+  }
+
+  &__price-info {
+    @include respond(tab-port) {
+      width: 100%;
+      margin-right: auto;
+      display: flex;
     }
 
-    &__hot-tag {
+    @include respond(phone) {
+      display: flex;
+    }
+  }
 
-        position: absolute;
+  &__price {
+    text-align: right;
 
-        padding: 10px;
-        left: -20px;
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 55px 55px 0 0;
-        border-color: rgba($color-secondary, .8) transparent transparent transparent;
-        z-index: 2;
-
-        &-text {
-            font-family: $font-ch;
-            font-size: 14px;
-            letter-spacing: 3px;
-            width: 200px;
-            color: #fff;
-            transform: rotate(-46deg);
-            position: absolute;
-            left: -2px;
-            top: -108px;
-            z-index: 5;
-            text-shadow: 0em 0em 0.2em lighten(yellow, 20%)
-        }
+    @include respond(phone) {
+      margin-top: 0px;
     }
 
-    &__course:hover &__img {
-        opacity: 0.7;
-        transform: scale(1.05);
-        overflow: hidden;
-        transition: all.5s;
+    > * {
+      margin-left: auto;
     }
 
-    &__course:hover {
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    &--discount {
+      font-weight: 500;
+      font-size: 24px;
+      margin-left: auto;
+      margin-bottom: 8px;
+
+      @include respond(tab-port) {
+        font-size: 22px;
+        margin: 0;
+      }
     }
 
-    &__img {
-        transform: scale(1.1);
-        display: block;
-        opacity: 1;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-
+    &--origin {
+      text-decoration: line-through;
+      font-size: 16px;
+      margin-left: 1.5rem;
     }
 
-    &__title {
-        @include respond(phone) {
-            color: $color-grey-light-2;
-        }
+    @include respond(tab-port) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
     }
-
-
-    &__content {
-        width: 100%;
-        padding: 20px;
-        display: flex;
-
-        justify-content: space-between;
-
-        >* {
-            display: flex;
-            flex-direction: column;
-        }
-
-        @include respond(tab-port) {
-            padding: 15px;
-            flex-direction: column;
-        }
-
-        @include respond(phone) {
-            color: $color-grey-light-2;
-            justify-content: flex-end;
-            position: absolute;
-            height: 100%;
-            top: 0%;
-            padding: 5px 10px;
-            background-image: linear-gradient(to bottom, rgba($color-secondary-light, .05), rgba(#000, .8));
-        }
-    }
-
-    &__info {
-        max-width: 400px;
-        margin-right: 20px;
-
-        @include respond(tab-port) {
-            margin-right: 0;
-        }
-
-    }
-
-
-    &__rating {
-        display: flex;
-        align-items: baseline;
-
-        &>span {
-            margin-left: 10px;
-        }
-    }
-
-    &__price-info {
-        @include respond(tab-port) {
-            width: 100%;
-            margin-right: auto;
-            display: flex;
-        }
-
-        @include respond(phone) {
-            display: flex;
-        }
-
-    }
-
-    &__price {
-        text-align: right;
-
-        @include respond(phone) {
-            margin-top: 0px;
-        }
-
-        >* {
-            margin-left: auto
-        }
-
-        &--discount {
-            font-weight: 500;
-            font-size: 24px;
-            margin-left: auto;
-            margin-bottom: 8px;
-
-            @include respond(tab-port) {
-                font-size: 22px;
-                margin: 0;
-            }
-        }
-
-        &--origin {
-            text-decoration: line-through;
-            font-size: 16px;
-            margin-left: 1.5rem;
-        }
-
-        @include respond(tab-port) {
-
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-
-    }
+  }
 }

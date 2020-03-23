@@ -4,8 +4,9 @@
       全館9折｜精選課程輸入折扣碼
       <b>
         &#129304;
-        <span @click="copyCode" class="announce-bar__code">{{code}}</span>&#129304;
-      </b>再折
+        <span @click="copyCode" class="announce-bar__code">{{ code }}</span
+        >&#129304; </b
+      >再折
       <b>$100</b>
     </div>
   </div>
@@ -13,19 +14,19 @@
 
 <script>
 export default {
-  name:'Announcebar',
+  name: 'Announcebar',
   data() {
     return {
-      code: "LOVEFITTING"
+      code: 'LOVEFITTING',
     };
   },
   methods: {
     copyCode() {
-      const textarea = document.createElement("textarea");
+      const textarea = document.createElement('textarea');
       textarea.value = this.code;
       document.body.appendChild(textarea);
       textarea.select();
-      document.execCommand("copy");
+      document.execCommand('copy');
       document.body.removeChild(textarea);
     },
   },

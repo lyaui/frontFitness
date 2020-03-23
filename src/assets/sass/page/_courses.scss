@@ -1,206 +1,206 @@
 .courses-main {
-    margin-top: 60px;
+  margin-top: 60px;
 }
 
 .course-cards {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .courses-header {
-    height: 150px;
-    width: 100%;
-    background-image: linear-gradient(to left bottom, rgba(31, 178, 197, 0.5), black),
-        url(./assets/img/figure-bg.jpg);
-    @include background-adjust;
-    background-position: 60% 40%;
-    padding: 2rem .5rem;
-    margin-bottom: 32px;
+  height: 150px;
+  width: 100%;
+  background-image: linear-gradient(
+      to left bottom,
+      rgba(31, 178, 197, 0.5),
+      black
+    ),
+    url(./assets/img/figure-bg.jpg);
+  @include background-adjust;
+  background-position: 60% 40%;
+  padding: 2rem 0.5rem;
+  margin-bottom: 32px;
+
+  @include respond(phone) {
+    height: 170px;
+    margin-top: 60px;
+    padding: 2rem 0rem;
+    background-position: 0% 30%;
+  }
+
+  &__title {
+    margin-top: 28px;
+    color: #fff;
+    font-size: 3.6rem;
+    letter-spacing: 0.5rem;
+    margin-bottom: 5px;
 
     @include respond(phone) {
-        height: 170px;
-        margin-top: 60px;
-        padding: 2rem 0rem;
-        background-position: 0% 30%;
+      margin-top: 52px;
     }
+  }
 
-    &__title {
-        margin-top: 28px;
-        color: #fff;
-        font-size: 3.6rem;
-        letter-spacing: .5rem;
-        margin-bottom: 5px;
-
-        @include respond(phone) {
-            margin-top: 52px;
-        }
-    }
-
-    &__text {
-        color: #fff;
-        font-size: 14px;
-        letter-spacing: 1px;
-    }
+  &__text {
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
 }
 
 .search-result {
+  padding: 5rem 0 3rem 1rem;
+  color: $color-primary;
+  font-size: 18px;
+  line-height: 1.8em;
 
-    padding: 5rem 0 3rem 1rem;
-    color: $color-primary;
-    font-size: 18px;
-    line-height: 1.8em;
+  @include respond(phone) {
+    // font-size: 16px;
+    padding: 70px 0 3rem 1rem;
+  }
 
-    @include respond(phone) {
-        // font-size: 16px;
-        padding: 70px 0 3rem 1rem;
-    }
-
-    ul {
-        margin-top: 2rem;
-        margin-left: 2rem;
-        font-size: 16px;
-        line-height: 2em;
-    }
-
+  ul {
+    margin-top: 2rem;
+    margin-left: 2rem;
+    font-size: 16px;
+    line-height: 2em;
+  }
 }
 
 ////////// Courses filter //////////
 
 .courses-filter {
-    width: 100%;
-    background-color: $color-grey-light-3;
+  width: 100%;
+  background-color: $color-grey-light-3;
 
-    &__list {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        padding: 1rem 1.5rem;
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+  }
+
+  &__item {
+    &:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+  }
+
+  &__btn-group {
+    @include respond(phone) {
+      justify-content: flex-end;
+      flex: 100%;
+    }
+  }
+
+  &__btn {
+    width: 80px;
+    background-color: $color-grey-light-1;
+    color: $color-font-default;
+    letter-spacing: 0.2rem;
+    font-size: 16px;
+    padding: 0.2rem 0;
+    border: 1px solid lighten($color-grey-dark-3, 15%);
+    border-radius: 5px;
+    transition: all 0.5s;
+
+    @include respond(phone) {
+      width: 70px;
+      font-size: 14px;
     }
 
-    &__item {
-        &:not(:first-child) {
-            margin-left: .5rem;
-        }
+    &:hover {
+      color: $color-secondary;
+      border: 1px solid $color-secondary;
     }
-
-    &__btn-group {
-        @include respond(phone) {
-            justify-content: flex-end;
-            flex: 100%;
-        }
-    }
-
-    &__btn {
-        width: 80px;
-        background-color: $color-grey-light-1;
-        color: $color-font-default;
-        letter-spacing: .2rem;
-        font-size: 16px;
-        padding: .2rem 0;
-        border: 1px solid lighten($color-grey-dark-3, 15%);
-        border-radius: 5px;
-        transition: all .5s;
-
-        @include respond(phone) {
-            width: 70px;
-            font-size: 14px;
-        }
-
-        &:hover {
-            color: $color-secondary;
-            border: 1px solid $color-secondary;
-        }
-    }
+  }
 }
 
 //////////Search bar//////////
 
 .search {
-    width: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: $font-ch;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-ch;
+
+  @include respond(phone) {
+    flex: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  &__input {
+    font-family: inherit;
+    font-size: 16px;
+    color: $color-grey-dark-3;
+    background-color: $color-grey-light-1;
+    border: 1px solid lighten($color-grey-dark-3, 15%);
+    padding: 0.4rem 2rem;
+    border-radius: 100px;
+    width: 95%;
+    transition: all 0.2s;
+    margin-right: -3.25rem;
+    letter-spacing: 1px;
+    font-weight: 400;
 
     @include respond(phone) {
-        flex: 100%;
-        margin-bottom: .5rem;
+      width: 100%;
     }
 
-
-    &__input {
-        font-family: inherit;
-        font-size: 16px;
-        color: $color-grey-dark-3;
-        background-color: $color-grey-light-1;
-        border: 1px solid lighten($color-grey-dark-3,15%);
-        padding: .4rem 2rem;
-        border-radius: 100px;
-        width: 95%;
-        transition: all .2s;
-        margin-right: -3.25rem;
-        letter-spacing: 1px;
-        font-weight: 400;
-
-        @include respond(phone) {
-            width: 100%;
-        }
-
-
-        &:focus {
-            outline: none;
-            width: 100%;
-            border: 1px solid $color-secondary;
-        }
-
-        &::-webkit-input-placeholder {
-            letter-spacing: 2px;
-            color: $color-grey-light-2;
-        }
+    &:focus {
+      outline: none;
+      width: 100%;
+      border: 1px solid $color-secondary;
     }
 
-    &__input:focus+&__button {
-        background-color: transparent;
+    &::-webkit-input-placeholder {
+      letter-spacing: 2px;
+      color: $color-grey-light-2;
     }
+  }
 
-    &__btn {
-        padding: 1rem;
-        margin-left: -1rem;
+  &__input:focus + &__button {
+    background-color: transparent;
+  }
+
+  &__btn {
+    padding: 1rem;
+    margin-left: -1rem;
+  }
+
+  &__icon {
+    font-size: 14px;
+    color: $color-font-default;
+    transition: all 0.5s;
+
+    &:hover {
+      color: $color-secondary;
     }
-
-    &__icon {
-        font-size: 14px;
-        color: $color-font-default;
-        transition: all .5s;
-
-        &:hover {
-            color: $color-secondary;
-        }
-    }
+  }
 }
 
 .ifinite-scroll {
-    padding: 2rem;
-    text-align: center;
-    font-size: 3rem;
-    color: lighten($color-grey-dark-3, 20%);
+  padding: 2rem;
+  text-align: center;
+  font-size: 3rem;
+  color: lighten($color-grey-dark-3, 20%);
 }
 
-.gotop{
-    display: block;
-    font-size: 16px;
-    text-decoration: none;
-    color: $color-primary;
-    margin-bottom: 32px;
-    letter-spacing: 2px;
+.gotop {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  color: $color-primary;
+  margin-bottom: 32px;
+  letter-spacing: 2px;
 
-    &:hover{
-        transform: translateY(-1px);
-        transition: all .3s;
-    }
-    &:active{
-        transform: translateY(1px);
-        color:$color-secondary;
-    }
+  &:hover {
+    transform: translateY(-1px);
+    transition: all 0.3s;
+  }
+  &:active {
+    transform: translateY(1px);
+    color: $color-secondary;
+  }
 }

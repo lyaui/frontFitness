@@ -10,6 +10,7 @@
     "aos": "^2.3.4",
     "core-js": "^2.6.5",
     "d3": "^5.14.2",
+    "eslint-import-resolver-alias": "^1.1.2",
     "firebase": "^7.9.1",
     "jquery": "^3.4.0",
     "moment": "^2.24.0",

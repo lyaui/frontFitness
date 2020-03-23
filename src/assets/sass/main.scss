@@ -1,35 +1,32 @@
-@import "../sass/abstract/mixin";
-@import "../sass/abstract/variable";
+@import '../sass/abstract/mixin';
+@import '../sass/abstract/variable';
 
-@import "../sass/base/animation";
-@import "../sass/base/base";
-@import "../sass/base/typography";
-@import "../sass/base/utility";
+@import '../sass/base/animation';
+@import '../sass/base/base';
+@import '../sass/base/typography';
+@import '../sass/base/utility';
 
+@import '../sass/component/button';
+@import '../sass/component/coach';
+@import '../sass/component/comments';
+@import '../sass/component/contact';
+@import '../sass/component/courseCard';
+@import '../sass/component/courseList';
+@import '../sass/component/courseRecommend';
+@import '../sass/component/feedback';
+@import '../sass/component/gallery';
+@import '../sass/component/pagination';
+@import '../sass/component/stepbar';
+@import '../sass/component/form';
+@import '../sass/component/modal';
 
-@import "../sass/component/button";
-@import "../sass/component/coach";
-@import "../sass/component/comments";
-@import "../sass/component/contact";
-@import "../sass/component/courseCard";
-@import "../sass/component/courseList";
-@import "../sass/component/courseRecommend";
-@import "../sass/component/feedback";
-@import "../sass/component/gallery";
-@import "../sass/component/pagination";
-@import "../sass/component/stepbar";
-@import "../sass/component/form";
-@import "../sass/component/modal";
+@import '../sass/layout/footer';
+@import '../sass/layout/header';
+@import '../sass/layout/navigation';
+@import '../sass/layout/sidebar';
 
-
-@import "../sass/layout/footer";
-@import "../sass/layout/header";
-@import "../sass/layout/navigation";
-@import "../sass/layout/sidebar";
-
-
-@import "../sass/page/admin";
-@import "../sass/page/checkout";
-@import "../sass/page/courses";
-@import "../sass/page/courseDetails";
-@import "../sass/page/home";
+@import '../sass/page/admin';
+@import '../sass/page/checkout';
+@import '../sass/page/courses';
+@import '../sass/page/courseDetails';
+@import '../sass/page/home';

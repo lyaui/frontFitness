@@ -23,6 +23,7 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
 # 以這個專案來講就要改成這樣以下這樣
 
-git push origin master master:gh-pages
+git push -f git@github.com:lyaui/frontFitness.git master:gh-pages
+
 
 cd -

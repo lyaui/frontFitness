@@ -5,7 +5,11 @@
         <div class="logo-box">frontFitness</div>
       </router-link>
       <div class="sidebar__user">
-        <img class="sidebar__user-img" :src="user.profile.userImg" :alt="user.profile.name">
+        <img
+          class="sidebar__user-img"
+          :src="user.profile.userImg"
+          :alt="user.profile.name"
+        />
         <div class="sidebar__user-info" @click.prevent="logOut()">
           <span class="sidebar__user-status">
             <i class="fas fa-sign-out-alt"></i> 登出
@@ -18,12 +22,18 @@
         v-for="cat in navList"
         :key="cat.cat"
         class="side-nav__item"
-        @click="activePage=cat.cat;turnNewEditPage(cat.cat,'新增課程')"
-        :class="{'side-nav__item--active':activePage===cat.cat}"
+        @click="
+          activePage = cat.cat;
+          turnNewEditPage(cat.cat, '新增課程');
+        "
+        :class="{ 'side-nav__item--active': activePage === cat.cat }"
       >
-        <router-link :to="{path:`/admin/${cat.path}`}" class="side-nav__link">
+        <router-link
+          :to="{ path: `/admin/${cat.path}` }"
+          class="side-nav__link"
+        >
           <i class="side-nav__icon d-none-phone" :class="`${cat.icon}`"></i>
-          <span>{{cat.cat}}</span>
+          <span>{{ cat.cat }}</span>
         </router-link>
       </li>
     </ul>
@@ -32,42 +42,39 @@
 
 <script>
 export default {
-  name:'SideBar',
+  name: 'SideBar',
   data() {
     return {
-      activePage: "個人資訊",
+      activePage: '個人資訊',
       navList: [
-        { cat: "個人資訊", icon: "fas fa-user", path: "profile" },
-        { cat: "新增課程", icon: "fas fa-edit", path: "course-edit" },
-        { cat: "課程列表", icon: "fas fa-list", path: "courses-admin" },
-        { cat: "訂單列表", icon: "fas fa-clipboard-list", path: "orders" }
-      ]
+        { cat: '個人資訊', icon: 'fas fa-user', path: 'profile' },
+        { cat: '新增課程', icon: 'fas fa-edit', path: 'course-edit' },
+        { cat: '課程列表', icon: 'fas fa-list', path: 'courses-admin' },
+        { cat: '訂單列表', icon: 'fas fa-clipboard-list', path: 'orders' },
+      ],
     };
   },
   computed: {
-    //確認使用者狀態
     user() {
-      return {...this.$store.state.auth.user};
-    }
+      return { ...this.$store.state.auth.user };
+    },
   },
   methods: {
-    //登出
     logOut() {
-      this.$store.dispatch("auth/signOut").then(() => {
-        this.$toasted.success("成功登出!!", {
-          duration: 2000
+      this.$store.dispatch('auth/signOut').then(() => {
+        this.$toasted.success('成功登出!!', {
+          duration: 2000,
         });
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: 'home' });
       });
     },
-    //編輯/新增課程
     turnNewEditPage(cat) {
-      if (cat === "新增課程") {
-         this.$store.commit("courses/setStatus", cat);
-         this.$store.commit("courses/setCourse", {});
-        this.$router.push({ name: "courseNewEdit" });
+      if (cat === '新增課程') {
+        this.$store.commit('courses/setStatus', cat);
+        this.$store.commit('courses/setCourse', {});
+        this.$router.push({ name: 'courseNewEdit' });
       }
-    }
-  }
+    },
+  },
 };
 </script>

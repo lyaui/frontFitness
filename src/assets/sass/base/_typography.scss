@@ -1,112 +1,91 @@
-    .logo-box {
-        display: inline-block;
-        text-decoration: none;
-        font-size: 28px;
-        color: #fff;
-        font-family: $font-logo;
-        transition: all .2s;
+.logo-box {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 28px;
+  color: #fff;
+  font-family: $font-logo;
+  transition: all 0.2s;
 
-        &:hover {
-            color: $color-secondary;
-        }
+  &:hover {
+    color: $color-secondary;
+  }
+}
 
-    }
+.heading-primary {
+  color: #fff;
+  letter-spacing: 1.5rem;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 5rem;
 
-    .heading-primary {
-        color: #FFF;
-        letter-spacing: 1.5rem;
-        text-transform: uppercase;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 5rem;
+  @include respond(phone) {
+    letter-spacing: 1.4rem;
+    padding: 0 3rem;
+  }
 
-        @include respond(phone) {
-            letter-spacing: 1.4rem;
-            padding: 0 3rem;
-        }
+  &__main {
+    font-family: $font-en;
+    font-size: 8rem;
+    animation: moveInLeft 2s;
+  }
 
-        &__main {
-            font-family: $font-en;
-            font-size: 8rem;
-            animation: moveInLeft 2s;
+  &__sub {
+    font-size: 2rem;
+    font-family: $font-ch;
+    font-weight: 300;
+    animation: moveInRight 2s;
+  }
+}
 
-        }
+.heading-secondary {
+  color: $color-primary;
+  padding: 1rem 0 3rem 0;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 4.5rem;
+  font-weight: 800;
+  letter-spacing: 5px;
+}
 
-        &__sub {
-            font-size: 2rem;
-            font-family: $font-ch;
-            font-weight: 300;
-            animation: moveInRight 2s;
-        }
+.heading-tertiary--grey {
+  color: $color-grey-dark-3;
+  font-family: $font-ch;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+  font-size: 20px;
+  text-decoration: none;
 
-    }
+  @include respond(phone) {
+    font-size: 18px;
+  }
+}
 
-    .heading-secondary {
-        color: $color-primary;
-        padding: 1rem 0 3rem 0;
-        font-family: 'Noto Serif TC',
-            serif;
-        font-size: 4.5rem;
-        font-weight: 800;
-        letter-spacing: 5px;
-    }
+.heading-tertiary--dark {
+  color: $color-primary;
+  font-family: $font-ch;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+  font-size: 20px;
+  text-decoration: none;
 
-    .heading-tertiary--grey {
-        color: $color-grey-dark-3;
-        font-family: $font-ch;
-        font-weight: 400;
-        letter-spacing: .3rem;
-        font-size: 20px;
-        text-decoration: none;
+  @include respond(phone) {
+    font-size: 20px;
+  }
+}
 
-        @include respond(phone) {
-            font-size: 18px;
-        }
-    }
+.text-highlight {
+  color: transparent;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(
+    to bottom,
+    $color-secondary-light,
+    $color-secondary-dark
+  );
+}
 
-    .heading-tertiary--dark {
-        color: $color-primary;
-        font-family: $font-ch;
-        font-weight: 400;
-        letter-spacing: .3rem;
-        font-size: 20px;
-        text-decoration: none;
-
-        @include respond(phone) {
-            font-size: 18px;
-        }
-    }
-
-    .section-title {
-        padding: 0 rem;
-        display: flex;
-        align-items: flex-end;
-        margin-bottom: 2rem;
-
-        &__name {
-            color: $color-primary;
-            font-size: 3.2rem;
-            font-weight: 800;
-            letter-spacing: .5rem;
-            margin-left: .5rem;
-            margin-bottom: -.5rem;
-
-        }
-
-        &__img {
-            width: 10rem;
-        }
-    }
-
-    .text-highlight {
-        color: transparent;
-        -webkit-background-clip: text;
-        background-image: linear-gradient(to bottom, $color-secondary-light, $color-secondary-dark);
-    }
-
-    .text-warning {
-        display: block;
-        font-size: 13px;
-        color: $color-secondary;
-    }
+.text-warning {
+  display: block;
+  font-size: 13px;
+  color: $color-secondary;
+}

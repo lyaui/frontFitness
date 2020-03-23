@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
 Vue.use(Router);
 
@@ -9,9 +9,10 @@ export default new Router({
     document.getElementById('app').scrollIntoView();
   },
 
-  routes: [{
+  routes: [
+    {
       path: '*',
-      redirect: '/'
+      redirect: '/',
     },
     {
       path: '/',
@@ -23,40 +24,42 @@ export default new Router({
       name: 'dashboard',
       component: () => import('@/views/backend/Dashboard.vue'),
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
       },
-      children: [{
+      children: [
+        {
           path: 'profile',
           name: 'Profile',
           component: () => import('@/views/backend/Profile.vue'),
           meta: {
-            requiresAuth: true
-          }
-        }, {
+            requiresAuth: true,
+          },
+        },
+        {
           path: 'courses-admin',
           name: 'coursesAdmin',
           component: () => import('@/views/backend/CoursesAdmin.vue'),
           meta: {
-            requiresAuth: true
-          }
+            requiresAuth: true,
+          },
         },
         {
           path: 'course-edit',
           name: 'courseNewEdit',
           component: () => import('@/views/backend/CourseNewEdit.vue'),
           meta: {
-            requiresAuth: true
-          }
+            requiresAuth: true,
+          },
         },
         {
           path: 'orders',
           name: 'Orders',
           component: () => import('@/views/backend/Orders.vue'),
           meta: {
-            requiresAuth: true
-          }
+            requiresAuth: true,
+          },
         },
-      ]
+      ],
     },
     {
       path: '/courses',
@@ -67,12 +70,12 @@ export default new Router({
     {
       path: '/courses/:course_id',
       name: 'CourseDetails',
-      component: () => import('@/views/frontend/CourseDetails.vue')
+      component: () => import('@/views/frontend/CourseDetails.vue'),
     },
     {
       path: '/cart',
       name: 'Cart',
-      component: () => import('@/views/frontend/Cart.vue')
+      component: () => import('@/views/frontend/Cart.vue'),
     },
 
     {
@@ -81,7 +84,7 @@ export default new Router({
       component: () => import('@/views/frontend/Checkout.vue'),
       meta: {
         requiresAuth: true,
-      }
+      },
     },
 
     {
@@ -89,9 +92,8 @@ export default new Router({
       name: 'CheckoutInfo',
       component: () => import('@/views/frontend/CheckoutInfo.vue'),
       meta: {
-        requiresAuth: true
-      }
+        requiresAuth: true,
+      },
     },
-
-  ]
-})
+  ],
+});

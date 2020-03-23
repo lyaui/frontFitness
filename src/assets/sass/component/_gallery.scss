@@ -1,85 +1,85 @@
 .gallery {
+  &__item {
+    background-image: linear-gradient(
+      to bottom,
+      $color-secondary-light,
+      $color-secondary-dark
+    );
+    position: relative;
+    flex: 0 0 20%;
+    overflow: hidden;
 
-    &__item {
-        background-image: linear-gradient(to bottom, $color-secondary-light, $color-secondary-dark);
-        position: relative;
-        flex: 0 0 20%;
-        overflow: hidden;
+    @include respond(tab-land) {
+      flex: 0 0 25%;
 
-        @include respond(tab-land) {
-            flex: 0 0 25%;
-
-            &:last-child {
-                display: none;
-            }
-            &:nth-last-child(2){
-                display: none;
-            }
-        }
-
-        @include respond(tab-port) {
-            flex: 0 0 33.33333%;
-
-            &:nth-last-child(2) {
-                display: block;
-            }
-        }
-
-        @include respond(phone) {
-            flex: 0 0 50%;
-                        &:last-child {
-                            display: block;
-                        }
-        }
+      &:last-child {
+        display: none;
+      }
+      &:nth-last-child(2) {
+        display: none;
+      }
     }
 
-    &__img {
+    @include respond(tab-port) {
+      flex: 0 0 33.33333%;
+
+      &:nth-last-child(2) {
         display: block;
-        width: 100%;
-        transition: all .5s;
+      }
     }
 
-    &__item:hover &__img {
-        opacity: .5;
-        transform: scale(1.05)
+    @include respond(phone) {
+      flex: 0 0 50%;
+      &:last-child {
+        display: block;
+      }
     }
+  }
 
+  &__img {
+    display: block;
+    width: 100%;
+    transition: all 0.5s;
+  }
 
-    &__icon {
-        width: 100%;
-        height: 100%;
-        color: #fff;
-        font-size: 4rem;
-        text-decoration: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        opacity: 0;
-        cursor: pointer;
-        transition: all 0.3s
-    }
+  &__item:hover &__img {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
 
-    &__item:hover &__icon {
-        opacity: .9;
-        transform: translate(-8%, -8%)
-    }
+  &__icon {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 4rem;
+    text-decoration: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
 
-    &__outline {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        outline: 0.4rem solid #fff;
-        outline-offset: -2rem;
-        transform: scale(0);
-        transition: all 0.3s linear;
-    }
+  &__item:hover &__icon {
+    opacity: 0.9;
+    transform: translate(-8%, -8%);
+  }
 
-    &__item:hover &__outline {
-        opacity: .9;
-        transform: scale(1)
-    }
+  &__outline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    outline: 0.4rem solid #fff;
+    outline-offset: -2rem;
+    transform: scale(0);
+    transition: all 0.3s linear;
+  }
 
-
+  &__item:hover &__outline {
+    opacity: 0.9;
+    transform: scale(1);
+  }
 }

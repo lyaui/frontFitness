@@ -1,176 +1,165 @@
 .sidebar {
-    z-index: 5;
-    background-color: $color-grey-dark-4;
+  z-index: 5;
+  background-color: $color-grey-dark-4;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  width: 220px;
+  color: $color-grey-light-2;
+  position: fixed;
+
+  @include respond(tab-land) {
+    width: 100%;
+    justify-content: space-between;
+    height: 80px;
+  }
+
+  &__header {
     display: flex;
-    height: 100%;
+    justify-content: center;
     flex-direction: column;
-    
-    width: 220px;
-    color: $color-grey-light-2;
-    position: fixed;
 
     @include respond(tab-land) {
-        width: 100%;
-        justify-content: space-between;
-        height: 80px;
+      margin-top: 8px;
+      padding: 0 16px;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__logo {
+    margin: 2rem 0;
+    text-align: center;
+
+    @include respond(tab-land) {
+      margin: 0;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 48px;
+
+    @include respond(tab-land) {
+      margin-bottom: 0;
     }
 
-    &__header {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
+    &-img {
+      display: inline-block;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      background-color: #fff;
+      object-fit: cover;
 
-        @include respond(tab-land) {
-            margin-top: 8px;
-            padding: 0 16px;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
+      @include respond(tab-land) {
+        width: 32px;
+        height: 32px;
+      }
     }
 
-
-
-    &__logo {
-        margin: 2rem 0;
-        text-align: center;
-
-        @include respond(tab-land) {
-            margin: 0;
-        }
+    &-info {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      margin-left: 1.5rem;
     }
 
-    &__user {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 48px;
+    &-name {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 0.3rem;
 
-        @include respond(tab-land) {
-            margin-bottom: 0;
-        }
-
-        &-img {
-            display: inline-block;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            background-color: #fff;
-            object-fit: cover;
-
-            @include respond(tab-land) {
-                width: 32px;
-                height: 32px;
-            }
-        }
-
-        &-info {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            margin-left: 1.5rem;
-        }
-
-        &-name {
-            font-weight: bold;
-            font-size: 18px;
-            margin-bottom: .3rem;
-
-            @include respond(tab-land) {
-                display: none;
-            }
-        }
-
-        &-status,
-        i {
-            font-size: 16px;
-            color: greenyellow;
-        }
+      @include respond(tab-land) {
+        display: none;
+      }
     }
 
-
-
+    &-status,
+    i {
+      font-size: 16px;
+      color: greenyellow;
+    }
+  }
 }
 
 .side-nav {
-    font-family: $font-ch;
-    font-size: 16px;
-    letter-spacing: .3rem;
-    list-style: none;
+  font-family: $font-ch;
+  font-size: 16px;
+  letter-spacing: 0.3rem;
+  list-style: none;
+
+  @include respond(tab-land) {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  &__item {
+    position: relative;
+    margin-bottom: 0.5rem;
+    flex: 0 0 25%;
 
     @include respond(tab-land) {
-        display: flex;
-        flex-wrap: wrap;
-        font-size: 14px;
+      margin-bottom: 0;
     }
+  }
 
-    &__item {
-        position: relative;
-        margin-bottom: .5rem;
-        flex: 0 0 25%;
+  &__logout {
+    width: 100%;
+    background-color: darken($color-grey-dark-4, 3%);
+  }
 
-        @include respond(tab-land) {
-            margin-bottom: 0;
-        }
+  &__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: $color-primary-light-2;
+    border-right: 5px solid $color-secondary;
+    transform: scaleY(0);
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+      background-color 0.1s;
 
+    @include respond(tab-land) {
+      border-right: 0;
+      border-bottom: 2px solid $color-secondary;
     }
+  }
 
-    &__logout {
-        width: 100%;
-        background-color: darken($color-grey-dark-4, 3%);
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+    color: red;
+  }
+  &__link:link,
+  &__link:visited {
+    color: var(--color-grey-light-1);
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.2rem 3rem;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    line-height: 1;
+
+    @include respond(tab-land) {
+      padding: 10px 10px;
     }
+  }
 
-    &__item::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 3px;
-        background-color: $color-primary-light-2;
-        border-right: 5px solid $color-secondary;
-        transform: scaleY(0);
-        transition: transform .2s,
-            width .4s cubic-bezier(1, 0, 0, 1) .2s,
-            background-color .1s;
-
-        @include respond(tab-land) {
-            border-right: 0;
-            border-bottom: 2px solid $color-secondary;
-        }
-    }
-
-
-
-    &__item--active::before {
-        transform: scaleY(1);
-        width: 100%;
-        color: red
-    }
-    &__link:link,
-    &__link:visited {
-        color: var(--color-grey-light-1);
-        text-decoration: none;
-        text-transform: uppercase;
-        display: block;
-        padding: 1.2rem 3rem;
-        position: relative;
-        z-index: 10;
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        line-height: 1;
-
-
-        @include respond(tab-land) {
-            padding: 10px 10px;
-        }
-
-    }
-
-    &__icon {
-        width: 14px;
-        height: 14px;
-        margin-right: 20px;
-    }
+  &__icon {
+    width: 14px;
+    height: 14px;
+    margin-right: 20px;
+  }
 }

@@ -1,170 +1,162 @@
 .checkout {
-    display: flex;
-    margin-bottom: 8rem;
-    align-items: flex-start;
+  display: flex;
+  margin-bottom: 8rem;
+  align-items: flex-start;
+
+  @include respond(tab-port) {
+    flex-direction: column;
+  }
+
+  &__items {
+    padding: 3rem;
+    width: 75%;
+    background-color: #fff;
+    margin-right: 2rem;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
+
+    @include respond(tab-land) {
+      padding: 3rem 2rem;
+    }
 
     @include respond(tab-port) {
-        flex-direction: column;
+      width: 100%;
+      margin-right: 0rem;
+      margin-bottom: 3rem;
+      padding: 3rem 1rem;
+    }
+  }
 
+  &__summary {
+    color: $color-font-default;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    background-color: #fff;
+    width: 25%;
+    width: 25rem;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
+
+    @include respond(tab-port) {
+      width: 100%;
     }
 
-
-    &__items {
-        padding: 3rem;
-        width: 75%;
-        background-color: #fff;
-        margin-right: 2rem;
-        box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
-
-        @include respond(tab-land) {
-            padding: 3rem 2rem;
-        }
-
-        @include respond(tab-port) {
-            width: 100%;
-            margin-right: 0rem;
-            margin-bottom: 3rem;
-            padding: 3rem 1rem;
-        }
+    &-title {
+      width: 100%;
+      margin-right: auto;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #c7c6c6;
     }
 
-
-    &__summary {
-        color: $color-font-default;
-        font-size: 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-        background-color: #fff;
-        width: 25%;
-        width: 25rem;
-        box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
-
-        @include respond(tab-port) {
-            width: 100%;
-        }
-
-        &-title {
-            width: 100%;
-            margin-right: auto;
-            margin-bottom: 1rem;
-            padding-bottom: .5rem;
-            border-bottom: 1px solid #c7c6c6;
-        }
-
-        &-price {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 1rem;
-        }
-
-        &-total {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            text-align: right;
-            font-size: 2.4rem;
-            font-weight: 500;
-            margin-top: 1.5rem;
-            border-top: 1px solid #c7c6c6;
-            padding: 1rem 0 3rem 0;
-
-            h3 {
-                color: $color-secondary;
-            }
-
-        }
-
-        &-list {
-            list-style: none;
-            color: $color-font-default;
-            line-height: 2em;
-        }
-
-        &--success {
-            @include respond(phone) {
-                order: -1;
-            }
-        }
+    &-price {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1rem;
     }
 
-    &__info {
-        width: 75%;
+    &-total {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      text-align: right;
+      font-size: 2.4rem;
+      font-weight: 500;
+      margin-top: 1.5rem;
+      border-top: 1px solid #c7c6c6;
+      padding: 1rem 0 3rem 0;
 
-        @include respond(tab-port) {
-            width: 100%;
-        }
+      h3 {
+        color: $color-secondary;
+      }
     }
 
-    &-form {
-        font-size: 16px;
-        letter-spacing: 1px;
-        padding: 3rem;
-        color: $color-font-default;
-        background-color: #fff;
-        margin-right: 2rem;
-        box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
-
-
-        @include respond(tab-port) {
-            margin-right: 0;
-        }
-
-        @include respond(phone) {
-            padding: 3rem 2rem;
-        }
-
-        &__text {
-            font-size: 14px;
-            color: $color-font-default;
-            line-height: 2;
-        }
-
+    &-list {
+      list-style: none;
+      color: $color-font-default;
+      line-height: 2em;
     }
 
-    &-payment {
+    &--success {
+      @include respond(phone) {
+        order: -1;
+      }
+    }
+  }
 
-        &__total {
-            border-top: 1px solid $color-grey-light-2;
-            text-align: right;
-            font-size: 18px;
-            padding-top: 8px;
-            padding-right: 1rem;
+  &__info {
+    width: 75%;
 
-        }
+    @include respond(tab-port) {
+      width: 100%;
+    }
+  }
 
-        &__invoice {
-            display: flex;
-            justify-content: space-between;
+  &-form {
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding: 3rem;
+    color: $color-font-default;
+    background-color: #fff;
+    margin-right: 2rem;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, 0.05);
 
-            b:first-child {
-                display: inline-block;
-                margin-bottom: 6px;
-            }
-
-            >* {
-                width: 50%;
-            }
-        }
+    @include respond(tab-port) {
+      margin-right: 0;
     }
 
-    &-table {
-        width: 100%;
-        border-collapse: collapse;
-
-        & th {
-            border-bottom: 1px solid $color-grey-light-2;
-            padding: 5px 1rem;
-            text-align: left;
-            transition: all .3s;
-        }
-
-        & td {
-            padding: 3px 1rem;
-            border-bottom: 1px solid $color-grey-light-2;
-        }
+    @include respond(phone) {
+      padding: 3rem 2rem;
     }
+
+    &__text {
+      font-size: 14px;
+      color: $color-font-default;
+      line-height: 2;
+    }
+  }
+
+  &-payment {
+    &__total {
+      border-top: 1px solid $color-grey-light-2;
+      text-align: right;
+      font-size: 18px;
+      padding-top: 8px;
+      padding-right: 1rem;
+    }
+
+    &__invoice {
+      display: flex;
+      justify-content: space-between;
+
+      b:first-child {
+        display: inline-block;
+        margin-bottom: 6px;
+      }
+
+      > * {
+        width: 50%;
+      }
+    }
+  }
+
+  &-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    & th {
+      border-bottom: 1px solid $color-grey-light-2;
+      padding: 5px 1rem;
+      text-align: left;
+      transition: all 0.3s;
+    }
+
+    & td {
+      padding: 3px 1rem;
+      border-bottom: 1px solid $color-grey-light-2;
+    }
+  }
 }

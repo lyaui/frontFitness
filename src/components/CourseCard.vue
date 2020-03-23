@@ -1,26 +1,40 @@
 <template>
   <div class="course-carousel mb-sm">
     <carousel
-      v-if="courseCard.length>0"
+      v-if="courseCard.length > 0"
       :nav="false"
       :margin="30"
       :dots="false"
       :rewind="false"
-      :responsive="{300:{items:1,stagePadding:30,margin:80},450:{items:1,stagePadding:50,margin:80},520:{items:2,margin:30},750:{items:2,stagePadding:30,margin:60},900:{items:3},1200:{items:4},1600:{items:5}}"
+      :responsive="{
+        300: { items: 1, stagePadding: 30, margin: 80 },
+        450: { items: 1, stagePadding: 50, margin: 80 },
+        520: { items: 2, margin: 30 },
+        750: { items: 2, stagePadding: 30, margin: 60 },
+        900: { items: 3 },
+        1200: { items: 4 },
+        1600: { items: 5 },
+      }"
     >
       <div class="course-card" v-for="course in courseCard" :key="course.id">
-        <router-link :to="{name:'CourseDetails',params:{course_id:course.id}}">
+        <router-link
+          :to="{ name: 'CourseDetails', params: { course_id: course.id } }"
+        >
           <div class="course-card__header">
             <div class="course-card__hot-tag" v-if="course.discount">
               <div class="course-card__hot-tag-text">精選</div>
             </div>
-            <img class="course-card__img" :src="course.imageUrl" alt>
+            <img class="course-card__img" :src="course.imageUrl" alt />
           </div>
           <div class="course-card__body">
-            <div class="course-card__title heading-tertiary--dark">{{courseTitle(course.title,20)}}</div>
+            <div class="course-card__title heading-tertiary--dark">
+              {{ courseTitle(course.title, 20) }}
+            </div>
             <div class="d-flex">
-              <div class="course-card__category">{{course.categorySelected}}｜</div>
-              <div class="course-card__coach">{{course.coach}}</div>
+              <div class="course-card__category">
+                {{ course.categorySelected }}｜
+              </div>
+              <div class="course-card__coach">{{ course.coach }}</div>
             </div>
             <div class="course-card__rating">
               <star-rating
@@ -31,8 +45,12 @@
               ></star-rating>
             </div>
             <div class="course-card__price">
-              <div class="course-card__price--origin">{{course.originPrice|currency}}</div>
-              <div class="course-card__price--discount">{{course.price|currency}}</div>
+              <div class="course-card__price--origin">
+                {{ course.originPrice | currency }}
+              </div>
+              <div class="course-card__price--discount">
+                {{ course.price | currency }}
+              </div>
             </div>
             <add-to-cart :course="course"></add-to-cart>
           </div>
@@ -57,34 +75,34 @@
 </template>
 
 <script>
-import carousel from "vue-owl-carousel";
-import StarRating from "vue-star-rating";
-import AddToCart from "@/components/AddToCart";
+import carousel from 'vue-owl-carousel';
+import StarRating from 'vue-star-rating';
+import AddToCart from '@/components/AddToCart';
 
 export default {
-  name: "CourseCard",
-  props: ["courseCard", "selectedCat"],
+  name: 'CourseCard',
+  props: ['courseCard', 'selectedCat'],
   components: { carousel, StarRating, AddToCart },
   data() {
     return {
-      showBtn: false
+      showBtn: false,
     };
   },
   computed: {
     selectCat() {
       return this.$store.state.courses.selectCat;
-    }
+    },
   },
 
   methods: {
     courseTitle(title, len) {
       if (title.length > len) {
-        title = title.substring(0, len - 1) + "...";
+        title = `${title.substring(0, len - 1)}...`;
       }
       return title;
     },
     measureSize() {
-      let width = window.innerWidth;
+      const width = window.innerWidth;
       let cardNum;
 
       switch (true) {
@@ -97,20 +115,19 @@ export default {
         case width < 1200:
           cardNum = 3;
           break;
-        case width < 1800:
-          cardNum = 4;
-          break;
-
         case width > 1800:
           cardNum = 5;
           break;
+        default:
+          cardNum = 4;
+          break;
       }
-      this.showBtn = this.courseCard.length <= cardNum ? false : true;
-    }
+      this.showBtn = !(this.courseCard.length <= cardNum);
+    },
   },
   created() {
-    window.addEventListener("resize", this.measureSize);
+    window.addEventListener('resize', this.measureSize);
     this.measureSize();
-  }
+  },
 };
 </script>

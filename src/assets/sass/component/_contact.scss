@@ -1,74 +1,84 @@
 form {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
 
 .focus-light {
-    &:focus {
-        border: 1px solid $color-secondary !important;
-    }
+  &:focus {
+    border: 1px solid $color-secondary !important;
+  }
 }
 
 .contact {
-    &__map {
-        width: 40%;
+  &__map {
+    width: 40%;
 
+    @include respond(phone) {
+      width: 100%;
+    }
+  }
 
+  &-form {
+    display: flex;
+    align-items: center;
+    font-family: $font-ch;
+    width: 60%;
+    padding: 3rem 5rem;
+    color: $color-grey-light-1;
+    font-size: 14px;
+    @include background-adjust;
+    background-image: linear-gradient(
+        to right bottom,
+        rgba(#1fb2c5, 0.6),
+        rgba(0, 0, 0, 1)
+      ),
+      url(./assets/img/general-bg.jpg);
+    background-attachment: fixed;
 
-        @include respond(phone) {
-            width: 100%;
-        }
+    > * {
+      width: 100%;
+      max-width: 75rem;
+      @include respond(phone) {
+        margin: auto;
+      }
     }
 
-    &-form {
-        font-family: $font-ch;
-        width: 60%;
-        padding: 3rem 4rem;
-        color: $color-grey-light-1;
-        font-size: 14px;
-        @include background-adjust;
-        background-image: linear-gradient(to right bottom, rgba(#1fb2c5, .6), rgba(0, 0, 0, 1)),
-            url(./assets/img/general-bg.jpg);
-        background-attachment: fixed;
-
-        @include respond(tab-port) {
-            padding: 4rem 2rem;
-        }
-
-        @include respond(phone) {
-            width: 100%;
-            padding: 4rem 3rem;
-        }
-
-        p {
-            letter-spacing: 1.5px;
-            font-size: 14px;
-        }
-
-        .form__group {
-            align-items: center;
-        }
-
-        textarea {
-            resize: none;
-            height: 12rem;
-            color: $color-grey-light-2
-        }
-
-        label {
-            color: $color-grey-light-2;
-            padding: 6px 3px 6px 10px;
-        }
-
-        input {
-            color: #fff
-        }
-
-        &__title {
-            font-size: 28px;
-            letter-spacing: 5px;
-        }
+    @include respond(tab-port) {
+      padding: 4rem;
     }
+
+    @include respond(phone) {
+      width: 100%;
+    }
+
+    p {
+      letter-spacing: 1.5px;
+      font-size: 14px;
+    }
+
+    .form__group {
+      align-items: center;
+    }
+
+    textarea {
+      resize: none;
+      height: 12rem;
+      color: $color-grey-light-2;
+    }
+
+    label {
+      color: $color-grey-light-2;
+      padding: 6px 3px 6px 10px;
+    }
+
+    input {
+      color: #fff;
+    }
+
+    &__title {
+      font-size: 28px;
+      letter-spacing: 5px;
+    }
+  }
 }

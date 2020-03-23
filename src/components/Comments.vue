@@ -17,7 +17,6 @@
             <div class="course-rating__bar">
               <span class="course-rating__bar-progress" :style="{width:percent+'%'}"></span>
             </div>
-
             <div class="d-flex" style="width:220px">
               <star-rating
                 :star-size="16"
@@ -38,12 +37,12 @@
       <div class="heading-tertiary--dark mb-sm">評論</div>
       <div class="user-comment" v-if="inputShow">
         <div class="user-comment__img-box">
-          <img class="user-comment__img" :src="currentUser.profile.userImg" v-if="currentUser">
+          <img class="user-comment__img" :src="currentUser.profile.userImg" v-if="currentUser" />
           <img
             class="user-comment__img"
             src="https://png2.pngtree.com/svg/20161215/9bc7bae28b.png"
             v-else
-          >
+          />
         </div>
         <div class="user-comment__content">
           <div class="user-comment__info">
@@ -93,7 +92,8 @@
                   class="btn btn-primary--cancel"
                   style="width:100px"
                   v-if="inputStatus==='編輯留言'"
-                  @click.prevent="inputStatus = '新留言';inputShow = !inputShow;comment.comment=tempComment"
+                  @click.prevent="inputStatus = '新留言';
+                  inputShow = !inputShow;comment.comment=tempComment"
                 >取消</button>
               </div>
             </div>
@@ -115,7 +115,7 @@
         >
           <div class="d-flex">
             <div class="user-comment__img-box">
-              <img class="user-comment__img" :src="comment.user.userImg">
+              <img class="user-comment__img" :src="comment.user.userImg" />
             </div>
             <!-- 手機排版 -->
             <div class="user-comment__info d-block-phone">
@@ -140,7 +140,8 @@
           </div>
           <div
             class="user-comment__content"
-            :class="{'user-current':!!currentUser&&comment.user.userId=== currentUser.profile.userId}"
+            :class="{'user-current':!!currentUser&&comment.user.userId
+            === currentUser.profile.userId}"
           >
             <!-- 桌機排版 -->
             <div class="user-comment__info d-none-phone">
@@ -176,76 +177,73 @@
 </template>
 
 <script>
-import StarRating from "vue-star-rating";
-import moment from "moment";
+import StarRating from 'vue-star-rating';
+import moment from 'moment';
 
 export default {
-  name: "Comments",
+  name: 'Comments',
   components: {
-    StarRating
+    StarRating,
   },
-  props: ["comments", "currentUser", "courseId"],
+  props: ['comments', 'currentUser', 'courseId'],
   data() {
     return {
       comment: {
         comment: null,
-        rating: null
+        rating: null,
       },
-      inputStatus: "新留言",
+      inputStatus: '新留言',
       inputShow: true,
-      tempComment: null
+      tempComment: null,
     };
   },
   computed: {
-    //計算平均分數
+    // 計算平均分數
     avgRating() {
       if (this.comments.length === 0) {
         return 0;
-      } else {
-        let avg =
-          this.comments
-            .map(comment => comment.rating)
-            .reduce((acc, cur) => acc + cur) / this.comments.length;
-        return parseFloat(avg.toFixed(1));
       }
+      const avg = this.comments
+        .map((comment) => comment.rating)
+        .reduce((acc, cur) => acc + cur) / this.comments.length;
+      return parseFloat(avg.toFixed(1));
     },
-    //計算每個bar
+    // 計算每個bar
     ratingPercents() {
       let percents = [0, 0, 0, 0, 0];
       if (this.comments.length === 0) {
         return percents;
       }
-      let ratings = this.comments.map(item => item.rating); //[5,3,3]
-      //計算每個rating出現比率
+      const ratings = this.comments.map((item) => item.rating); // [5,3,3]
+      // 計算每個rating出現比率
       percents = percents.map(
-        (item, index) =>
-          (item = ratings.filter(rating => rating === index + 1).length) /
-          ratings.length
+        // eslint-disable-next-line no-return-assign
+        (item, index) => (item = ratings.filter((rating) => rating === index + 1).length)
+          / ratings.length,
       );
-      //換算百分比
-      return percents.map(num => parseFloat(num.toFixed(2)) * 100).reverse();
-    }
+      // 換算百分比
+      return percents.map((num) => parseFloat(num.toFixed(2)) * 100).reverse();
+    },
   },
   watch: {
-    //若平均評價改變則更新資料庫資料
+    // 若平均評價改變則更新資料庫資料
     avgRating() {
-      let course = { ...this.$store.state.courses.course };
+      const course = { ...this.$store.state.courses.course };
       course.avgRating = this.avgRating;
-      this.$store.dispatch("courses/updateCourse", {
+      this.$store.dispatch('courses/updateCourse', {
         id: this.courseId,
-        course: course
+        course,
       });
-    }
+    },
   },
   methods: {
     time(num) {
-      return moment(num).format("YYYY/MM/DD HH:mm");
+      return moment(num).format('YYYY/MM/DD HH:mm');
     },
-    //註冊登入提示
     alertLogReg() {
       if (!this.currentUser) {
-        this.$toasted.info("請先 註冊/登入 以進行評價", {
-          duration: 2000
+        this.$toasted.info('請先 註冊/登入 以進行評價', {
+          duration: 2000,
         });
       }
     },
@@ -256,61 +254,58 @@ export default {
         this.comment.user = this.currentUser.profile.userId;
         this.comment.toId = this.courseId;
         this.$store
-          .dispatch("comments/createComment", {
+          .dispatch('comments/createComment', {
             comment: this.comment,
-            user: this.currentUser
+            user: this.currentUser,
           })
           .then(() => {
-            this.$toasted.success("已收到您的評價", {
-              duration: 2000
+            this.$toasted.success('已收到您的評價', {
+              duration: 2000,
             });
-            this.inputStatus = "新留言";
+            this.inputStatus = '新留言';
             this.inputShow = !this.inputShow;
           });
       } else {
-        this.$toasted.error("請 選取分數 與 留下評論 再送出", {
-          duration: 2000
+        this.$toasted.error('請 選取分數 與 留下評論 再送出', {
+          duration: 2000,
         });
       }
     },
 
-    //更新評價
     updateComment() {
-      // this.updateAvgRating();
       if (this.comment.rating && this.comment.comment) {
         this.$store
-          .dispatch("comments/updateComment", this.comment)
+          .dispatch('comments/updateComment', this.comment)
           .then(() => {
-            this.$toasted.success("成功修改評價", {
-              duration: 2000
+            this.$toasted.success('成功修改評價', {
+              duration: 2000,
             });
-            this.inputStatus = "新留言";
+            this.inputStatus = '新留言';
             this.inputShow = !this.inputShow;
           });
       } else {
-        this.$toasted.error("請 選取分數 與 留下評論 再送出", {
-          duration: 2000
+        this.$toasted.error('請 選取分數 與 留下評論 再送出', {
+          duration: 2000,
         });
       }
     },
     init() {
       if (this.currentUser) {
-        //確認使用者是否留過言
-        let checkArr = this.comments.find(
-          comment => comment.user.userId === this.currentUser.profile.userId
+        // 確認使用者是否留過言
+        const checkArr = this.comments.find(
+          (comment) => comment.user.userId === this.currentUser.profile.userId,
         );
-        //若留過言
+        // 若留過言
         if (checkArr) {
-          //不主動顯示輸入框，並讀入可編輯內容
+          // 不主動顯示輸入框，並讀入可編輯內容
           this.inputShow = false;
           this.comment = { ...checkArr };
         }
       }
-    }
+    },
   },
   created() {
-    // 確認使用者登入狀態
     window.setTimeout(this.init, 3000);
-  }
+  },
 };
 </script>
