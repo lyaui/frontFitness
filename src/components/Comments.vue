@@ -216,12 +216,10 @@ export default {
       if (vm.comments.length === 0) {
         return percents;
       }
-      const ratings = vm.comments.map((item) => item.rating); // [5,3,3]
+      const ratings = vm.comments.map((item) => item.rating);
       // 計算每個rating出現比率
       percents = percents.map(
-        // eslint-disable-next-line no-return-assign
-        (item, index) => (item = ratings.filter((rating) => rating === index + 1).length)
-          / ratings.length,
+        (item, index) => (ratings.filter((rating) => rating === index + 1).length) / ratings.length,
       );
       // 換算百分比
       return percents.map((num) => parseFloat(num.toFixed(2)) * 100).reverse();

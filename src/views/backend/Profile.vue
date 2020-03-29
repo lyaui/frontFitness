@@ -20,10 +20,6 @@
       <div class="profile-admin__form">
         <div class="profile-admin__img">
           <div class="form__group">
-            <label class="form__label">
-              個人檔案圖片
-              <span class="text-highlight">*</span>
-            </label>
             <img v-if="account.userImg" class :src="account.userImg" alt />
             <img
               v-if="!account.userImg"
@@ -35,7 +31,7 @@
         <div class="profile-admin__info">
           <div class="form__row">
             <div class="form__group">
-              <label class="form__label">
+              <label class="form__label" for="profileName">
                 姓名
                 <span class="text-highlight">*</span>
               </label>
@@ -43,6 +39,7 @@
                 class="form__input"
                 placeholder="請填入姓名"
                 v-model="account.name"
+                id="profileName"
               />
               <template v-if="$v.account.name.$dirty">
                 <span v-if="!$v.account.name.required" class="text-warning"
@@ -51,21 +48,22 @@
               </template>
             </div>
             <div class="form__group">
-              <label class="form__label">
+              <label class="form__label" for="profileMail">
                 電子信箱（不可變更）
                 <span class="text-highlight">*</span>
               </label>
-              <input class="form__input" v-model="account.email" disabled />
+              <input class="form__input" v-model="account.email" id="profileMail" disabled />
             </div>
           </div>
           <div class="form__row">
             <div class="form__group">
-              <label class="form__label" for>輸入圖片網址</label>
+              <label class="form__label" for="profileImgUrl">輸入個人圖片網址</label>
               <input
                 class="form__input"
                 placeholder="https://unsplash..."
                 type="text"
                 v-model="account.userImg"
+                id="profileImgUrl"
               />
               <template v-if="$v.account.userImg.$dirty">
                 <span v-if="!$v.account.userImg.required" class="text-warning"
@@ -77,11 +75,11 @@
               </template>
             </div>
             <div class="form__group">
-              <label class="form__label">
-                或 選擇封面檔案
+              <label class="form__label" for="profileImgFile">
+                或 選擇圖片檔案
                 <i class="fas fa-spinner fa-spin" v-if="updatePhoto"></i>
               </label>
-              <input class="form__input" type="file" @change="uploadImage" />
+              <input class="form__input" type="file" @change="uploadImage" id="profileImgFile" />
             </div>
           </div>
           <div class="btn-footer">
@@ -335,7 +333,6 @@ export default {
       vm.showDetail = vm.showDetail === i ? false : i;
     },
 
-    // 前往結帳
     goCheckout(id) {
       const vm = this;
       vm.$router.push(`/checkout/${id}`);

@@ -131,7 +131,7 @@
 </template>
 
 <script>
-import StepBar from '@/components/StepBar';
+import StepBar from '@/components/StepBar.vue';
 import moment from 'moment';
 
 export default {

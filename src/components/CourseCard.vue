@@ -28,7 +28,7 @@
           </div>
           <div class="course-card__body">
             <div class="course-card__title heading-tertiary--dark">
-              {{ courseTitle(course.title, 20) }}
+              {{ textLimit(course.title, 20) }}
             </div>
             <div class="d-flex">
               <div class="course-card__category">
@@ -77,7 +77,7 @@
 <script>
 import carousel from 'vue-owl-carousel';
 import StarRating from 'vue-star-rating';
-import AddToCart from '@/components/AddToCart';
+import AddToCart from '@/components/AddToCart.vue';
 
 export default {
   name: 'CourseCard',
@@ -96,11 +96,12 @@ export default {
   },
 
   methods: {
-    courseTitle(title, len) {
+    textLimit(title, len) {
+      let substringText = title;
       if (title.length > len) {
-        title = `${title.substring(0, len - 1)}...`;
+        substringText = `${title.substring(0, len - 1)}...`;
       }
-      return title;
+      return substringText;
     },
     measureSize() {
       const vm = this;

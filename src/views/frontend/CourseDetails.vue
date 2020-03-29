@@ -213,11 +213,11 @@
 </template>
 
 <script>
-import CoachCard from '@/components/CoachCard';
-import Comments from '@/components/Comments';
-import CourseRecommend from '@/components/CourseRecommend';
+import CoachCard from '@/components/CoachCard.vue';
+import Comments from '@/components/Comments.vue';
+import CourseRecommend from '@/components/CourseRecommend.vue';
 import StarRating from 'vue-star-rating';
-import AddToCart from '@/components/AddToCart';
+import AddToCart from '@/components/AddToCart.vue';
 
 export default {
   name: 'CourseDetails',

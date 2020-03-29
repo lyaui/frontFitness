@@ -19,9 +19,9 @@
 
 <script>
 import $ from 'jquery';
-import Announcebar from '@/components/Announcebar';
-import NavBar from '@/components/NavBar';
-import AppFooter from '@/components/Footer';
+import Announcebar from '@/components/Announcebar.vue';
+import NavBar from '@/components/NavBar.vue';
+import AppFooter from '@/components/Footer.vue';
 
 export default {
   name: 'APP',
@@ -101,8 +101,7 @@ export default {
     },
     scrollAnnounce() {
       // Get the current scroll position
-      const currentScrollPosition =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
       // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero
       if (currentScrollPosition < 60) {
         return;

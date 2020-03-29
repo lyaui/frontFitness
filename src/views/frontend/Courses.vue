@@ -24,7 +24,7 @@
         </li>
       </ul>
     </nav>
-    <main class="courses-main" id="courseMain">
+    <main class="courses-main" id="gotop">
       <header class="courses-header" v-if="!searchShow">
         <div class="container">
           <h2 class="courses-header__title">{{ cat }}</h2>
@@ -136,7 +136,8 @@
 
             <a
               class="gotop"
-              href="#courseMain"
+              href="#gotop"
+              @click="goTop"
               v-if="infiniteData.length == coursesOrdered.length"
             >
               <i class="fas fa-chevron-up"></i> 返回頂部
@@ -151,8 +152,8 @@
 
 <script>
 import $ from 'jquery';
-import CourseCard from '@/components/CourseCard';
-import CourseList from '@/components/CourseList';
+import CourseCard from '@/components/CourseCard.vue';
+import CourseList from '@/components/CourseList.vue';
 
 export default {
   name: 'Courses',
@@ -228,6 +229,12 @@ export default {
       }
       vm.showNavbar = currentScrollPosition < vm.lastScrollPosition;
       vm.lastScrollPosition = currentScrollPosition;
+    },
+    goTop() {
+      const doc = document.documentElement;
+      $(doc).animate({
+        scrollTop: 0,
+      }, 400);
     },
     loadMore() {
       const vm = this;

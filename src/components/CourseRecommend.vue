@@ -22,7 +22,7 @@
       <div class="course-recommend__content">
         <div class="course-recommend__info">
           <div class="course-recommend__title heading-tertiary--dark">
-            {{ courseTitle(course.title) }}
+            {{ textLimit(course.title,20) }}
           </div>
           <div class="d-flex d-none-phone">
             <div class="course-recommend__category">
@@ -79,12 +79,12 @@ export default {
     },
   },
   methods: {
-    courseTitle(title) {
-      const len = 20;
+    textLimit(title, len) {
+      let substringText = title;
       if (title.length > len) {
-        title = `${title.substring(0, len - 1)}...`;
+        substringText = `${title.substring(0, len - 1)}...`;
       }
-      return title;
+      return substringText;
     },
   },
   created() {

@@ -64,7 +64,7 @@
 
 <script>
 import StarRating from 'vue-star-rating';
-import AddToCart from '@/components/AddToCart';
+import AddToCart from '@/components/AddToCart.vue';
 
 export default {
   name: 'CourseList',
@@ -78,10 +78,11 @@ export default {
   },
   methods: {
     textLimit(title, len) {
+      let substringText = title;
       if (title.length > len) {
-        title = `${title.substring(0, len - 1)}...`;
+        substringText = `${title.substring(0, len - 1)}...`;
       }
-      return title;
+      return substringText;
     },
   },
 };

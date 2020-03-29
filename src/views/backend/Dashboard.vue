@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import SideBar from '@/components/SideBar';
-import CoursesAdmin from '@/views/backend/CoursesAdmin';
+import SideBar from '@/components/SideBar.vue';
+import CoursesAdmin from '@/views/backend/CoursesAdmin.vue';
 
 export default {
   name: 'Dashboard',

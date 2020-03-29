@@ -9,7 +9,7 @@
             <div>
               <div class="form__row">
                 <div class="form__group">
-                  <label class="form__label">輸入封面網址</label>
+                  <label class="form__label" for="coverUrl">輸入封面網址</label>
                   <input
                     class="form__input"
                     type="text"
@@ -18,6 +18,7 @@
                       'form__input--warning': $v.course.imageUrl.$error,
                     }"
                     v-model="course.imageUrl"
+                    id="coverUrl"
                   />
                   <template v-if="$v.course.imageUrl.$dirty">
                     <span
@@ -33,7 +34,7 @@
               </div>
               <div class="form__row">
                 <div class="form__group">
-                  <label class="form__label">
+                  <label class="form__label" for="coverFile">
                     或 選擇封面檔案
                     <i class="fas fa-spinner fa-spin" v-if="updateCover"></i>
                   </label>
@@ -41,6 +42,7 @@
                     @change="uploadImage"
                     class="form__input"
                     type="file"
+                    id="coverFile"
                   />
                 </div>
               </div>
@@ -61,12 +63,13 @@
             <!-- 課程名稱 -->
             <div class>
               <div class="form__group">
-                <label class="form__label">課程名稱（標題上限25字元）</label>
+                <label class="form__label" for="courseTitle">課程名稱（標題上限25字元）</label>
                 <input
                   class="form__input"
                   placeholder="請填入課程名稱"
                   type="text"
                   v-model.trim="course.title"
+                  id="courseTitle"
                   :maxlength="titleMax"
                   :class="{ 'form__input--warning': $v.course.title.$error }"
                 />
@@ -87,12 +90,13 @@
             <!-- 課程簡介 -->
             <div class="form__row">
               <div class="form__group">
-                <label class="form__label">課程簡介（簡介上限80字元）</label>
+                <label class="form__label" for="courseIntro">課程簡介（簡介上限80字元）</label>
                 <input
                   class="form__input"
                   placeholder="請填入課程簡介"
                   type="textarea"
                   v-model.trim="course.intro"
+                  id="courseIntro"
                   style="padding-right:40px"
                   :maxlength="introMax"
                   :class="{ 'form__input--warning': $v.course.intro.$error }"
@@ -115,7 +119,7 @@
             <div class="form__row">
               <div class="form__group">
                 <div class="form__tag-case">
-                  <label class="form__label">標籤</label>
+                  <label class="form__label" for="courseTags">標籤</label>
                   <div
                     class="form__tag"
                     v-for="(tag, key) in course.tags"
@@ -130,6 +134,7 @@
                   type="text"
                   @keyup.enter="addTags()"
                   v-model.trim="tag"
+                  id="courseTags"
                   placeholder="請填入標籤並以enter隔開"
                 />
               </div>
@@ -138,10 +143,11 @@
             <!-- 課程類別、教練 -->
             <div class="form__row">
               <div class="form__group">
-                <label class="form__label">課程類別</label>
+                <label class="form__label" for="courseCat">課程類別</label>
                 <select
                   class="form__input"
                   v-model="course.categorySelected"
+                  id="courseCat"
                   :class="{
                     'form__input--warning': $v.course.categorySelected.$error,
                   }"
@@ -164,11 +170,12 @@
                 </template>
               </div>
               <div class="form__group">
-                <label class="form__label">課程教練</label>
+                <label class="form__label" for="courseCoach">課程教練</label>
                 <select
                   class="form__input"
                   :class="{ 'form__input--warning': $v.course.coach.$error }"
                   v-model="course.coach"
+                  id="courseCoach"
                   required
                 >
                   <option value disabled selected hidden>請選擇課程教練</option>
@@ -190,11 +197,12 @@
             <!-- 課程星期、時間 -->
             <div class="form__row">
               <div class="form__group">
-                <label class="form__label">課程星期</label>
+                <label class="form__label" for="courseWeek">課程星期</label>
                 <select
                   class="form__input"
                   :class="{ 'form__input--warning': $v.course.week.$error }"
                   v-model="course.week"
+                  id="courseWeek"
                   required
                 >
                   <option value disabled selected hidden>請選擇課程星期</option>
@@ -207,11 +215,12 @@
                 </template>
               </div>
               <div class="form__group">
-                <label class="form__label">課程時間</label>
+                <label class="form__label" for="courseTime">課程時間</label>
                 <select
                   class="form__input"
                   :class="{ 'form__input--warning': $v.course.time.$error }"
                   v-model="course.time"
+                  id="courseTime"
                   required
                 >
                   <option value disabled selected hidden>請選擇課程時間</option>
@@ -244,12 +253,13 @@
             <!-- 滿班人數、可報名人數 -->
             <div class="form__row">
               <div class="form__group">
-                <label class="form__label">滿班人數</label>
+                <label class="form__label" for="courseQty">滿班人數</label>
                 <input
                   class="form__input"
                   placeholder="請填入人數"
                   type="number"
                   v-model.number="course.quantity"
+                  id="courseQty"
                   :class="{ 'form__input--warning': $v.course.quantity.$error }"
                 />
                 <template v-if="$v.course.quantity.$dirty">
@@ -262,11 +272,12 @@
                 </template>
               </div>
               <div class="form__group">
-                <label class="form__label">可報名人數</label>
+                <label class="form__label" for="courseRemain">可報名人數</label>
                 <input
                   class="form__input"
                   placeholder="請填入人數"
                   type="number"
+                  id="courseRemain"
                   v-model.number="course.remainQuantity"
                   :class="{
                     'form__input--warning': $v.course.remainQuantity.$error,
@@ -290,12 +301,13 @@
             <!-- 課程原價、售價 -->
             <div class="form__row">
               <div class="form__group">
-                <label class="form__label">原價</label>
+                <label class="form__label" for="courseOriPri">原價</label>
                 <input
                   class="form__input"
                   placeholder="請填入價格"
                   type="number"
                   v-model.number="course.originPrice"
+                  id="courseOriPri"
                   :class="{
                     'form__input--warning': $v.course.originPrice.$error,
                   }"
@@ -314,12 +326,13 @@
                 </template>
               </div>
               <div class="form__group">
-                <label class="form__label">售價</label>
+                <label class="form__label" for="courseSelPri">售價</label>
                 <input
                   class="form__input"
                   placeholder="請填入價格"
                   type="number"
                   v-model.number="course.price"
+                  id="courseSelPri"
                   :class="{ 'form__input--warning': $v.course.price.$error }"
                 />
                 <template v-if="$v.course.price.$dirty">
@@ -335,13 +348,14 @@
 
             <!-- 精選課程 -->
             <div class="form__row">
-              <div class="form__group d-flex" style="align-items:center">
+              <div class="form__group d-flex" style="align-items:baseline">
                 <input
                   class="form__checkbox"
                   type="checkbox"
                   v-model="course.discount"
+                  id="courseSel"
                 />
-                <label class="form__label">精選課程（優惠）</label>
+                <label class="form__label" for="courseSel">精選課程（優惠）</label>
               </div>
             </div>
             <!-- 詳細課程內容 -->
@@ -392,7 +406,9 @@
 </template>
 
 <script>
-import { required, maxLength, minValue, url } from 'vuelidate/lib/validators';
+import {
+  required, maxLength, minValue, url,
+} from 'vuelidate/lib/validators';
 import { VueEditor } from 'vue2-editor';
 
 export default {

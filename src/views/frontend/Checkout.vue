@@ -96,7 +96,7 @@
               <form class="checkout-form__form">
                 <div class="form__row">
                   <div class="form__group">
-                    <label class="form__label">
+                    <label class="form__label" for="paymentName">
                       姓名
                       <span class="text-highlight">*</span>
                     </label>
@@ -104,6 +104,7 @@
                     <input
                       class="form__input"
                       v-model.trim="userInfo.name"
+                      id="paymentName"
                       placeholder="請填入真實姓名"
                       type="text"
                       :class="{
@@ -119,13 +120,14 @@
                     </template>
                   </div>
                   <div class="form__group">
-                    <label class="form__label">
+                    <label class="form__label" for="paymentMail">
                       聯絡電子信箱
                       <span class="text-highlight">*</span>
                     </label>
                     <input
                       class="form__input"
                       v-model.trim="userInfo.email"
+                      id="paymentMail"
                       placeholder="請填入電子信箱"
                       type="email"
                       :class="{
@@ -146,13 +148,14 @@
                 </div>
                 <div class="form__row">
                   <div class="form__group">
-                    <label class="form__label">
+                    <label class="form__label" for="paymentPhone">
                       聯絡電話
                       <span class="text-highlight">*</span>
                     </label>
                     <input
                       class="form__input"
                       v-model.trim.number="userInfo.phone"
+                      id="paymentPhone"
                       placeholder="請填入聯絡電話"
                       type="tel"
                       :class="{
@@ -175,11 +178,12 @@
                 </div>
                 <div class="form__row">
                   <div class="form__group">
-                    <label class="form__label">備註</label>
+                    <label class="form__label" for="paymentRemark">備註</label>
 
                     <textarea
                       class="form__input"
                       v-model="userInfo.remark"
+                      id="paymentRemark"
                       placeholder="如有任何備註事項請註明"
                       cols="30"
                       rows="20"
@@ -220,7 +224,7 @@
 </template>
 
 <script>
-import StepBar from '@/components/StepBar';
+import StepBar from '@/components/StepBar.vue';
 import { required, email, numeric } from 'vuelidate/lib/validators';
 
 export default {

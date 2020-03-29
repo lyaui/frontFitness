@@ -4,7 +4,7 @@ import Router from 'vue-router';
 Vue.use(Router);
 
 export default new Router({
-  //確保每次頁面跳轉都到頂部
+  // 確保每次頁面跳轉都到頂部
   scrollBehavior() {
     document.getElementById('app').scrollIntoView();
   },

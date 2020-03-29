@@ -113,19 +113,19 @@
             <li
               class="FAQ__item"
               v-for="(item, i) in FAQs"
-              @click="toggleOpen(i)"
+              @click="toggleFAQ(i)"
               :key="i"
             >
               <div class="FAQ__accordian-title">
                 <span>
                   <i
-                    :class="{ 'FAQ__accordian-title--rotate': item.open }"
+                    :class="{ 'FAQ__accordian-title--rotate': showFAQ === i }"
                     class="yo fas fa-plus"
                   ></i>
                 </span>
                 {{ item.question }}
               </div>
-              <div class="FAQ__accordian-content" v-if="item.open">
+              <div class="FAQ__accordian-content" v-if="showFAQ === i">
                 {{ item.answer }}
               </div>
             </li>
@@ -230,10 +230,10 @@
 
 <script>
 import $ from 'jquery';
-import HeaderCarousel from '@/components/HeaderCarousel';
-import CourseCard from '@/components/CourseCard';
-import Gallery from '@/components/Gallery';
-import Feedback from '@/components/Feedback';
+import HeaderCarousel from '@/components/HeaderCarousel.vue';
+import CourseCard from '@/components/CourseCard.vue';
+import Gallery from '@/components/Gallery.vue';
+import Feedback from '@/components/Feedback.vue';
 import countTo from 'vue-count-to';
 
 export default {
@@ -280,38 +280,35 @@ export default {
           icon: 'fas fa-users',
         },
       ],
+
       FAQs: [
         {
-          open: true,
           question: '甚麼人才適合參加健身訓練？ 會否有人是不可參加？',
           answer:
             '課程內容會因應學生目標和進度而調整，多數人都可進行健身訓練。除非醫生建議您不可進行此類運動，或您未滿18歲需要家長同意。',
         },
         {
-          open: false,
           question: '除了訓練費用外，是否有其他雜費要付？',
           answer:
             '本公司的客戶只須要付私人訓練的課堂費用，無額外的會藉費、入場費、儲物櫃費用等等。',
         },
         {
-          open: false,
           question: '參加課程會否有飲食按排或建議？',
           answer:
             '教練會給予個人化的飲食或補充品建議，並使您慢慢適應飲食的改變、因應您的進度作出飲食建議，不會課程剛開始就完全地改變您的飲食餐單。',
         },
         {
-          open: false,
           question: '教練擁有專業資格嗎？如何核實？',
           answer:
             '我們的教練經嚴格考核、定期進修，以確保您享有優質服務。我們提供高透明度資訊，歡迎您隨時上網查閱有關教練專業資格及資歷。',
         },
         {
-          open: false,
           question: '客戶個人資料用途？',
           answer:
             '我們收集的所有客戶資料，包括姓名、電話、電郵、以至訓練情況，都只供本公司對客戶上課使用，絕不會用作傳銷或給予第三方。',
         },
       ],
+      showFAQ: 0,
     };
   },
   computed: {
@@ -341,24 +338,15 @@ export default {
         .dispatch('courses/getCourses', cat)
         .then(() => vm.$router.push('/courses'));
     },
-    toggleOpen(i) {
+    toggleFAQ(i) {
       const vm = this;
-      vm.FAQs = vm.FAQs.map((faq, j) => {
-        if (j === i) {
-          faq.open = !faq.open;
-        } else {
-          faq.open = false;
-        }
-        return faq;
-      });
+      vm.showFAQ = vm.showFAQ === i ? false : i;
     },
   },
-
   created() {
     const vm = this;
     vm.$store.dispatch('courses/getCourses', '所有課程');
   },
-
   mounted() {
     $('.navigation').removeClass('navigation-dark');
   },
