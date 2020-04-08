@@ -15,15 +15,9 @@
         <div class="footer__contact">
           <p class="footer__title">聯絡我們</p>
           <ul class="footer__list">
-            <li class="footer__item">
-              <i class="fas fa-map-marker-alt"></i> 110 台北市信義路五段7號
-            </li>
-            <li class="footer__item">
-              <i class="fas fa-mobile-alt"></i> ＋886 2 8101 8800
-            </li>
-            <li class="footer__item">
-              <i class="far fa-envelope"></i> frontfitness@service.com.tw
-            </li>
+            <li class="footer__item"><i class="fas fa-map-marker-alt"></i> 110 台北市信義路五段7號</li>
+            <li class="footer__item"><i class="fas fa-mobile-alt"></i> ＋886 2 8101 8800</li>
+            <li class="footer__item"><i class="far fa-envelope"></i> frontfitness@service.com.tw</li>
           </ul>
           <div class="footer__social-media">
             <a href="#" class="footer__media-link">

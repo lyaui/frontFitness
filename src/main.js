@@ -24,11 +24,9 @@ Vue.use(VModal, {
 Vue.use(SocialSharing);
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
-Vue.component(
-  'AddToCartModal',
-  require('@/components/AddToCartModal.vue').default,
-);
+Vue.component('AddToCartModal', require('@/components/AddToCartModal.vue').default);
 Vue.component('AddToCart', require('@/components/AddToCart.vue').default);
+Vue.component('LogRegModal', require('@/components/LogRegModal.vue').default);
 
 Vue.use(infiniteScroll);
 Vue.use(Vuelidate);

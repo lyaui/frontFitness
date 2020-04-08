@@ -1,12 +1,7 @@
 <template>
   <div>
-    <loading
-      :active.sync="isLoading"
-      :opacity="0.8"
-      :background-color="'#000'"
-      :color="'#ff5722'"
-    ></loading>
-    <main class="course-detail-main">
+    <loading :active.sync="isLoading" :opacity="0.8" :background-color="'#000'" :color="'#ff5722'"></loading>
+    <main class="course-detail-main" id="courseTop">
       <!-- breadcrumb -->
       <div class="container">
         <div class="breadcrumb" v-if="course">
@@ -14,10 +9,7 @@
             所有課程
           </div>
           <span>/</span>
-          <div
-            class="breadcrumb__item"
-            @click.prevent="selectCat(course.categorySelected)"
-          >
+          <div class="breadcrumb__item" @click.prevent="selectCat(course.categorySelected)">
             {{ course.categorySelected }}
           </div>
           <span>/</span>
@@ -30,11 +22,7 @@
       <div class="course-intro" v-if="course">
         <div class="container">
           <div class="course-intro__img-box">
-            <img
-              class="course-intro__img"
-              :src="course.imageUrl"
-              :alt="course.title"
-            />
+            <img class="course-intro__img" :src="course.imageUrl" :alt="course.title" />
             <social-sharing
               class="course-intro__img-social"
               url="https://front-gym.web.app/"
@@ -45,55 +33,30 @@
               inline-template
             >
               <div>
-                <network
-                  network="facebook"
-                  class="course-intro__img-social-link"
-                >
+                <network network="facebook" class="course-intro__img-social-link">
                   <i class="fab fa-facebook-square"></i>
                 </network>
                 <network network="line" class="course-intro__img-social-link">
                   <i class="fab fa-line"></i>
                 </network>
-                <network
-                  network="twitter"
-                  class="course-intro__img-social-link"
-                >
+                <network network="twitter" class="course-intro__img-social-link">
                   <i class="fab fa-twitter"></i>
                 </network>
               </div>
             </social-sharing>
           </div>
           <div class="course-intro__detail">
-            <social-sharing
-              url="https://front-gym.web.app/"
-              title="fronFitness | 運動 ‧ 一切生命的源泉"
-              description="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動健身課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！"
-              quote="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動健身課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！"
-              hashtags="fronFitness,台北都會健身中心,全方位專業課程,運動改變生活"
-              inline-template
-            >
+            <social-sharing url="https://front-gym.web.app/" title="fronFitness | 運動 ‧ 一切生命的源泉" description="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動健身課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！" quote="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動健身課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！" hashtags="fronFitness,台北都會健身中心,全方位專業課程,運動改變生活" inline-template>
               <div>
-                <network network="facebook">
-                  <i class="fab fa-facebook-square"></i> Facebook
-                </network>
-                <network network="line">
-                  <i class="fab fa-line"></i> Line
-                </network>
-                <network network="twitter">
-                  <i class="fab fa-twitter"></i> Twitter
-                </network>
+                <network network="facebook"> <i class="fab fa-facebook-square"></i> Facebook </network>
+                <network network="line"> <i class="fab fa-line"></i> Line </network>
+                <network network="twitter"> <i class="fab fa-twitter"></i> Twitter </network>
               </div>
             </social-sharing>
 
             <h1>{{ course.title }}</h1>
             <div class="d-flex">
-              <star-rating
-                :rating="course.avgRating"
-                :increment="0.1"
-                :star-size="20"
-                :read-only="true"
-                active-color="#ffd056"
-              ></star-rating>
+              <star-rating :rating="course.avgRating" :increment="0.1" :star-size="20" :read-only="true" active-color="#ffd056"></star-rating>
             </div>
 
             <div class>教練：{{ course.coach }}</div>
@@ -115,33 +78,19 @@
                 <i class="fas fa-tag"></i>
 
                 <ul class="course-tags__list">
-                  <li
-                    class="course-tags__item"
-                    v-for="tag in course.tags"
-                    :key="tag"
-                  >
+                  <li class="course-tags__item" v-for="tag in course.tags" :key="tag">
                     {{ tag }}
                   </li>
                 </ul>
               </div>
             </div>
-            <div
-              class="course-intro__content-article"
-              v-html="course.desc"
-            ></div>
+            <div class="course-intro__content-article" v-html="course.desc"></div>
 
             <section class="course-recommends">
-              <course-recommend
-                :course-id="course.id"
-                :category="course.categorySelected"
-              ></course-recommend>
+              <course-recommend :course-id="course.id" :category="course.categorySelected"></course-recommend>
             </section>
             <section class="course-comments">
-              <comments
-                :comments="comments"
-                :current-user="user"
-                :course-id="course.id"
-              ></comments>
+              <comments :comments="comments" :current-user="user" :course-id="course.id"></comments>
             </section>
             <section class="precautions">
               <div class="heading-tertiary--grey mt-sm ml-sm">注意事項</div>
@@ -181,14 +130,7 @@
               </div>
               <add-to-cart :course="course" class="mb-sm"></add-to-cart>
 
-              <social-sharing
-                url="https://front-gym.web.app/"
-                title="fronFitness | 運動 ‧ 一切生命的源泉"
-                description="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！"
-                quote="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！"
-                hashtags="fronFitness,台北都會健身中心,全方位專業課程,運動改變生活"
-                inline-template
-              >
+              <social-sharing url="https://front-gym.web.app/" title="fronFitness | 運動 ‧ 一切生命的源泉" description="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！" quote="fronFitness名人口碑推薦健身中心！20年專業經驗、全方位運動課程、業界最強教練師資、豪華先進設備，為您量身規劃專屬運動菜單，打造健康完美身材！" hashtags="fronFitness,台北都會健身中心,全方位專業課程,運動改變生活" inline-template>
                 <div class="course-price__share">
                   <network network="facebook">
                     <i class="fab fa-facebook-square"></i>
@@ -208,16 +150,17 @@
         </div>
       </div>
     </main>
-    <AddToCartModal></AddToCartModal>
+    <a class="go-top" @click.prevent="goTop()" href="#courseTop"><i class="fas fa-angle-up"></i></a>
+    <add-to-cart-modal></add-to-cart-modal>
   </div>
 </template>
 
 <script>
+import $ from 'jquery';
 import CoachCard from '@/components/CoachCard.vue';
 import Comments from '@/components/Comments.vue';
 import CourseRecommend from '@/components/CourseRecommend.vue';
 import StarRating from 'vue-star-rating';
-import AddToCart from '@/components/AddToCart.vue';
 
 export default {
   name: 'CourseDetails',
@@ -226,7 +169,6 @@ export default {
     Comments,
     CourseRecommend,
     StarRating,
-    AddToCart,
   },
   computed: {
     isLoading() {
@@ -259,9 +201,16 @@ export default {
   methods: {
     selectCat(cat) {
       const vm = this;
-      vm.$store
-        .dispatch('courses/getCourses', cat)
-        .then(() => vm.$router.push('/courses'));
+      vm.$store.dispatch('courses/getCourses', cat).then(() => vm.$router.push('/courses'));
+    },
+    goTop() {
+      const doc = document.documentElement;
+      $(doc).animate(
+        {
+          scrollTop: 0,
+        },
+        400,
+      );
     },
   },
   created() {

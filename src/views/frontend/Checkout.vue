@@ -8,9 +8,7 @@
           <div class="checkout__info mb-sm">
             <!-- 購買課程 -->
             <div class="checkout-form checkout-payment__courses mb-sm">
-              <div class="heading-tertiary--dark mb-sm">
-                <i class="fas fa-money-check fa-lg"></i> 結帳金額
-              </div>
+              <div class="heading-tertiary--dark mb-sm"><i class="fas fa-money-check fa-lg"></i> 結帳金額</div>
               <table class="checkout-table">
                 <thead>
                   <tr>
@@ -24,21 +22,15 @@
                   <tr v-for="course in courses" :key="course.title">
                     <td>{{ course.title }}</td>
                     <td class="d-none-phone">
-                      <template
-                        v-if="course.discount && total.totalDiscount > 0"
-                        >精選優惠</template
-                      >
+                      <template v-if="course.discount && total.totalDiscount > 0">精選優惠</template>
                       <template v-else>課程售價</template>
                     </td>
-                    <td class="d-none-phone" style="text-align:right">
+                    <td class="d-none-phone" style="text-align: right;">
                       {{ course.price | currency }}
                     </td>
 
-                    <td style="text-align:right">
-                      <template
-                        v-if="total.totalDiscount !== 0 && course.discount"
-                        >{{ (course.price - 100) | currency }}</template
-                      >
+                    <td style="text-align: right;">
+                      <template v-if="total.totalDiscount !== 0 && course.discount">{{ (course.price - 100) | currency }}</template>
                       <template v-else>{{ course.price | currency }}</template>
                     </td>
                   </tr>
@@ -72,11 +64,7 @@
                     <option value="超商付款">超商付款</option>
                   </select>
                   <template v-if="$v.userInfo.payWay.$dirty">
-                    <span
-                      class="text-warning"
-                      v-if="!$v.userInfo.payWay.required"
-                      >請選擇付款方式</span
-                    >
+                    <span class="text-warning" v-if="!$v.userInfo.payWay.required">請選擇付款方式</span>
                   </template>
                 </div>
               </div>
@@ -112,11 +100,7 @@
                       }"
                     />
                     <template v-if="$v.userInfo.name.$dirty">
-                      <span
-                        class="text-warning"
-                        v-if="!$v.userInfo.name.required"
-                        >姓名為必填欄位</span
-                      >
+                      <span class="text-warning" v-if="!$v.userInfo.name.required">姓名為必填欄位</span>
                     </template>
                   </div>
                   <div class="form__group">
@@ -135,14 +119,8 @@
                       }"
                     />
                     <template v-if="$v.userInfo.email.$dirty">
-                      <span
-                        class="text-warning"
-                        v-if="!$v.userInfo.email.required"
-                        >信箱為必填欄位</span
-                      >
-                      <span class="text-warning" v-if="!$v.userInfo.email.email"
-                        >請輸入正確信箱格式</span
-                      >
+                      <span class="text-warning" v-if="!$v.userInfo.email.required">信箱為必填欄位</span>
+                      <span class="text-warning" v-if="!$v.userInfo.email.email">請輸入正確信箱格式</span>
                     </template>
                   </div>
                 </div>
@@ -163,16 +141,8 @@
                       }"
                     />
                     <template v-if="$v.userInfo.phone.$dirty">
-                      <span
-                        class="text-warning"
-                        v-if="!$v.userInfo.phone.required"
-                        >電話為必填欄位</span
-                      >
-                      <span
-                        class="text-warning"
-                        v-if="!$v.userInfo.phone.numeric"
-                        >電話號碼必為數字</span
-                      >
+                      <span class="text-warning" v-if="!$v.userInfo.phone.required">電話為必填欄位</span>
+                      <span class="text-warning" v-if="!$v.userInfo.phone.numeric">電話號碼必為數字</span>
                     </template>
                   </div>
                 </div>
@@ -180,15 +150,7 @@
                   <div class="form__group">
                     <label class="form__label" for="paymentRemark">備註</label>
 
-                    <textarea
-                      class="form__input"
-                      v-model="userInfo.remark"
-                      id="paymentRemark"
-                      placeholder="如有任何備註事項請註明"
-                      cols="30"
-                      rows="20"
-                      style="height:100px"
-                    ></textarea>
+                    <textarea class="form__input" v-model="userInfo.remark" id="paymentRemark" placeholder="如有任何備註事項請註明" cols="30" rows="20" style="height: 100px;"></textarea>
                   </div>
                 </div>
               </form>
@@ -303,15 +265,11 @@ export default {
           title: course.title,
           plan:
             // 如果這是優惠課程並且有輸入優惠碼
-            course.discount && vm.total.totalDiscount > 0
-              ? '精選優惠'
-              : '課程售價',
+            course.discount && vm.total.totalDiscount > 0 ? '精選優惠' : '課程售價',
           price: course.price,
           sellingPrice:
             // 如果這是優惠課程並且有輸入優惠碼
-            course.discount && vm.total.totalDiscount > 0
-              ? course.price - vm.$store.state.cart.discount
-              : course.price,
+            course.discount && vm.total.totalDiscount > 0 ? course.price - vm.$store.state.cart.discount : course.price,
         }));
 
         const payment = {

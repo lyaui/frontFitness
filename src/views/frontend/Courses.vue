@@ -1,22 +1,12 @@
 /* eslint-disable no-plusplus */
 <template>
   <div>
-    <loading
-      :active.sync="isLoading"
-      :opacity="0.8"
-      :background-color="'#000'"
-      :color="'#ff5722'"
-    ></loading>
+    <loading :active.sync="isLoading" :opacity="0.8" :background-color="'#000'" :color="'#ff5722'"></loading>
 
     <!-- sub-nav -->
     <nav class="sub-nav" :class="{ 'sub-nav--hidden': !showNavbar }">
       <ul class="sub-nav__list">
-        <li
-          v-for="cat in navbar"
-          :key="cat.cat"
-          class="sub-nav__item"
-          @click.prevent="selectCat(cat.cat)"
-        >
+        <li v-for="cat in navbar" :key="cat.cat" class="sub-nav__item" @click.prevent="selectCat(cat.cat)">
           <a class="sub-nav__link">
             <i :class="`${cat.icon}`"></i>
             <p>{{ cat.cat }}</p>
@@ -38,11 +28,7 @@
         <section v-if="!searchShow">
           <h2 class="heading-tertiary--dark">精選{{ cat }}</h2>
           <transition name="slide-fade">
-            <course-card
-              v-if="courses.length > 0"
-              :selectedCat="cat"
-              :course-card="courses"
-            ></course-card>
+            <course-card v-if="courses.length > 0" :selectedCat="cat" :course-card="courses"></course-card>
           </transition>
         </section>
 
@@ -52,32 +38,21 @@
           <!-- 沒有課程結果 -->
           <div class="search-result" v-if="searchShow && !isLoading">
             <div v-if="coursesOrdered.length === 0">
-              <p>
-                抱歉，我們找不到有關「{{ keyWord }}」的任何結果
-                <br />請嘗試調整您的搜索。以下是幾點建議：
-              </p>
+              <p>抱歉，我們找不到有關「{{ keyWord }}」的任何結果 <br />請嘗試調整您的搜索。以下是幾點建議：</p>
               <ul>
                 <li>確保所有字詞拼寫正確。</li>
                 <li>嘗試不同的搜索詞。</li>
                 <li>嘗試更常見的搜索字詞。</li>
               </ul>
             </div>
-            <div v-else>
-              關於「{{ keyWord }}」的 {{ coursesOrdered.length }} 筆结果：
-            </div>
+            <div v-else>關於「{{ keyWord }}」的 {{ coursesOrdered.length }} 筆结果：</div>
           </div>
           <!-- filter&search tool bar-->
           <div class="courses-filter">
             <div class="courses-filter__list">
               <!-- 課程搜尋 -->
               <div class="search">
-                <input
-                  type="text"
-                  class="search__input"
-                  v-model.trim="searchWord"
-                  placeholder="搜尋課程"
-                  @keyup.enter="searchCourse()"
-                />
+                <input type="text" class="search__input" v-model.trim="searchWord" placeholder="搜尋課程" @keyup.enter="searchCourse()" />
                 <button class="search__btn btn" @click="searchCourse()">
                   <div class="search__icon">
                     <i class="fas fa-search"></i>
@@ -119,29 +94,13 @@
 
         <!-- 全部課程List -->
         <section>
-          <course-list
-            :courses-list="infiniteData"
-            v-if="infiniteData.length > 0"
-          ></course-list>
-          <div
-            class="ifinite-scroll"
-            v-infinite-scroll="loadMore"
-            infinite-scroll-disabled="busy"
-            infinite-scroll-distance="15"
-            infinite-scroll-immediate-check="false"
-          >
+          <course-list :courses-list="infiniteData" v-if="infiniteData.length > 0"></course-list>
+          <div class="ifinite-scroll" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="15" infinite-scroll-immediate-check="false">
             <div v-if="busy && infiniteData.length !== coursesOrdered.length">
               <i class="fas fa-spinner fa-spin"></i>
             </div>
 
-            <a
-              class="gotop"
-              href="#gotop"
-              @click="goTop"
-              v-if="infiniteData.length == coursesOrdered.length"
-            >
-              <i class="fas fa-chevron-up"></i> 返回頂部
-            </a>
+            <a class="gotop" href="#gotop" @click="goTop" v-if="infiniteData.length == coursesOrdered.length"> <i class="fas fa-chevron-up"></i> 返回頂部 </a>
           </div>
         </section>
       </div>
@@ -186,15 +145,11 @@ export default {
     },
     courses() {
       const vm = this;
-      return vm.$store.state.courses.courses.filter(
-        (course) => course.remainQuantity > 0 && course.discount,
-      );
+      return vm.$store.state.courses.courses.filter((course) => course.remainQuantity > 0 && course.discount);
     },
     coursesOrdered() {
       const vm = this;
-      const course = [...vm.$store.state.courses.courses].sort(
-        (a, b) => b[vm.property] - a[vm.property],
-      );
+      const course = [...vm.$store.state.courses.courses].sort((a, b) => b[vm.property] - a[vm.property]);
       return vm.order ? course : course.reverse();
     },
     cat() {
@@ -232,9 +187,12 @@ export default {
     },
     goTop() {
       const doc = document.documentElement;
-      $(doc).animate({
-        scrollTop: 0,
-      }, 400);
+      $(doc).animate(
+        {
+          scrollTop: 0,
+        },
+        400,
+      );
     },
     loadMore() {
       const vm = this;
@@ -242,11 +200,12 @@ export default {
       if (vm.infiniteData.length <= arrayShow.length) {
         vm.busy = true;
         setTimeout(() => {
-          for (let i = 0, j = 5; i < j; i++) {
-            if (vm.count === arrayShow.length) {
+          for (let i = 0, j = 5; i < j; i += 1) {
+            if (!arrayShow[vm.count]) {
               break;
             }
-            vm.infiniteData.push(arrayShow[vm.count++]);
+            vm.infiniteData.push(arrayShow[vm.count]);
+            vm.count += 1;
           }
           vm.busy = false;
         }, 500);
@@ -260,14 +219,11 @@ export default {
         vm.reset();
         vm.searchShow = true;
         // 符合課程
-        vm.$store
-          .dispatch('courses/getCourses', '所有課程')
-          .then((courses) => {
-            const filteredCourses = courses.filter((course) => course.title.match(vm.keyWord))
-              || [];
-            vm.$store.commit('courses/setCourses', filteredCourses);
-            vm.loadMore();
-          });
+        vm.$store.dispatch('courses/getCourses', '所有課程').then((courses) => {
+          const filteredCourses = courses.filter((course) => course.title.match(vm.keyWord)) || [];
+          vm.$store.commit('courses/setCourses', filteredCourses);
+          vm.loadMore();
+        });
       } else {
         vm.$toasted.error('請輸入搜尋字詞', { duration: 3000 });
       }

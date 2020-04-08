@@ -6,8 +6,7 @@
           class="step-bar__circle"
           :class="{
             'step-bar__circle--active': status === 'cart',
-            'step-bar__circle--done':
-              status === 'checkout' || status === 'success',
+            'step-bar__circle--done': status === 'checkout' || status === 'success',
           }"
         >
           <span>1</span>
@@ -33,10 +32,7 @@
         </div>
       </li>
       <li class="step-bar__item step-bar__item--last">
-        <div
-          class="step-bar__circle"
-          :class="{ 'step-bar__circle--done': status === 'success' }"
-        >
+        <div class="step-bar__circle" :class="{ 'step-bar__circle--done': status === 'success' }">
           <span>3</span>
         </div>
         <div class="step-bar__title">

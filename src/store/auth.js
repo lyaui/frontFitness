@@ -1,15 +1,13 @@
-import {
-  db,
-} from '@/firebase/init';
+import { db } from '@/firebase/init';
 import fb from 'firebase/app';
 import 'firebase/auth';
-
 
 export default {
   namespaced: true,
   state() {
     return {
       user: null,
+      status: '',
     };
   },
   getters: {
@@ -20,14 +18,12 @@ export default {
 
   actions: {
     // 註冊
-    signUp(_, {
-      email,
-      password,
-    }) {
-      return fb.auth().createUserWithEmailAndPassword(email, password)
-        .then(({
-          user,
-        }) => user).catch((error) => {
+    signUp(_, { email, password }) {
+      return fb
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(({ user }) => user)
+        .catch((error) => {
           let message;
           switch (error.code) {
             case 'auth/email-already-in-use':
@@ -47,60 +43,46 @@ export default {
     },
 
     // 登入
-    signIn(_, {
-      email,
-      password,
-    }) {
-      return fb.auth().signInWithEmailAndPassword(email, password)
+    signIn(_, { email, password }) {
+      return fb
+        .auth()
+        .signInWithEmailAndPassword(email, password)
         .catch((error) => {
-          const message = error.code === 'auth/user-not-found'
-            ? '無使用者 請再確認帳號'
-            : '密碼錯誤 請再重試';
+          const message = error.code === 'auth/user-not-found' ? '無使用者 請再確認帳號' : '密碼錯誤 請再重試';
           return Promise.reject(message);
         });
     },
 
     // 登出
-    signOut({
-      commit,
-    }) {
-      return fb.auth().signOut()
+    signOut({ commit }) {
+      return fb
+        .auth()
+        .signOut()
         .then(() => commit('setAuthUser', null));
     },
 
     // 建立使用者資料
-    createUserProfile(_, {
-      uid,
-      userProfile,
-    }) {
-      return db
-        .collection('users')
-        .doc(uid)
-        .set(userProfile);
+    createUserProfile(_, { uid, userProfile }) {
+      return db.collection('users').doc(uid).set(userProfile);
     },
 
     // 讀取寫入使用者資料
-    storeAuthUser({
-      commit,
-    }, user) {
-      return db.collection('users')
+    storeAuthUser({ commit }, user) {
+      return db
+        .collection('users')
         .doc(user.uid)
         .get()
         .then((snapshot) => {
           const profile = snapshot.data();
-          user.profile = profile;
-          commit('setAuthUser', user);
+          const theUser = user;
+          theUser.profile = profile;
+          commit('setAuthUser', theUser);
           return profile;
         });
     },
 
     // 更新使用者資料
-    updateUser({
-      commit,
-    }, {
-      id,
-      user,
-    }) {
+    updateUser({ commit }, { id, user }) {
       if (user && id) {
         db.collection('users')
           .doc(id)
@@ -116,7 +98,9 @@ export default {
     setAuthUser(state, user) {
       state.user = user;
     },
-
+    setStatus(state, status) {
+      state.status = status;
+    },
     changeUserView(state, user) {
       state.user.profile.name = user.name;
       state.user.profile.userImg = user.userImg;

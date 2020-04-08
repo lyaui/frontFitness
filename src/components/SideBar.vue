@@ -5,15 +5,9 @@
         <div class="logo-box">frontFitness</div>
       </router-link>
       <div class="sidebar__user">
-        <img
-          class="sidebar__user-img"
-          :src="user.profile.userImg"
-          :alt="user.profile.name"
-        />
+        <img class="sidebar__user-img" :src="user.profile.userImg" :alt="user.profile.name" />
         <div class="sidebar__user-info" @click.prevent="logOut()">
-          <span class="sidebar__user-status">
-            <i class="fas fa-sign-out-alt"></i> 登出
-          </span>
+          <span class="sidebar__user-status"> <i class="fas fa-sign-out-alt"></i> 登出 </span>
         </div>
       </div>
     </div>
@@ -28,10 +22,7 @@
         "
         :class="{ 'side-nav__item--active': activePage === cat.cat }"
       >
-        <router-link
-          :to="{ path: `/admin/${cat.path}` }"
-          class="side-nav__link"
-        >
+        <router-link :to="{ path: `/admin/${cat.path}` }" class="side-nav__link">
           <i class="side-nav__icon d-none-phone" :class="`${cat.icon}`"></i>
           <span>{{ cat.cat }}</span>
         </router-link>

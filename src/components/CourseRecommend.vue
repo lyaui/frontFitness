@@ -2,48 +2,30 @@
   <div>
     <div class="heading-tertiary--dark mb-sm">為你推薦</div>
 
-    <router-link
-      :to="{ name: 'CourseDetails', params: { course_id: course.id } }"
-      class="course-recommend__course"
-      v-for="course in courses.slice(0, 3)"
-      :key="course.id"
-    >
+    <router-link :to="{ name: 'CourseDetails', params: { course_id: course.id } }" class="course-recommend__course" v-for="course in courses.slice(0, 3)" :key="course.id">
       <div class="course-recommend__header">
         <div class="course-recommend__hot-tag" v-if="course.discount">
           <div class="course-recommend__hot-tag-text">精選</div>
         </div>
-        <img
-          class="course-recommend__img"
-          :src="course.imageUrl"
-          :alt="course.title"
-        />
+        <img class="course-recommend__img" :src="course.imageUrl" :alt="course.title" />
       </div>
 
       <div class="course-recommend__content">
         <div class="course-recommend__info">
           <div class="course-recommend__title heading-tertiary--dark">
-            {{ textLimit(course.title,20) }}
+            {{ textLimit(course.title, 20) }}
           </div>
           <div class="d-flex d-none-phone">
-            <div class="course-recommend__category">
-              {{ course.categorySelected }}｜
-            </div>
+            <div class="course-recommend__category">{{ course.categorySelected }}｜</div>
             <div class="course-recommend__coach">{{ course.coach }}｜</div>
-            <div class="course-recommend__time">
-              {{ course.week }} {{ course.time }}
-            </div>
+            <div class="course-recommend__time">{{ course.week }} {{ course.time }}</div>
           </div>
 
           <div class="course-recommend__time"></div>
         </div>
         <div class="d-flex">
           <div class="course-recommend__price">
-            <star-rating
-              :rating="course.avgRating"
-              :increment="0.1"
-              :star-size="18"
-              :read-only="true"
-            ></star-rating>
+            <star-rating :rating="course.avgRating" :increment="0.1" :star-size="18" :read-only="true"></star-rating>
           </div>
           <div class="course-recommend__price">
             <div class="course-recommend__price--discount">
@@ -71,11 +53,7 @@ export default {
   computed: {
     courses() {
       const vm = this;
-      return vm.$store.state.courses.courses.filter(
-        (course) => course.categorySelected === vm.category
-          && course.id !== vm.courseId
-          && course.remainQuantity > 0,
-      );
+      return vm.$store.state.courses.courses.filter((course) => course.categorySelected === vm.category && course.id !== vm.courseId && course.remainQuantity > 0);
     },
   },
   methods: {

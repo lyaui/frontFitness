@@ -47,10 +47,7 @@ export default {
         query = db.collection('courses').get();
       } else {
         // 分類的情況
-        query = db
-          .collection('courses')
-          .where('categorySelected', '==', cat)
-          .get();
+        query = db.collection('courses').where('categorySelected', '==', cat).get();
       }
       return query.then((snapshots) => {
         const courses = snapshots.docs.map((snapshot) => ({
@@ -152,15 +149,10 @@ export default {
         }
 
         state.pagination.previousFirstItems.splice(lastItemIndex, 1);
-        query = db
-          .collection('courses')
-          .orderBy('categorySelected', 'desc')
-          .startAt(previousItem)
-          .limit(state.pagination.itemCount);
+        query = db.collection('courses').orderBy('categorySelected', 'desc').startAt(previousItem).limit(state.pagination.itemCount);
       }
 
-      // eslint-disable-next-line consistent-return
-      return query.get().then((snapshots) => {
+      query.get().then((snapshots) => {
         if (snapshots.docs.length === 0) {
           return [];
         }

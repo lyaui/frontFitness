@@ -1,6 +1,4 @@
-import {
-  db,
-} from '@/firebase/init';
+import { db } from '@/firebase/init';
 
 export default {
   namespaced: true,
@@ -12,14 +10,13 @@ export default {
   },
   actions: {
     // 取得所有訂單
-    getPayments({
-      commit,
-    }) {
+    getPayments({ commit }) {
       commit('loading', true, {
         root: true,
       });
       commit('setPayments', []);
-      return db.collection('payments')
+      return db
+        .collection('payments')
         .orderBy('createdAt', 'desc')
         .get()
         .then((snapshots) => {
@@ -36,9 +33,7 @@ export default {
     },
 
     // 取得特定訂單
-    getPaymentById({
-      commit,
-    }, paymentId) {
+    getPaymentById({ commit }, paymentId) {
       commit('loading', true, {
         root: true,
       });
@@ -56,24 +51,21 @@ export default {
     },
 
     // 新增訂單
-    createPayment({
-      commit,
-    }, payment) {
-      payment.status = '尚未付款';
-      payment.createdAt = Date.now();
+    createPayment({ commit }, payment) {
+      const thePayment = payment;
+      thePayment.status = '尚未付款';
+      thePayment.createdAt = Date.now();
       db.collection('payments')
-        .add(payment)
+        .add(thePayment)
         .then((docRef) => {
-          payment.id = docRef.id;
+          thePayment.id = docRef.id;
           // 回傳新增訂單id作為頁面路徑
-          commit('setPayment', payment);
+          commit('setPayment', thePayment);
         });
     },
 
     // 付款更新訂單狀態
-    finishPayment({
-      commit,
-    }, id) {
+    finishPayment({ commit }, id) {
       db.collection('payments')
         .doc(id)
         .update({
@@ -86,7 +78,6 @@ export default {
           finishedAt: Date.now(),
         }));
     },
-
   },
   mutations: {
     // 儲存全部訂單
@@ -100,10 +91,7 @@ export default {
     },
 
     // 更改訂單狀態
-    changePaymentsStatus(state, {
-      status,
-      finishedAt,
-    }) {
+    changePaymentsStatus(state, { status, finishedAt }) {
       state.payment.status = status;
       state.payment.finishedAt = finishedAt;
     },

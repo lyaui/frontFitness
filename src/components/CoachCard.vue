@@ -1,9 +1,7 @@
 <template>
   <div class="coach-card">
     <div class="coach-card__header">
-      <div class="coach-card__title heading-tertiary--dark text-center">
-        關於 {{ coach.name }} 教練
-      </div>
+      <div class="coach-card__title heading-tertiary--dark text-center">關於 {{ coach.name }} 教練</div>
       <div class="coach-card__info">
         <div class="coach-card__img-box">
           <img :src="coach.photo" :alt="coach.name" class="coach-card__img" />

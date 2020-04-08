@@ -5,36 +5,22 @@
         <step-bar :status="status"></step-bar>
         <div class="checkout">
           <div class="checkout__items">
-            <div
-              class="heading-tertiary--dark mb-sm"
-              v-if="cartCourses.length > 0"
-            >
+            <div class="heading-tertiary--dark mb-sm" v-if="cartCourses.length > 0">
               <i class="fas fa-shopping-cart fa-lg"></i>
               購物車中有 {{ cartCourses.length }} 門課程
             </div>
             <div class="heading-tertiary--dark mb-sm" v-else>
               <i class="fas fa-shopping-cart fa-lg"></i>
               購物車中尚無課程！
-              <button
-                class="btn heading-tertiary--dark"
-                @click.prevent="selectCat('所有課程')"
-              >
+              <button class="btn heading-tertiary--dark" @click.prevent="selectCat('所有課程')">
                 <u>速選購</u>
               </button>
               &#128170;
             </div>
             <ul class="checkout__list">
-              <li
-                class="cart__item"
-                v-for="course in cartCourses"
-                :key="course.id"
-              >
+              <li class="cart__item" v-for="course in cartCourses" :key="course.id">
                 <div class="d-flex">
-                  <img
-                    class="cart__img"
-                    :src="course.imageUrl"
-                    :alt="course.title"
-                  />
+                  <img class="cart__img" :src="course.imageUrl" :alt="course.title" />
                 </div>
 
                 <div class="cart__info">
@@ -49,24 +35,16 @@
                       <div v-if="course.discount" class="cart__tag">
                         精選課程
                       </div>
-                      <span
-                        class="text-warning"
-                        v-if="discounted && course.discount"
-                        >已成功套用優惠券</span
-                      >
+                      <span class="text-warning" v-if="discounted && course.discount">已成功套用優惠券</span>
                     </div>
 
                     <div class="cart__title d-none-phone">
                       {{ course.title }}
                     </div>
                     <div class="d-flex">
-                      <div class="cart__category">
-                        {{ course.categorySelected }}｜
-                      </div>
+                      <div class="cart__category">{{ course.categorySelected }}｜</div>
                       <div class="cart__coach">{{ course.coach }}｜</div>
-                      <div class="cart__time">
-                        {{ course.week }} {{ course.time }}
-                      </div>
+                      <div class="cart__time">{{ course.week }} {{ course.time }}</div>
                     </div>
                   </router-link>
                   <div class="cart__handle">
@@ -95,10 +73,7 @@
                         </template>
                       </template>
                     </div>
-                    <button
-                      class="cart__remove btn"
-                      @click="deleteCourse(course)"
-                    >
+                    <button class="cart__remove btn" @click="deleteCourse(course)">
                       <i class="far fa-trash-alt"></i>
                     </button>
                   </div>
@@ -126,30 +101,15 @@
             <div class="form__row">
               <div class="form__group">
                 <div class="form__label">使用折扣代碼</div>
-                <input
-                  class="mb-sm form__input"
-                  type="text"
-                  v-model.trim="couponCode"
-                  placeholder="請輸入優惠券"
-                  :disabled="couponCode === 'LOVEFITTING'"
-                />
+                <input class="mb-sm form__input" type="text" v-model.trim="couponCode" placeholder="請輸入優惠券" :disabled="couponCode === 'LOVEFITTING'" />
                 <span class="text-warning">{{ feedback }}</span>
               </div>
             </div>
 
-            <button
-              v-if="cartCourses.length > 0"
-              class="btn btn-primary"
-              @click="checkOut()"
-            >
-              確定結帳
+            <button v-if="cartCourses.length > 0" class="btn btn-primary" @click="checkOut()">
+              會員結帳
             </button>
-            <button
-              v-else
-              class="btn btn-primary--cancel"
-              style="margin:0"
-              @click="selectCat('所有課程')"
-            >
+            <button v-else class="btn btn-primary--cancel" style="margin: 0;" @click="selectCat('所有課程')">
               請先選購課程
             </button>
           </div>
@@ -229,7 +189,6 @@ export default {
     },
   },
   methods: {
-
     deleteCourse(course) {
       const vm = this;
       vm.$store.commit('cart/removeItem', course);
@@ -238,9 +197,7 @@ export default {
     },
     selectCat(cat) {
       const vm = this;
-      vm.$store
-        .dispatch('courses/getCourses', cat)
-        .then(() => vm.$router.push('/courses'));
+      vm.$store.dispatch('courses/getCourses', cat).then(() => vm.$router.push('/courses'));
     },
 
     // 下一步
@@ -255,7 +212,17 @@ export default {
         vm.$router.push('/checkout');
       } else {
         vm.$toasted.error('請先登入或註冊會員', { duration: 3000 });
+        vm.logRegStatus('登入');
       }
+    },
+    logRegStatus(status) {
+      const vm = this;
+      vm.$store.commit('auth/setStatus', status);
+      vm.show();
+    },
+    show() {
+      const vm = this;
+      vm.$modal.show('logRegModal');
     },
   },
 

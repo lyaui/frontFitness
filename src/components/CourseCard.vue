@@ -17,9 +17,7 @@
       }"
     >
       <div class="course-card" v-for="course in courseCard" :key="course.id">
-        <router-link
-          :to="{ name: 'CourseDetails', params: { course_id: course.id } }"
-        >
+        <router-link :to="{ name: 'CourseDetails', params: { course_id: course.id } }">
           <div class="course-card__header">
             <div class="course-card__hot-tag" v-if="course.discount">
               <div class="course-card__hot-tag-text">精選</div>
@@ -31,18 +29,11 @@
               {{ textLimit(course.title, 20) }}
             </div>
             <div class="d-flex">
-              <div class="course-card__category">
-                {{ course.categorySelected }}｜
-              </div>
+              <div class="course-card__category">{{ course.categorySelected }}｜</div>
               <div class="course-card__coach">{{ course.coach }}</div>
             </div>
             <div class="course-card__rating">
-              <star-rating
-                :rating="course.avgRating"
-                :increment="0.1"
-                :star-size="18"
-                :read-only="true"
-              ></star-rating>
+              <star-rating :rating="course.avgRating" :increment="0.1" :star-size="18" :read-only="true"></star-rating>
             </div>
             <div class="course-card__price">
               <div class="course-card__price--origin">

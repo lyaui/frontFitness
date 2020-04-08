@@ -1,6 +1,4 @@
-import {
-  db,
-} from '@/firebase/init';
+import { db } from '@/firebase/init';
 import Vue from 'vue';
 
 export default {
@@ -11,13 +9,11 @@ export default {
     };
   },
   actions: {
-
     // 獲得全部評論
-    getComments({
-      commit,
-    }, id) {
+    getComments({ commit }, id) {
       // commit('setComments', [])
-      return db.collection('comments')
+      return db
+        .collection('comments')
         .where('toId', '==', id)
         .get()
         .then(async (snapshots) => {
@@ -41,40 +37,33 @@ export default {
         });
     },
 
-
     // 新增評論
-    createComment({
-      commit,
-    }, {
-      comment,
-      user,
-    }) {
-      comment.timestamp = Date.now();
+    createComment({ commit }, { comment, user }) {
+      const theComment = comment;
+      theComment.timestamp = Date.now();
       db.collection('comments')
-        .add(comment)
+        .add(theComment)
         .then((docRef) => {
           // 新增並且更新課程總評分(cloud function)
-          comment.user = user.profile;
-          comment.id = docRef.id;
-          commit('addComment', comment);
+          theComment.user = user.profile;
+          theComment.id = docRef.id;
+          commit('addComment', theComment);
         });
     },
 
     // 更新評論
-    updateComment({
-      commit,
-    },
-    comment) {
-      comment.timestamp = Date.now();
+    updateComment({ commit }, comment) {
+      const theComment = comment;
+      theComment.timestamp = Date.now();
       db.collection('comments')
-        .doc(comment.id)
+        .doc(theComment.id)
         .update({
-          comment: comment.comment,
-          rating: comment.rating,
-          timestamp: comment.timestamp,
+          comment: theComment.comment,
+          rating: theComment.rating,
+          timestamp: theComment.timestamp,
         })
         .then(() => {
-          commit('changeComment', comment);
+          commit('changeComment', theComment);
         });
     },
   },
@@ -99,5 +88,4 @@ export default {
       Vue.set(state.comments[index], 'timestamp', comment.timestamp);
     },
   },
-
 };

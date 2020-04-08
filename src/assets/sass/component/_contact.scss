@@ -13,7 +13,6 @@ form {
 .contact {
   &__map {
     width: 40%;
-
     @include respond(phone) {
       width: 100%;
     }
@@ -28,12 +27,7 @@ form {
     color: $color-grey-light-1;
     font-size: 14px;
     @include background-adjust;
-    background-image: linear-gradient(
-        to right bottom,
-        rgba(#1fb2c5, 0.6),
-        rgba(0, 0, 0, 1)
-      ),
-      url(./assets/img/general-bg.jpg);
+    background-image: linear-gradient(to right bottom, rgba(#1fb2c5, 0.6), rgba(0, 0, 0, 1)), url(./assets/img/general-bg.jpg);
     background-attachment: fixed;
 
     > * {
@@ -50,6 +44,7 @@ form {
 
     @include respond(phone) {
       width: 100%;
+      margin-top: -10px;
     }
 
     p {
@@ -65,15 +60,21 @@ form {
       resize: none;
       height: 12rem;
       color: $color-grey-light-2;
+      &::-webkit-input-placeholder {
+        color: rgba($color-grey-light-2,.5)
+      }
     }
 
     label {
-      color: $color-grey-light-2;
-      padding: 6px 3px 6px 10px;
+      color: rgba(#fff,.8);
+      padding: 0 0 6px 0;
     }
 
     input {
       color: #fff;
+      &::-webkit-input-placeholder {
+        color: rgba($color-grey-light-2,.5)
+      }
     }
 
     &__title {

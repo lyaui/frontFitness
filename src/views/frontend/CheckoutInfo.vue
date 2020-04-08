@@ -1,11 +1,6 @@
 <template>
   <div>
-    <loading
-      :active.sync="isLoading"
-      :opacity="0.8"
-      :background-color="'#000'"
-      :color="'#ff5722'"
-    ></loading>
+    <loading :active.sync="isLoading" :opacity="0.8" :background-color="'#000'" :color="'#ff5722'"></loading>
 
     <main class="courses-main">
       <div class="container">
@@ -14,10 +9,18 @@
         <div class="checkout">
           <div class="checkout__info mb-sm">
             <!-- 購買課程 -->
-            <div class="checkout-form checkout-payment__courses mb-sm">
+            <div class="checkout-form mb-sm" v-if="payment.status === '付款完成'">
               <div class="heading-tertiary--dark mb-sm">
-                <i class="fas fa-money-check fa-lg"></i> 結帳金額
+                <i class="fas fa-thumbs-up"></i>
+                付款成功！查看更多精彩課程～
+                <button class="btn heading-tertiary--dark" @click.prevent="selectCat('所有課程')">
+                  <u>速選購</u>
+                </button>
+                &#128525;
               </div>
+            </div>
+            <div class="checkout-form checkout-payment__courses mb-sm">
+              <div class="heading-tertiary--dark mb-sm"><i class="fas fa-money-check fa-lg"></i> 結帳金額</div>
               <table class="checkout-table">
                 <thead>
                   <tr>
@@ -34,11 +37,11 @@
                       <template v-if="course.discount">精選優惠</template>
                       <template v-else>課程售價</template>
                     </td>
-                    <td class="d-none-phone" style="text-align:right">
+                    <td class="d-none-phone" style="text-align: right;">
                       {{ course.price | currency }}
                     </td>
 
-                    <td style="text-align:right">
+                    <td style="text-align: right;">
                       {{ course.sellingPrice | currency }}
                     </td>
                   </tr>
@@ -51,9 +54,7 @@
             </div>
             <!-- 付款資訊 -->
             <div class="checkout-form checkout-payment__user">
-              <div class="heading-tertiary--dark mb-sm">
-                <i class="far fa-address-card fa-lg"></i> 付款資訊
-              </div>
+              <div class="heading-tertiary--dark mb-sm"><i class="far fa-address-card fa-lg"></i> 付款資訊</div>
               <div class="checkout-payment__invoice">
                 <div>
                   <b>付款方式</b>
@@ -86,28 +87,16 @@
               <div>總計</div>
               <h3>{{ total.totalPrice | currency }}</h3>
             </div>
-            <button
-              class="btn btn-primary"
-              style="display: inline-block; background-color: rgb(255, 87, 33);
-               border-left-color: rgb(255, 87, 33); border-right-color: rgb(255, 87, 33);"
-              @click.prevent="checkOut(payment.id)"
-            >
+            <button class="btn btn-primary" style="display: inline-block; background-color: rgb(255, 87, 33); border-left-color: rgb(255, 87, 33); border-right-color: rgb(255, 87, 33);" @click.prevent="checkOut(payment.id)">
               確認付款
             </button>
           </div>
 
           <!-- 付款成功 -->
-          <div
-            class="checkout__summary checkout__summary--success mb-sm"
-            v-if="payment.status === '付款完成'"
-          >
+          <div class="checkout__summary checkout__summary--success mb-sm" v-if="payment.status === '付款完成'">
             <div class="mb-sm heading-tertiary--dark">付款成功 感謝購買</div>
 
-            <img
-              class="mb-sm mt-sm"
-              width="100px"
-              src="@/assets/img/checked.svg"
-            />
+            <img class="mb-sm mt-sm" width="100px" src="@/assets/img/checked.svg" />
             <ul class="checkout__summary-list">
               <li class="checkout__summary-item">
                 訂單編號：
@@ -119,9 +108,7 @@
                 <br />
                 {{ time }}
               </li>
-              <li class="checkout__summary-item">
-                付款金額：{{ total.totalPrice | currency }}
-              </li>
+              <li class="checkout__summary-item">付款金額：{{ total.totalPrice | currency }}</li>
             </ul>
           </div>
         </div>

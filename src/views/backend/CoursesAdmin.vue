@@ -1,15 +1,8 @@
 <template>
   <div>
-    <loading
-      :active.sync="isLoading"
-      :opacity="0.8"
-      :background-color="'#000'"
-      :color="'#ff5722'"
-    ></loading>
+    <loading :active.sync="isLoading" :opacity="0.8" :background-color="'#000'" :color="'#ff5722'"></loading>
     <h2 class="heading-secondary">課程列表</h2>
-    <button @click="turnNewEditPage('新增課程')" class="btn admin-btn">
-      <i class="fas fa-plus-square"></i> 新增課程
-    </button>
+    <button @click="turnNewEditPage('新增課程')" class="btn admin-btn"><i class="fas fa-plus-square"></i> 新增課程</button>
 
     <table class="admin-table">
       <thead>
@@ -26,24 +19,13 @@
       </thead>
 
       <tbody>
-        <tr
-          v-for="(course, index) in courses"
-          :class="{ 'lighten-row': index % 2 == 1 }"
-          :key="course.id"
-        >
+        <tr v-for="(course, i) in courses" :class="{ 'lighten-row': i % 2 == 1 }" :key="course.id">
           <td class="d-none-phone">
-            <img
-              class="course-admin__img"
-              :src="course.imageUrl"
-              :alt="course.title"
-            />
+            <img class="course-admin__img" :src="course.imageUrl" :alt="course.title" />
           </td>
           <td class="d-none-phone">{{ course.categorySelected }}</td>
-          <td style="text-align:left;padding-left:20px">
-            <router-link
-              :to="{ name: 'CourseDetails', params: { course_id: course.id } }"
-              >{{ course.title }}</router-link
-            >
+          <td style="text-align: left; padding-left: 20px;">
+            <router-link :to="{ name: 'CourseDetails', params: { course_id: course.id } }">{{ course.title }}</router-link>
           </td>
 
           <td class="d-none-phone">
@@ -51,22 +33,14 @@
             <div v-else>-</div>
           </td>
 
-          <td :class="{ 'text-highlight': course.remainQuantity === 0 }">
-            {{ course.remainQuantity }}/{{ course.quantity }}
-          </td>
+          <td :class="{ 'text-highlight': course.remainQuantity === 0 }">{{ course.remainQuantity }}/{{ course.quantity }}</td>
           <td class="d-none-tab-p">{{ course.originPrice | currency }}</td>
           <td>{{ course.price | currency }}</td>
           <td>
-            <button
-              @click="turnNewEditPage('編輯課程', course)"
-              class="btn admin-btn"
-            >
+            <button @click="turnNewEditPage('編輯課程', course)" class="btn admin-btn">
               <i class="fas fa-edit"></i>
             </button>
-            <button
-              class="btn admin-btn"
-              @click="deleteCourse(course.title, course.id)"
-            >
+            <button class="btn admin-btn" @click="deleteCourse(course.title, course.id)">
               <i class="fas fa-trash-alt"></i>
             </button>
           </td>
@@ -125,24 +99,20 @@ export default {
 
     addCourse() {
       const vm = this;
-      vm.$store
-        .dispatch('courses/createCourse', { ...vm.course })
-        .then(() => {
-          vm.$toasted.success('成功新增課程', {
-            duration: 2000,
-          });
+      vm.$store.dispatch('courses/createCourse', { ...vm.course }).then(() => {
+        vm.$toasted.success('成功新增課程', {
+          duration: 2000,
         });
+      });
     },
 
     updateCourse(id) {
       const vm = this;
-      vm.$store
-        .dispatch('courses/updateCourse', { id, course: vm.course })
-        .then(() => {
-          vm.$toasted.success('更新成功!!', {
-            duration: 2000,
-          });
+      vm.$store.dispatch('courses/updateCourse', { id, course: vm.course }).then(() => {
+        vm.$toasted.success('更新成功!!', {
+          duration: 2000,
         });
+      });
     },
     // 編輯/新增課程
     turnNewEditPage(status, course) {

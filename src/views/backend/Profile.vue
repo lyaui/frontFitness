@@ -1,30 +1,19 @@
 <template>
   <div>
-    <loading
-      :active.sync="isLoading"
-      :opacity="0.8"
-      :background-color="'#000'"
-      :color="'#ff5722'"
-    ></loading>
+    <loading :active.sync="isLoading" :opacity="0.8" :background-color="'#000'" :color="'#ff5722'"></loading>
 
     <h2 class="heading-secondary">個人資訊</h2>
     <div class="admin-panel mb-md">
-      <div class="heading-tertiary--dark mb-sm">
-        <i class="fas fa-cog"></i>帳號設定
-      </div>
+      <div class="heading-tertiary--dark mb-sm"><i class="fas fa-cog"></i>帳號設定</div>
       <p class="mb-sm">
-        請確認姓名、電子郵件、圖片是否已設定好，如已設定完成，務必確認上述資訊為最新資訊。
-        （
+        請確認姓名、電子郵件、圖片是否已設定好，如已設定完成，務必確認上述資訊為最新資訊。 （
         <span class="text-highlight">*</span> 為必填欄位）
       </p>
       <div class="profile-admin__form">
         <div class="profile-admin__img">
           <div class="form__group">
             <img v-if="account.userImg" class :src="account.userImg" alt />
-            <img
-              v-if="!account.userImg"
-              src="https://png2.pngtree.com/svg/20161215/9bc7bae28b.png"
-            />
+            <img v-if="!account.userImg" src="https://png2.pngtree.com/svg/20161215/9bc7bae28b.png" />
           </div>
         </div>
         <!-- 個人檔案編輯 -->
@@ -35,16 +24,9 @@
                 姓名
                 <span class="text-highlight">*</span>
               </label>
-              <input
-                class="form__input"
-                placeholder="請填入姓名"
-                v-model="account.name"
-                id="profileName"
-              />
+              <input class="form__input" placeholder="請填入姓名" v-model="account.name" id="profileName" />
               <template v-if="$v.account.name.$dirty">
-                <span v-if="!$v.account.name.required" class="text-warning"
-                  >姓名為必填欄位</span
-                >
+                <span v-if="!$v.account.name.required" class="text-warning">姓名為必填欄位</span>
               </template>
             </div>
             <div class="form__group">
@@ -58,20 +40,10 @@
           <div class="form__row">
             <div class="form__group">
               <label class="form__label" for="profileImgUrl">輸入個人圖片網址</label>
-              <input
-                class="form__input"
-                placeholder="https://unsplash..."
-                type="text"
-                v-model="account.userImg"
-                id="profileImgUrl"
-              />
+              <input class="form__input" placeholder="https://unsplash..." type="text" v-model="account.userImg" id="profileImgUrl" />
               <template v-if="$v.account.userImg.$dirty">
-                <span v-if="!$v.account.userImg.required" class="text-warning"
-                  >圖片網址為必填欄位</span
-                >
-                <span v-if="!$v.account.userImg.url" class="text-warning"
-                  >請輸入正確格式網址</span
-                >
+                <span v-if="!$v.account.userImg.required" class="text-warning">圖片網址為必填欄位</span>
+                <span v-if="!$v.account.userImg.url" class="text-warning">請輸入正確格式網址</span>
               </template>
             </div>
             <div class="form__group">
@@ -83,11 +55,7 @@
             </div>
           </div>
           <div class="btn-footer">
-            <button
-              style="width:120px"
-              class="btn btn-primary"
-              @click="updateUser"
-            >
+            <button style="width: 120px;" class="btn btn-primary" @click="updateUser">
               修改
             </button>
           </div>
@@ -97,9 +65,7 @@
 
     <!-- 訂單 -->
     <div class="admin-panel mb-md">
-      <div class="heading-tertiary--dark mb-sm">
-        <i class="fas fa-file-invoice-dollar"></i> 訂單紀錄
-      </div>
+      <div class="heading-tertiary--dark mb-sm"><i class="fas fa-file-invoice-dollar"></i> 訂單紀錄</div>
       <p class="mb-md">
         商品進入購物車並填寫完購買資訊以後，該筆訂單即成立，這裡您可以查看所有訂單詳細資訊，掌握每一筆交易狀況。
       </p>
@@ -108,43 +74,22 @@
         尚無訂單：）
       </div>
 
-      <div
-        v-else
-        v-for="(payment, i) in payments"
-        :key="payment.id"
-        class="mb-md"
-      >
+      <div v-else v-for="(payment, i) in payments" :key="payment.id" class="mb-md">
         <div class="go-checkout d-flex">
           <p class="heading-tertiary--grey mb-sm">訂單編號：{{ payment.id }}</p>
-          <button
-            v-if="payment.status === '尚未付款'"
-            @click.prevent="goCheckout(payment.id)"
-            class="btn btn-primary mb-sm"
-            style="width:120px"
-          >
+          <button v-if="payment.status === '尚未付款'" @click.prevent="goCheckout(payment.id)" class="btn btn-primary mb-sm" style="width: 120px;">
             確認付款
           </button>
         </div>
 
-        <div
-          class="admin-order"
-          :class="{ 'admin-order--notpay': payment.status === '尚未付款' }"
-        >
+        <div class="admin-order" :class="{ 'admin-order--notpay': payment.status === '尚未付款' }">
           <div class="d-flex admin-order-info">
-            <div style="margin-right:3rem">
+            <div style="margin-right: 3rem;">
               <p>訂單成立： {{ time(payment.createdAt) }}</p>
               <p>
                 付款時間：
-                <template v-if="payment.status === '付款完成'">{{
-                  time(payment.finishedAt)
-                }}</template>
-                <template v-else>
-                  <i
-                    class="fas fa-exclamation-triangle"
-                    style="color:#ff5721;margin-right:5px"
-                  ></i
-                  >尚未付款
-                </template>
+                <template v-if="payment.status === '付款完成'">{{ time(payment.finishedAt) }}</template>
+                <template v-else> <i class="fas fa-exclamation-triangle" style="color: #ff5721; margin-right: 5px;"></i>尚未付款 </template>
               </p>
             </div>
             <div>
@@ -153,12 +98,8 @@
             </div>
           </div>
           <button class="btn detail-show-btn mt-sm" @click="show(i)">
-            <template v-if="showDetail === i">
-              <i class="fas fa-chevron-up"></i> 收合內容
-            </template>
-            <template v-else>
-              <i class="fas fa-chevron-down"></i> 查看詳細
-            </template>
+            <template v-if="showDetail === i"> <i class="fas fa-chevron-up"></i> 收合內容 </template>
+            <template v-else> <i class="fas fa-chevron-down"></i> 查看詳細 </template>
           </button>
           <!-- 購買明細 -->
           <transition name="fade">
@@ -177,10 +118,10 @@
                   <tr v-for="course in payment.courses" :key="course.title">
                     <td>{{ course.title }}</td>
                     <td>{{ course.plan }}</td>
-                    <td style="text-align:right">
+                    <td style="text-align: right;">
                       {{ course.price | currency }}
                     </td>
-                    <td style="text-align:right">
+                    <td style="text-align: right;">
                       {{ course.sellingPrice | currency }}
                     </td>
                   </tr>
@@ -196,11 +137,7 @@
           <transition name="fade">
             <div class="d-block-phone" v-if="showDetail === i">
               <p>價格明細：</p>
-              <table
-                class="checkout-table"
-                v-for="course in payment.courses"
-                :key="course.title"
-              >
+              <table class="checkout-table" v-for="course in payment.courses" :key="course.title">
                 <tbody>
                   <tr>
                     <td>
@@ -270,9 +207,7 @@ export default {
     },
     payments() {
       const vm = this;
-      return vm.$store.state.checkout.payments.filter(
-        (payment) => payment.user.userId === vm.user.userId,
-      );
+      return vm.$store.state.checkout.payments.filter((payment) => payment.user.userId === vm.user.userId);
     },
     getDownloadURL() {
       const vm = this;

@@ -1,12 +1,7 @@
 <template>
   <div>
     <div class="gallery-box" id="gallery-lightbox">
-      <div
-        class="gallery__item"
-        v-for="(course, index) in courses"
-        :key="index"
-        @click="() => showImg(index)"
-      >
+      <div class="gallery__item" v-for="(course, i) in courses" :key="i" @click="showImg(i)">
         <img class="gallery__img" :src="course" />
         <a :href="course.categoryImg">
           <i class="fas fa-search gallery__icon"></i>
@@ -14,12 +9,7 @@
         </a>
       </div>
     </div>
-    <vue-easy-lightbox
-      :visible="visible"
-      :imgs="courses"
-      :index="index"
-      @hide="handleHide"
-    ></vue-easy-lightbox>
+    <vue-easy-lightbox :visible="visible" :imgs="courses" :index="index" @hide="handleHide"></vue-easy-lightbox>
   </div>
 </template>
 
@@ -30,18 +20,7 @@ export default {
     return {
       visible: false,
       index: 0,
-      courses: [
-        require('../assets/img/gallery-1.jpg'),
-        require('../assets/img/gallery-2.jpg'),
-        require('../assets/img/gallery-3.jpg'),
-        require('../assets/img/gallery-4.jpg'),
-        require('../assets/img/gallery-5.jpg'),
-        require('../assets/img/gallery-6.jpg'),
-        require('../assets/img/gallery-7.jpg'),
-        require('../assets/img/gallery-8.jpg'),
-        require('../assets/img/gallery-9.jpeg'),
-        require('../assets/img/gallery-10.jpg'),
-      ],
+      courses: [require('../assets/img/gallery-1.jpg'), require('../assets/img/gallery-2.jpg'), require('../assets/img/gallery-3.jpg'), require('../assets/img/gallery-4.jpg'), require('../assets/img/gallery-5.jpg'), require('../assets/img/gallery-6.jpg'), require('../assets/img/gallery-7.jpg'), require('../assets/img/gallery-8.jpg'), require('../assets/img/gallery-9.jpeg'), require('../assets/img/gallery-10.jpg')],
     };
   },
   methods: {

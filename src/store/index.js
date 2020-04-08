@@ -20,14 +20,7 @@ export default new Vuex.Store({
   // 保持項目
   plugins: [
     createPersistedState({
-      paths: [
-        'courses.cat',
-        'courses.status',
-        'courses.course',
-        'courses.courses',
-        'cart.cart',
-        'checkout.payment',
-      ],
+      paths: ['courses.cat', 'courses.status', 'courses.course', 'courses.courses', 'cart.cart', 'checkout.payment'],
     }),
   ],
 
@@ -50,18 +43,11 @@ export default new Vuex.Store({
     updateFile({ commit }, { file, place }) {
       const storageRef = st.storage().ref(place + file.name);
       const uploadTask = storageRef.put(file);
-      uploadTask.on(
-        'state_changed',
-        // eslint-disable-next-line no-unused-vars
-        (snapshot) => {},
-        // eslint-disable-next-line no-unused-vars
-        (error) => {},
-        () => {
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            commit('setDownloadUrl', downloadURL);
-          });
-        },
-      );
+      uploadTask.on('state_changed', null, null, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          commit('setDownloadUrl', downloadURL);
+        });
+      });
     },
   },
 

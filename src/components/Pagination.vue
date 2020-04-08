@@ -2,21 +2,13 @@
   <div>
     <ul class="pagination">
       <li class="page-item">
-        <button
-          class="page-item btn"
-          @click.prevent="getMoreCourses('previous')"
-          :disabled="currentPage === 1"
-        >
+        <button class="page-item btn" @click.prevent="getMoreCourses('previous')" :disabled="currentPage === 1">
           <i class="fas fa-caret-left"></i>
         </button>
       </li>
       <li class="page-item">{{ currentPage }} / {{ totalPage }}</li>
       <li class="page-item">
-        <button
-          class="page-item btn"
-          @click.prevent="getMoreCourses('next')"
-          :disabled="currentPage === totalPage"
-        >
+        <button class="page-item btn" @click.prevent="getMoreCourses('next')" :disabled="currentPage === totalPage">
           <i class="fas fa-caret-right"></i>
         </button>
       </li>
