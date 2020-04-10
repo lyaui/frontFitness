@@ -56,6 +56,23 @@ body {
   }
 }
 
+.sec-container {
+  max-width: 144rem;
+  width: 100%;
+  padding: 5rem 10rem ;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include respond(tab-land) {
+  padding: 5rem 6rem ;
+  }
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+
+}
+
 ::selection {
   background-color: $color-secondary;
   color: #fff;

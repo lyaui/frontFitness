@@ -37,7 +37,7 @@
       </section>
 
       <!-- 課程特點區 -->
-      <section class="features">
+      <section class="features sec-container">
         <div class="features__content">
           <div class="features-card" v-for="feature in features" :key="feature.title">
             <div class="features-card__head">
@@ -101,7 +101,7 @@
       </section>
 
       <!-- 聯絡表單 -->
-      <section class="contact">
+      <section class="contact sec-container">
         <iframe class="contact__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.003103508137!2d121.56228351449951!3d25.033968744447897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb6da9c9e1f%3A0x1206bcf082fd10a6!2zMTEw5Y-w5YyX5biC5L-h576p5Y2A5L-h576p6Lev5LqU5q61N-iZn-WPsOWMlzEwMeWkp-aokw!5e0!3m2!1szh-TW!2stw!4v1560106419477!5m2!1szh-TW!2stw" frameborder="0" style="border: 0;" allowfullscreen></iframe>
         <div class="contact-form">
           <div class="">
