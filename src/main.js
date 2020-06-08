@@ -43,14 +43,6 @@ firebase.auth().onAuthStateChanged(async (user) => {
   // init app if not already created
   if (!app) {
     new Vue({
-      created() {
-        AOS.init({
-          // offset: 200,
-          duration: 800,
-          easing: 'ease-in-sine',
-          delay: 800,
-        });
-      },
       router,
       store,
       render: (h) => h(App),
